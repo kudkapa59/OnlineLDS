@@ -1,0 +1,6 @@
+include LDSnew/OARIMA_code_data/*
+include LDSnew/OARIMA_code_data/code/*
+include LDSnew/OARIMA_code_data/data/*
+include LDSnew/*
+include LDSnew/slides/*
+include LDSnew/outputs/*
