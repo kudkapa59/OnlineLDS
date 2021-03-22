@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from LDS.filters.real_filters.kalman_filtering_siso import KalmanFilteringSISO
+from LDS.filters.kalman_filtering_siso import KalmanFilteringSISO
 from LDS.ds.dynamical_system import DynamicalSystem
 
 sys = DynamicalSystem(np.matrix([[0.999,0],[0,0.5]]),np.zeros((2,1)),np.matrix([[1,1]]),np.zeros((1,1)),

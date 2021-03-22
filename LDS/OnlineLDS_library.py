@@ -20,9 +20,9 @@ import numpy as np
 from scipy.io import loadmat
 from LDS.ds.dynamical_system import DynamicalSystem
 from LDS.ts.time_series import TimeSeries
-#from LDS.filters.real_filters.wave_filtering_siso import WaveFilteringSISO
-from LDS.filters.real_filters.wave_filtering_siso_ftl import WaveFilteringSisoFtl
-#from LDS.filters.real_filters.kalman_filtering_siso import KalmanFilteringSISO
+#from LDS.filters.wave_filtering_siso import WaveFilteringSISO
+from LDS.filters.wave_filtering_siso_ftl import WaveFilteringSisoFtl
+#from LDS.filters.kalman_filtering_siso import KalmanFilteringSISO
 from LDS.matlab_options.matlab_class_options import ClassOptions
 
 matplotlib.rcParams['pdf.fonttype'] = 42

@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 from LDS.ds.dynamical_system import DynamicalSystem
-from LDS.filters.real_filters.wave_filtering_siso import WaveFilteringSISO
+from LDS.filters.wave_filtering_siso import WaveFilteringSISO
 
 sys = DynamicalSystem(np.matrix([[0.999,0],[0,0.5]]),np.zeros((2,1)),np.matrix([[1,1]]),np.zeros((1,1)),
                                process_noise='gaussian',
