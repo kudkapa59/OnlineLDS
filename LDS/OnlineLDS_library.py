@@ -44,14 +44,50 @@ def close_all_figs():
 def test_identification(sys, filename_stub = "test", no_runs = 2,
                        t_t = 100, k = 5, eta_zeros = None, ymin = None, ymax = None,
                        sequence_label = None, have_spectral = True):
-    '''
+    """
     from experiments.py
-    no_runs is the number of runs, t_t is the time horizon, k is the number of filters,
-    '''
+    no_runs is the number of runs, t_t is the time horizon, k is the number of filters.
+    Implements here On-line Gradient Descent Algorithm 1 by the use of cost_ar and gradient_ar
+    functions. 
+    Data found is used by plot_p1,plot_p2, plot_p3 functions which create seq0, logration pdfs.
+
+    "Our on-line algorithm maintains a state estimate, which is represented by the regression 
+    coefficients $\theta\in \RR^s$, where $s$ is the regression depth,
+    a parameter of the algorithm.  
+    At time step $t$, the algorithm first produces a prediction of the 
+    observation $Y_t$, using the current state $\theta$ and previous 
+    observations, $Y_{t-1},\ldots,Y_0$."
+
+    
+    Implements Example 8 from Experiments section of the paper. Plots Figure 7.
+    "This is illustrated in Figure \ref{figImpactC} on sequence d0. 
+    As can be seen from the top-left plot, low values of $c$ may lead to slow 
+    convergence and hence high errors initially.
+    It may hence be preferable to 
+    increase the $c$, as illustrated on the right.
+    We note that for the (essentially stationary) sequences d1 and d2 
+    from Example ~\ref{realistic}, $c= 1$ works well. "
+
+    Plots Figure 8.
+    "In Figure \ref{fig2} we compare the predictive performance of Algorithm 
+    \ref{alg:OGD} to spectral filtering and to the persistence (last seen 
+    value) predictor on the first $T = 100$ elements of the 
+    three sequences of Example~\ref{realistic}. The errors of spectral 
+    filtering are two to three orders of magnitude larger than for the last-
+    value prediction (940 vs. 1.47, 299 vs. 3.58, 4689 vs. 11.02). While some 
+    of this is due to the large spikes, the errors are non-negligible 
+    throughout. Algorithm \ref{alg:OGD} performs substantially better than 
+    either method used for comparison."
+
+
+    Raises:
+        Exits if k > t_t.
+    """
 
 
     if k>t_t:
-        print("Number of filters (k) must be less than or equal to the number of time-steps (t_t).")
+        print("Number of filters (k) must be less than or equal",\
+            "to the number of time-steps (t_t).")
         exit()
     if not eta_zeros:
         eta_zeros = [1.0, 2500.0]
@@ -61,18 +97,17 @@ def test_identification(sys, filename_stub = "test", no_runs = 2,
     filename = './outputs/' + filename_stub+'.pdf'
     p_p = PdfPages(filename)
 
-    error_ar_data = None
-    error_spec_data = None
-    error_persist_data = None
+    error_ar_data = None        #auto-regression error
+    error_spec_data = None      #spectral filter error
+    error_persist_data = None   #last-value prediction error
 
     for i in range(no_runs):
         print("run %i" % i)
         inputs = np.zeros(t_t)
         sys.solve([[1],[0]],inputs,t_t)
 
-        if have_spectral:
-            #using class WaveFilteringSisoFtl instead fubction WaveFilteringSisoFtl
-            #predicted_spectral, M, error_spec, error_persist = WaveFilteringSisoFtl(sys, t_t, k)
+        if have_spectral: #Checks if we need spectral and persistent filters
+            #using class WaveFilteringSisoFtl instead function WaveFilteringSisoFtl
             wf_siso_ftl = WaveFilteringSisoFtl(sys, t_t, k, VERBOSE)
             predicted_spectral, M, error_spec, error_persist = \
                 wf_siso_ftl.y_pred_full, wf_siso_ftl.M,\
@@ -89,16 +124,16 @@ def test_identification(sys, filename_stub = "test", no_runs = 2,
 
         for eta_zero in eta_zeros:
             error_ar = np.zeros(t_t)
-            predicted_ar = np.zeros(t_t)
-            s=2
+            predicted_ar = np.zeros(t_t) #predicted outputs
+            s=2   #AR(2)
             matrix_d=1.
-            theta = [0 for i in range(s)]
+            theta = [0 for i in range(s)]  #regression coefficients
             for t in range(s,t_t):
-                eta = pow(float(t),-0.5) / eta_zero
-                Y = sys.outputs[t]
-                loss = cost_ar(theta, Y, list(reversed(sys.outputs[t-s:t])))
-                error_ar[t] = pow(loss, 0.5)
-                grad = gradient_ar(theta, Y, list(reversed(sys.outputs[t-s:t])))
+                eta = pow(float(t),-0.5) / eta_zero #learning rate
+                Y = sys.outputs[t]    #output values
+                loss = cost_ar(theta, Y, list(reversed(sys.outputs[t-s:t]))) #quadratic loss
+                error_ar[t] = pow(loss, 0.5) #individual loss
+                grad = gradient_ar(theta, Y, list(reversed(sys.outputs[t-s:t])))#gradient of loss
                 #print("Loss: at time step %d :" % (t), loss)
                 theta = [theta[i] -eta*grad[i] for i in range(len(theta))] #gradient step
                 norm_theta = np.linalg.norm(theta)
@@ -108,16 +143,16 @@ def test_identification(sys, filename_stub = "test", no_runs = 2,
 
             if error_ar_data is None:
                 error_ar_data = error_ar
-            else:
+            else: #appending error values
                 error_ar_data = np.vstack((error_ar_data, error_ar))
 
-            if not have_spectral:
+            if not have_spectral: #If we don't plot spectal and persistent filters
                 predicted_spectral = []
             plot_p1(ymin, ymax, inputs, sequence_label, have_spectral,
                     predicted_spectral, predicted_ar,
                     sys, p_p)
 
-            if not have_spectral:
+            if not have_spectral: #If we don't plot spectal and persistent filters
                 error_spec, error_persist = [], []
             plot_p2(have_spectral, error_spec, error_persist, error_ar, lab, p_p)
 
@@ -144,9 +179,17 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                         have_kalman = False, have_spectral = True,
                         G = np.matrix([[0.999,0],[0,0.5]]),
                         f_dash = np.matrix([[1,1]]), sequence_label = ""):
-    '''
-    from experiments.py
-    '''
+    """
+    Originates from experiments.py
+
+    Implements Example 7 from Experiments section of the paper.
+    Creates './outputs/AR.pdf'.Finds all the filters' errors and
+    uses function p3_for_test_identification2 for plotting them.
+    Plots Figure 2,5 of the main paper.
+
+    Raises:
+        Exits if number of runs is less than 2.
+    """
     if have_kalman:
         s_choices = s_choices + [t_t]
     if len(sequence_label) > 0:
@@ -160,13 +203,13 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     p_p = PdfPages(filename)
 
     ################# SYSTEM ###################
-    proc_noise_std = 0.5
-    obs_noise_std  = 0.5
+    proc_noise_std = 0.5             #w = 0.5
+    obs_noise_std  = 0.5             #v = 0.5
 
-    error_spec_data = None
-    error_persist_data = None
-    error_AR1_data = None
-    error_Kalman_data = None
+    error_spec_data = None           #error of the spectral filtering
+    error_persist_data = None        #error of persistance prediction
+    error_AR1_data = None            #error of auto-regression
+    error_Kalman_data = None         #error of Kalman filtering
 
     for runNo in range(no_runs):
         sys = DynamicalSystem(G,np.zeros((2,1)),f_dash,np.zeros((1,1)),
@@ -177,18 +220,21 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                                timevarying_multiplier_b = None)
         inputs = np.zeros(t_t)
         sys.solve([[1],[1]],inputs,t_t)
-        Y = [i[0,0] for i in sys.outputs]
+        Y = [i[0,0] for i in sys.outputs]    #real outputs
         #pdb.set_trace()
         ############################################
 
         ########## PRE-COMPUTE FILTER PARAMS ###################
         n, m, W, V, matrix_c, R, Q, matrix_a, Z = pre_comp_filter_params(G, f_dash, proc_noise_std,\
-             obs_noise_std, t_t)
+             obs_noise_std, t_t)           #Kalman filtering results
 
         #PREDICTION
         plt.plot(Y, label='Output', color='#000000', linewidth=2, antialiased = True)
 
-        for s in s_choices:
+        for s in s_choices: #Chose and fix some $s\geq 1$. Then for any $t\geq s+1$, 
+                            #the expectation \eqref{thatexpintext} has the form displayed in 
+                            #Figure 1.
+            #Prediction with no remainder term
             Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
 
             #print(np.linalg.norm([Y_pred[i][0,0] - Y[i] for i in range(len(Y))]))
@@ -197,7 +243,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
             if s == 1:
                 if error_AR1_data is None:
                     error_AR1_data = np.array([pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]),\
-                         2) for i in range(len(Y))])
+                         2) for i in range(len(Y))])   #quadratic loss
                 else:
                     #print(error_AR1_data.shape)
                     error_AR1_data = np.vstack((error_AR1_data,\
@@ -223,7 +269,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
             plt.ylabel('Prediction')
 
 
-        if have_spectral:
+        if have_spectral:   #Spectral filtering and last-value prediction
             #using class WaveFilteringSisoFtl instead fubction WaveFilteringSisoFtl
             #predicted_output, M, error_spec, error_persist = WaveFilteringSisoFtl(sys, t_t, 5)
             wf_siso_ftl = WaveFilteringSisoFtl(sys, t_t, 5, VERBOSE)
@@ -233,8 +279,10 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
 
             plt.plot(predicted_output, label='Spectral' + sequence_label,\
                  color='#1B2ACC', linewidth=2, antialiased = True)
+            #spectral error
             if error_spec_data is None: error_spec_data = error_spec
             else: error_spec_data = np.vstack((error_spec_data, error_spec))
+            #last-value error
             if error_persist_data is None: error_persist_data = error_persist
             else: error_persist_data = np.vstack((error_persist_data, error_persist))
 
@@ -243,16 +291,19 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
         plt.close('all')
         #plt.show()
 
-    if have_spectral:
+    #In case we don't plot any of the filter, we assigns its error
+    #parameters to [].
+
+    if have_spectral:#means and stdevs of methods' errors
         error_spec_mean, error_spec_std, error_persist_mean, error_persist_std = \
             error_stat(error_spec_data, error_persist_data)
     else:
         error_spec_mean, error_spec_std, error_persist_mean, error_persist_std = [], [], [], []
 
-
+    #Mean and stdev of auto-regression error
     error_AR1_mean = np.mean(error_AR1_data, 0)
     error_AR1_std = np.std(error_AR1_data, 0)
-    if have_kalman:
+    if have_kalman:#mean and stdev of kalman filter
         error_Kalman_mean = np.mean(error_Kalman_data, 0)
         error_Kalman_std = np.std(error_Kalman_data, 0)
     else:
@@ -262,7 +313,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     if error_persist is None: error_persist = []
     for (ylim, alphaValue) in [((0, 100.0), 0.2), ((0.0, 1.0), 0.05)]:
         for Tlim in [t_t-1, min(t_t-1, 20)]:
-
+            #Plots Figure 2 and './outputs/AR.pdf'
             p3_for_test_identification2(ylim, have_spectral, Tlim, error_spec, sequence_label,
                                error_spec_mean, error_spec_std, alphaValue,
                                error_persist, error_persist_mean, error_persist_std,
@@ -335,9 +386,33 @@ def heatmap(data, row_labels, col_labels, ax=None,
 
 
 def testNoiseImpact(t_t = 50, no_runs = 10, discretisation = 10):
-    '''
-    from experiments.py 
-    '''
+    """
+    from experiments.py
+    Produces './outputs/noise.pdf'. Plots heatmap of process noise variance
+    vs observation noise variance based on relative error between any two
+    predictive algorithms. LaTeX shows the example of the ratio of the errors 
+    of Kalman filter and AR(2) on Figure 3 of Example 7.
+
+    LaTeX:
+    In Figure~\ref{figNoisebrief}, we compare the performance of AR(2) and 
+    Kalman filter under varying magnitude of noises $v,w$. 
+    In particular, colour indicates the ratio of the errors of Kalman filter
+    to the errors of AR(2), wherein the errors are the average prediction 
+    error over 10 trajectories of (\ref{eq:experem1_system_hazan})
+    for each cell of the heat-map, with each trajectory of length 50. 
+
+    Plots RMSE of AR Figure 6(left): 
+    average RMSE of predictions of AR(s+ 1) as a function of the variance of the
+    process noise (vertical axis) and observation noise (horizontal axis).
+
+    Plots Figure 6(center): 
+    The differences in average RMSE of Kalman filters and AR(s + 1) as a function
+    of the variance of the process noise (vertical axis) and observation noise (horizontal axis).
+
+    Plots Figure 6(right):
+    The ratio (70) of the errors of Kalman filters and AR(s + 1) as a function of
+    the variance of the process noise (vertical axis) and observation noise (horizontal axis). 
+    """
     
     filename = './outputs/noise.pdf'
     p_p = PdfPages(filename)
@@ -349,14 +424,23 @@ def testNoiseImpact(t_t = 50, no_runs = 10, discretisation = 10):
         errKalman = np.zeros((discretisation, discretisation))
         errAR = np.zeros((discretisation, discretisation))
         ################# SYSTEM ###################
-        G = np.matrix([[0.999,0],[0,0.5]])
-        f_dash = np.matrix([[1,1]])
+        G = np.matrix([[0.999,0],[0,0.5]])   #G = \diag([0.999,0.5])
+        f_dash = np.matrix([[1,1]])          #F' = [1, 1]
+
+        #Finding stdev of process and observation noises
         for proc_noise_i in range(discretisation):
             proc_noise_std = float(proc_noise_i + 1) / (discretisation - 1)
             for obs_noise_i in range(discretisation):
                 obs_noise_std  = float(obs_noise_i + 1) / (discretisation - 1)
 
                 for runNo in range(no_runs):
+                    #Initalizing a Linear Dynamical System(LDS)
+                    #As usual in the literature \cite{WestHarrison}, 
+                    # we define a linear system $L = (G,F,v,W)$ as:
+                    #\begin{eqnarray}
+                    #\phi_{t} = G h_{t-1} + \omega_t \\
+                    #Y_t = F' \phi_t + \nu_t,
+                    #\end{eqnarray}
                     sys = DynamicalSystem(G,np.zeros((2,1)),f_dash,np.zeros((1,1)),
                                            process_noise='gaussian',
                                            observation_noise='gaussian',
@@ -364,44 +448,58 @@ def testNoiseImpact(t_t = 50, no_runs = 10, discretisation = 10):
                                            observation_noise_std=obs_noise_std,
                                            timevarying_multiplier_b = None)
                     inputs = np.zeros(t_t)
-                    sys.solve([[1],[1]],inputs,t_t)
+                    sys.solve([[1],[1]],inputs,t_t)  #Finds true outputs of LDS
                     Y = [i[0,0] for i in sys.outputs]
                     #pdb.set_trace()
                     ############################################
 
                     ########## PRE-COMPUTE FILTER PARAMS ###################
-                    n, m, W, V, matrix_c, R, Q, matrix_a, Z = pre_comp_filter_params(G, f_dash, proc_noise_std, obs_noise_std, t_t)
+                    n, m, W, V, matrix_c, R, Q, matrix_a, Z = pre_comp_filter_params(G,\
+                        f_dash, proc_noise_std, obs_noise_std, t_t)
 
                     #PREDICTION
+                    #AR prediction
                     Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
+                    #Kalman prediction
                     Y_kalman = prediction_kalman(t_t, f_dash, G, matrix_a, sys, Z, Y)
 
-
-                    data[proc_noise_i][obs_noise_i] += np.linalg.norm([Y_pred[i][0,0] - Y[i] for i in range(len(Y))])
+                    '''Root-mean-square error(RMSE) of AR'''
+                    data[proc_noise_i][obs_noise_i] += np.linalg.norm([Y_pred[i][0,\
+                        0] - Y[i] for i in range(len(Y))])
                     diffHere = np.linalg.norm([Y_pred[i][0,0] - Y[i] for i in range(len(Y))])
                     #print(Y_kalman[0][0,0])
-                    diffHere -= np.linalg.norm([Y_kalman[i][0,0] - Y[i] for i in range(min(len(Y),len(Y_kalman)))])
+                    diffHere -= np.linalg.norm([Y_kalman[i][0,0] - Y[i] for i in range(min(len(Y),\
+                        len(Y_kalman)))])
                     #print(diffHere)
+                    '''Difference in RMSEs of AR and Kalman filter'''
                     diff[proc_noise_i][obs_noise_i] += diffHere
                     #print(len(Y))
                     #print(len(Y_kalman))
-                    errKalman[proc_noise_i][obs_noise_i] += pow(np.linalg.norm([Y_kalman[i][0,0] - Y[i] for i in range(min(len(Y),len(Y_kalman)))]), 2)
-                    errAR[proc_noise_i][obs_noise_i] += pow(np.linalg.norm([Y_pred[i][0,0] - Y[i] for i in range(len(Y))]), 2)
+                    #Kalman filter error
+                    errKalman[proc_noise_i][obs_noise_i] += pow(np.linalg.norm([Y_kalman[i][0,\
+                        0] - Y[i] for i in range(min(len(Y),len(Y_kalman)))]), 2)
+                    #Auto-regression error
+                    errAR[proc_noise_i][obs_noise_i] += pow(np.linalg.norm([Y_pred[i][0,\
+                        0] - Y[i] for i in range(len(Y))]), 2)
 
+        '''Calculating the average'''
         data = data / no_runs
         fig, ax = plt.subplots()
         tickLabels = [str(float(i+1) / 10) for i in range(11)]
-        im, cbar = heatmap(data, tickLabels, tickLabels, ax=ax, cmap="YlGn", cbarlabel="Avg. RMSE of AR(%i), %s runs" % (s+1, no_runs))
+        im, cbar = heatmap(data, tickLabels, tickLabels, ax=ax, cmap="YlGn",\
+            cbarlabel="Avg. RMSE of AR(%i), %s runs" % (s+1, no_runs))
         plt.ylabel('Variance of process noise')
         plt.xlabel('Variance of observation noise')
         fig.tight_layout()
         plt.savefig(p_p, format='pdf')
         #plt.show()
 
+        '''Calculating the average'''
         diff = diff / no_runs
         fig, ax = plt.subplots()
         tickLabels = [str(float(i+1) / 10) for i in range(11)]
-        im, cbar = heatmap(diff, tickLabels, tickLabels, ax=ax, cmap="YlOrRd", cbarlabel="Avg. diff. in RMSEs of AR(%i) and Kalman filter, %s runs" % (s+1, no_runs))
+        im, cbar = heatmap(diff, tickLabels, tickLabels, ax=ax, cmap="YlOrRd",\
+            cbarlabel="Avg. diff. in RMSEs of AR(%i) and Kalman filter, %s runs" % (s+1, no_runs))
         plt.ylabel('Variance of process noise')
         plt.xlabel('Variance of observation noise')
         fig.tight_layout()
@@ -411,7 +509,8 @@ def testNoiseImpact(t_t = 50, no_runs = 10, discretisation = 10):
         ratio = pow(errKalman / errAR, 2)
         fig, ax = plt.subplots()
         tickLabels = [str(float(i+1) / 10) for i in range(11)]
-        im, cbar = heatmap(ratio, tickLabels, tickLabels, ax=ax, cmap="PuBu", cbarlabel="Ratios of agg. errors of Kalman and AR(%i), %s runs" % (s+1, no_runs))
+        im, cbar = heatmap(ratio, tickLabels, tickLabels, ax=ax, cmap="PuBu",\
+            cbarlabel="Ratios of agg. errors of Kalman and AR(%i), %s runs" % (s+1, no_runs))
         plt.ylabel('Variance of process noise')
         plt.xlabel('Variance of observation noise')
         fig.tight_layout()
@@ -421,9 +520,23 @@ def testNoiseImpact(t_t = 50, no_runs = 10, discretisation = 10):
 
 
 def testImpactOfS(t_t = 200, no_runs = 100, sMax = 15):
-    '''
+    """
     from experiments.py
-    '''
+    Creates file './outputs/impacts.pdf', which stores
+    plots of average error of auto-regression as a function of
+    regression depth s. In the main paper we present it again with Example 7 and Figure 4.
+
+    LaTeX:
+    in Figure~\ref{figNoise2brief}, we illustrate the decay of the 
+    remainder term by presenting the mean (line) and standard deviation 
+    (shaded area) of the error as a function of the regression depth $s$. 
+    There, 4 choices of the covariance matrix $W$ of the process noise
+    and the variance $v$ of the observation noise are considered within Example ~\ref{HazanEx}
+    and the error is averaged over $N = 100$ runs of length $T = 200$.
+
+    Raises:
+        Exits if sMax > t_t. 
+    """
 
     if sMax > t_t:
         print("The number of s to test must be less than the horizon t_t.")
@@ -432,8 +545,9 @@ def testImpactOfS(t_t = 200, no_runs = 100, sMax = 15):
     filename = './outputs/impacts.pdf'
     p_p = PdfPages(filename)
 
-    for (proc_noise_std, obs_noise_std, linestyle) in [ (0.1, 0.1, "dotted"), (0.1, 1.0, "dashdot"),  (1.0, 0.1, "dashed"), (1.0, 1.0, "solid") ]:
-        errAR = np.zeros((sMax+1, no_runs))
+    for (proc_noise_std, obs_noise_std, linestyle) in [ (0.1, 0.1, "dotted"),\
+        (0.1, 1.0, "dashdot"),  (1.0, 0.1, "dashed"), (1.0, 1.0, "solid") ]:
+        errAR = np.zeros((sMax+1, no_runs))  #Auto-regression
         ################# SYSTEM ###################
         G = np.matrix([[0.999,0],[0,0.5]])
         f_dash = np.matrix([[1,1]])
@@ -453,13 +567,15 @@ def testImpactOfS(t_t = 200, no_runs = 100, sMax = 15):
                 ############################################
 
                 ########## PRE-COMPUTE FILTER PARAMS ###################
-                n, m, W, V, matrix_c, R, Q, matrix_a, Z = pre_comp_filter_params(G, f_dash, proc_noise_std, obs_noise_std, t_t)
+                n, m, W, V, matrix_c, R, Q, matrix_a, Z = pre_comp_filter_params(G, f_dash,\
+                    proc_noise_std, obs_noise_std, t_t)
 
-                #PREDICTION
+                #AR PREDICTION
                 Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
 
 
-                errAR[s][runNo] = pow(np.linalg.norm([Y_pred[i][0,0] - Y[i] for i in range(min(len(Y), len(Y_pred)))]), 2) / t_t
+                errAR[s][runNo] = pow(np.linalg.norm([Y_pred[i][0,\
+                    0] - Y[i] for i in range(min(len(Y), len(Y_pred)))]), 2) / t_t
 
 
         error_AR1_mean = np.mean(errAR, 1)
@@ -467,24 +583,42 @@ def testImpactOfS(t_t = 200, no_runs = 100, sMax = 15):
         print(len(error_AR1_mean))
         alphaValue = 0.2
         cAR1 = (proc_noise_std, obs_noise_std, 1.0/255)
-        #plt.plot(range(1, sMax), error_AR1_mean[1:], label='AR(2)', color=cAR1, linewidth=2, antialiased = True)
-        #plt.fill_between(range(1, sMax), (error_AR1_mean-error_AR1_std)[1:], (error_AR1_mean+error_AR1_std)[1:], alpha=alphaValue, edgecolor=cAR1, linewidth=2, antialiased=True) #transform=trans) #offset_position="data") alpha=alphaValue,
+        #plt.plot(range(1, sMax), error_AR1_mean[1:], label='AR(2)', color=cAR1,\
+        # linewidth=2, antialiased = True)
+        #plt.fill_between(range(1, sMax), (error_AR1_mean-error_AR1_std)[1:],\
+        # (error_AR1_mean+error_AR1_std)[1:], alpha=alphaValue, edgecolor=cAR1,\
+        # linewidth=2, antialiased=True) #transform=trans) #offset_position="data") alpha=alphaValue,
         lab = "W = %.2f, V = %.2f" % (proc_noise_std, obs_noise_std)
-        plt.plot(range(sMax+1)[1:-1], error_AR1_mean[1:-1], color=cAR1, linewidth=2, antialiased = True, label = lab, linestyle= linestyle)
-        plt.fill_between(range(sMax+1)[1:-1], (error_AR1_mean-error_AR1_std)[1:-1], (error_AR1_mean+error_AR1_std)[1:-1], alpha=alphaValue, facecolor = cAR1, edgecolor=cAR1, linewidth=2, antialiased=True) #transform=trans) #offset_position="data") alpha=alphaValue,
+        plt.plot(range(sMax+1)[1:-1], error_AR1_mean[1:-1], color=cAR1, linewidth=2,\
+            antialiased = True, label = lab, linestyle= linestyle)
+        plt.fill_between(range(sMax+1)[1:-1], (error_AR1_mean-error_AR1_std)[1:-1],\
+            (error_AR1_mean+error_AR1_std)[1:-1], alpha=alphaValue, facecolor = cAR1,\
+                edgecolor=cAR1, linewidth=2, antialiased=True) #transform=trans) #offset_position="data") alpha=alphaValue,
         plt.xlabel('Number s of auto-regressive terms, past the first one')
         plt.ylabel('Avg. error of AR(s), %i runs' % no_runs )
         plt.ylim(0, 1.5)
         plt.legend()
         plt.savefig(p_p, format='pdf')
+    '''
+    Of course, as expected, increasing $s$ 
+    decreases the error, until the error approaches that of the Kalman filter. 
+    Observe again that for a given value of the observation noise, the convergence 
+    w.r.t $s$ is slower for \textit{smaller} process noise, consistently 
+    with our theoretical observations.
+    '''
 
     p_p.close()
 
 
 def testSeqD0(no_runs = 100):
-    '''
+    """
     from experiments.py
-    '''
+    Makes several initiations of test_identification function so as to plot logratio and
+    seq0, seq1, seq2 pdfs.
+
+    Args:
+        no_runs: Number of runs.
+    """
 
     plain = False
     lr = True
@@ -495,15 +629,20 @@ def testSeqD0(no_runs = 100):
         varname_in = "seq_d0"
         ts = TimeSeries(matlabfile = matlabfile_in, varname="seq_d0")
         t_t = len(ts.outputs)
-        test_identification(ts, "%s-complete"%varname_in, no_runs, t_t, 5, sequence_label = varname_in, have_spectral = False)
+        test_identification(ts, "%s-complete"%varname_in, no_runs, t_t, 5,\
+            sequence_label = varname_in, have_spectral = False)
         t_t = min(20000, len(ts.outputs))
-        test_identification(ts, "%s-20000"%varname_in, no_runs, t_t, 5, sequence_label = varname_in, have_spectral = False)
+        test_identification(ts, "%s-20000"%varname_in, no_runs, t_t, 5,\
+            sequence_label = varname_in, have_spectral = False)
         t_t = min(2000, len(ts.outputs))
-        test_identification(ts, "%s-2000"%varname_in, no_runs, t_t, 5, sequence_label = varname_in, have_spectral = False)
+        test_identification(ts, "%s-2000"%varname_in, no_runs, t_t, 5,\
+            sequence_label = varname_in, have_spectral = False)
         t_t = min(200, len(ts.outputs))
-        test_identification(ts, "%s-200"%varname_in, no_runs, t_t, 5, sequence_label = varname_in, have_spectral = False)
+        test_identification(ts, "%s-200"%varname_in, no_runs, t_t, 5,\
+            sequence_label = varname_in, have_spectral = False)
         t_t = min(100, len(ts.outputs))
-        test_identification(ts, "%s-short-k5"%varname_in, 1, t_t, 5, sequence_label = varname_in)
+        test_identification(ts, "%s-short-k5"%varname_in, 1, t_t, 5,\
+            sequence_label = varname_in)
         #test_identification(ts, "seq0-short-k50", 1, t_t, 50, 27, 37, sequence_label = "seq_d0")
         #test_identification(ts, "seq0-short-k5", 1, t_t, 5, sequence_label = "seq_d0")
         #test_identification(ts, "seq0-short-k50", 1, t_t, 50, sequence_label = "seq_d0")
@@ -512,20 +651,26 @@ def testSeqD0(no_runs = 100):
         ts = TimeSeries(matlabfile = matlabfile_in, varname="seq_d0")
         ts.logratio()
         t_t = len(ts.outputs) # has to go after the log-ratio truncation by one
-        test_identification(ts, "logratio-complete", no_runs, t_t, 5, sequence_label = varname_in, have_spectral = False)
+        test_identification(ts, "logratio-complete", no_runs, t_t, 5, sequence_label = varname_in,\
+            have_spectral = False)
         t_t = min(20000, len(ts.outputs))
-        test_identification(ts, "logratio-20000", no_runs, t_t, 5,  sequence_label = varname_in, have_spectral = False)
+        test_identification(ts, "logratio-20000", no_runs, t_t, 5,  sequence_label = varname_in,\
+            have_spectral = False)
         t_t = min(2000, len(ts.outputs))
-        test_identification(ts, "logratio-2000", no_runs, t_t, 5, sequence_label = varname_in, have_spectral = False)
+        test_identification(ts, "logratio-2000", no_runs, t_t, 5, sequence_label = varname_in,\
+            have_spectral = False)
         t_t = min(200, len(ts.outputs))
-        test_identification(ts, "logratio-200", no_runs, t_t, 5, sequence_label = varname_in, have_spectral = False)
+        test_identification(ts, "logratio-200", no_runs, t_t, 5, sequence_label = varname_in,\
+            have_spectral = False)
         t_t = min(100, len(ts.outputs))
         test_identification(ts, "logratio-short-k5", no_runs, t_t, 5, sequence_label = varname_in)
 
 def test_AR():
-    '''
+    """
+    Function implements Algorithm 1(On-line Gradient Descent).
+
     from experiments.py
-    '''
+    """
     matlabfile_in = './OARIMA_code_data/data/setting6.mat'
     varname_in = "seq_d0"
 
@@ -536,12 +681,12 @@ def test_AR():
     theta = [0 for i in range(s)]
 
     for t in range(s,t_t):
-        eta = pow(float(t),-0.5)
+        eta = pow(float(t),-0.5) #learning rate
 
-        Y = ts.outputs[t]
+        Y = ts.outputs[t]        #true outputs
 
-        loss = cost_ar(theta, Y, list(reversed(ts.outputs[t-s:t])))
-        grad = gradient_ar(theta, Y, list(reversed(ts.outputs[t-s:t])))
+        loss = cost_ar(theta, Y, list(reversed(ts.outputs[t-s:t]))) #loss function
+        grad = gradient_ar(theta, Y, list(reversed(ts.outputs[t-s:t]))) #gradient
 
         print("Loss: at time step %d :" % (t), loss)
         theta = [theta[i] -eta*grad[i] for i in range(len(theta))] #gradient step
@@ -559,26 +704,50 @@ def test_AR():
 
 
 def cost_ar(theta, *args):
-    '''
+    """
     from onlinelds.py
+    Loss function of auto-regression. 
+    After the prediction is made, the true observation $Y_t$ is revealed to 
+    the algorithm, and a loss associated with the prediction is computed. 
+    Here we consider the quadratic loss for simplicity:  
+    We define $\ell(x,y)$ as $(x-y)^2$. The loss function at time $t$ will be given by 
+    \begin{align}
+    \label{eq:loss}
+    \ell_t(\theta) := \ell(Y_t,\hat{y}_t(\theta)). 
+    \end{align}
 
-    theta: s parameters
-    args[0]: observation at time t
-    args[1]: past s observations (most most to least recent: t-1 to t-1-s)
-    '''
+    Args:
+        theta: s parameters
+        args[0]: observation at time t
+        args[1]: past s observations (most most to least recent: t-1 to t-1-s)
+
+    Returns:
+        Loss function of auto-regression
+    """
+    #\hat{y}_t(\theta) = \sum_{i=0}^{s-1} \theta_{i} Y_{t-i-1}
+    #\ell_t(\theta) := \ell(Y_t,\hat{y}_t(\theta))
 
     return pow(float(args[0]) - np.dot(args[1], theta), 2)
 
 
 def gradient_ar(theta, *args):
-    '''
-     from onlinelds.py
+    """
+    from onlinelds.py
+    Gradient function of auto-regression.
+    We use the general scheme of on-line gradient decent algorithms, \cite{Zinkevich2003},
+    where the update goes against the direction of the gradient of the current loss. 
+    In addition, it is useful to restrict the state to a bounded domain.
 
-    theta: s parameters
-    args[0]: observation
-    args[1]: past s observations
-    '''
+    Args:
+        theta: s parameters
+        args[0]: observation
+        args[1]: past s observations
 
+    Returns:
+        Gradient function of auto-regression.
+    """
+    #& -2\Brack{Y_t - \sum_{i=0}^{s-1} \theta_i Y_{t-i-1}}
+    #\Brack{Y_{t-1},Y_{t-2},\ldots, Y_{t-s}}
     g = [(float(args[0]) - np.dot(args[1], theta)) * i for i in args[1]]
 
     return np.squeeze(-2 * np.array(g).reshape(-1, 1))
@@ -851,6 +1020,11 @@ def arima_ons(data, options):
 ### New funct ####
 
 def lab(s, eta_zero):
+    """
+    Gives a label to auto-regression outputs and labels in seq0,seq1,seq2 pdfs.
+    Returns:
+        lab1: auto-regression label. Example: "AR(2), c = 2500".
+    """
     # lab1 = 'AR(3) / OGD, c_0 = ' + str(eta_zero)
     lab1 = "AR(" + str(s) + "), c = " + str(int(eta_zero))
     return lab1
@@ -859,31 +1033,33 @@ def lab(s, eta_zero):
 def plot_p1(ymin, ymax, inputs, sequence_label, have_spectral,
             predicted_spectral, predicted_ar,
             sys, p_p):
-    '''
+    """
+    Plots seq0, seq1, seq2, logratio pdf files.
 
-    :param ymin:
-    :param ymax:
-    :param inputs:
-    :param sequence_label:
-    :param have_spectral:
-    :param predicted_spectral:
-    :param eta_zero:
-    :param predicted_ar:
-    :param s:
-    :param sys:
-    :param p_p:
-    :return:
-    '''
+    Args:
+        ymin:               Minimal value of y-axis.
+        ymax:               Maximal value of y-axis.
+        inputs:             Input to the system matrix.
+        sequence_label:     Plot's label.
+        have_spectral:      True if we want to build spectral and persistent filters.
+        predicted_spectral: Predicted values of spectral filter. If have_spectral is False,
+                            it's equal to an empty list.
+        predicted_ar:       Predicted values of auto-regression.
+        sys:                Linear Dynamical System created with DynamicalSystem class.
+        p_p:                PDF file, to which are export the plots.
+    """
 
     p1 = plt.figure()
     if ymax and ymin: plt.ylim(ymin, ymax)
     if sum(inputs[1:]) > 0: plt.plot(inputs[1:], label='Input')
     if sequence_label:
-        plt.plot([float(i) for i in sys.outputs][1:], label=sequence_label, color='#000000', linewidth=2,
-                 antialiased=True)
+        plt.plot([float(i) for i in sys.outputs][1:], label=sequence_label, color='#000000',\
+        linewidth=2, antialiased=True)
     else:
-        plt.plot([float(i) for i in sys.outputs][1:], label='Output', color='#000000', linewidth=2, antialiased=True)
-    # plt.plot([-i for i in predicted_output], label='Predicted output') #for some reason, usual way produces -ve estimate
+        plt.plot([float(i) for i in sys.outputs][1:], label='Output', color='#000000',\
+        linewidth=2, antialiased=True)
+    # plt.plot([-i for i in predicted_output], label='Predicted output') #for some reason,\
+    # usual way produces -ve estimate
     if have_spectral:
         plt.plot([i for i in predicted_spectral], label='Spectral')
 
@@ -896,10 +1072,18 @@ def plot_p1(ymin, ymax, inputs, sequence_label, have_spectral,
 
 
 def plot_p2(have_spectral, error_spec, error_persist, error_ar, lab, p_p):
-    '''
+    """
+    Plots seq0, seq1, seq2, logratio pdf files.
 
-    :return:
-    '''
+    Args:
+        have_spectral:      True if we want to build spectral and persistent filters.
+        error_spec:         Spectral filter error.
+        error_persist:      Persistent filter error.
+        error_ar:           Auto-regression error.
+        lab:                Auto-regression plot label.
+        p_p:                PDF file, to which are export the plots.
+    """
+
     p2 = plt.figure()
     plt.ylim(0, 20)
     if have_spectral:
@@ -917,25 +1101,41 @@ def plot_p3(ymin, ymax, have_spectral, error_spec_mean, error_spec_std,
             error_persist_mean, error_persist_std,
             error_ar_mean, error_ar_std,
             t_t, p_p):
+    """
+    Plots seq0, seq1, seq2, logratio pdf files.
+
+    Args:
+        ymin:               Minimal value of y-axis.
+        ymax:               Maximal value of y-axis.
+        have_spectral:      True if we want to build spectral and persistent filters.
+        error_spec_mean:    Mean error of spectral filtering.
+        error_spec_std:     Std of spectral filtering error.
+        error_persist_mean: Mean error of last-value prediction.
+        error_persist_std:  Std of last-value prediction error.
+        error_ar_mean:      Mean error of auto-regression.
+        error_ar_std:       Std of auto-regression error.
+        p_p:                PDF file, to which are export the plots.
+    """
+
     p3 = plt.figure()
     if ymax and ymin: plt.ylim(ymin, ymax)
     if have_spectral:
         plt.plot(error_spec_mean, label='Spectral', color='#1B2ACC', linewidth=2, antialiased=True)
-        plt.fill_between(range(0, t_t - 1), error_spec_mean - error_spec_std, error_spec_mean + error_spec_std, alpha=0.2,
-                         edgecolor='#1B2ACC', facecolor='#089FFF',
-                         linewidth=1, antialiased=True)
-        plt.plot(error_persist_mean, label='Persistence', color='#CC1B2A', linewidth=2, antialiased=True)
-        plt.fill_between(range(0, t_t - 1), error_persist_mean - error_persist_std,
-                         error_persist_mean + error_persist_std, alpha=0.2, edgecolor='#CC1B2A', facecolor='#FF0800',
-                         linewidth=1, antialiased=True)
+        plt.fill_between(range(0, t_t - 1), error_spec_mean - error_spec_std,\
+            error_spec_mean + error_spec_std, alpha=0.2,edgecolor='#1B2ACC', facecolor='#089FFF',\
+                linewidth=1, antialiased=True)
+        plt.plot(error_persist_mean, label='Persistence', color='#CC1B2A', linewidth=2,\
+            antialiased=True)
+        plt.fill_between(range(0, t_t - 1), error_persist_mean - error_persist_std,\
+            error_persist_mean + error_persist_std, alpha=0.2, edgecolor='#CC1B2A',\
+                facecolor='#FF0800', linewidth=1, antialiased=True)
 
-    cAR1 = (42.0 / 255, 204.0 / 255.0, 1.0 / 255)
+    cAR1 = (42.0 / 255, 204.0 / 255.0, 1.0 / 255) #plot color
     bAR1 = (1.0, 204.0 / 255.0, 0.0)  # , alphaValue
     plt.ylim(0, 20)
     plt.plot(error_ar_mean, label='AR(3)', color=cAR1, linewidth=2, antialiased=True)
-    plt.fill_between(range(0, t_t), error_ar_mean - error_ar_std, error_ar_mean + error_ar_std, alpha=0.2, edgecolor=cAR1,
-                     facecolor=bAR1,
-                     linewidth=1, antialiased=True)
+    plt.fill_between(range(0, t_t), error_ar_mean - error_ar_std, error_ar_mean + error_ar_std,\
+        alpha=0.2, edgecolor=cAR1, facecolor=bAR1, linewidth=1, antialiased=True)
     plt.legend()
     plt.xlabel('Time')
     plt.ylabel('Error')
@@ -943,10 +1143,14 @@ def plot_p3(ymin, ymax, have_spectral, error_spec_mean, error_spec_std,
 
 
 def error_stat(error_spec_data, error_persist_data):
-    '''
+    """
     if have_spectral:
-    :return:
-    '''
+    Returns:
+        error_spec_mean:    Mean error of spectral filtering
+        error_spec_std:     Std of spectral filtering error
+        error_persist_mean: Mean error of last-value prediction
+        error_persist_std:  Std of last-value prediction error
+    """
 
     error_spec_mean = np.mean(error_spec_data, 0)
     error_spec_std = np.std(error_spec_data, 0)
@@ -956,11 +1160,23 @@ def error_stat(error_spec_data, error_persist_data):
     return error_spec_mean, error_spec_std, error_persist_mean, error_persist_std
 
 def pre_comp_filter_params(G, f_dash, proc_noise_std, obs_noise_std, t_t):
-    n = G.shape[0]
-    m = f_dash.shape[0]
+    """
+    Kalman filter auxiliary parameters calculation
 
-    W = proc_noise_std ** 2 * np.matrix(np.eye(n))
-    V = obs_noise_std ** 2 * np.matrix(np.eye(m))
+    The Kalman filter satisfies the following recursive update equations: 
+    Set
+    begin{eqnarray*}
+    a_t &=& G m_{t-1}
+    R_t &=& G C_{t-1} G' + W \\ % R_{t+1}  = W + G*(R_t -  A\times A *Q)*G'
+    Q_t &=& F'R_tF + v
+    A_t &=& R_t F  / Q_t
+    \end{eqnarray*}
+    """
+    n = G.shape[0]   #input vector
+    m = f_dash.shape[0] #observation vector
+
+    W = proc_noise_std ** 2 * np.matrix(np.eye(n))  #covariance matrix of process noise
+    V = obs_noise_std ** 2 * np.matrix(np.eye(m))   #observation noise covariance
 
     # m_t = [np.matrix([[0],[0]])]
     matrix_c = [np.matrix(np.eye(2))]
@@ -970,10 +1186,16 @@ def pre_comp_filter_params(G, f_dash, proc_noise_std, obs_noise_std, t_t):
     Z = []
 
     for t in range(t_t):
-        R.append(G * matrix_c[-1] * G.transpose() + W)
-        Q.append(f_dash * R[-1] * f_dash.transpose() + V)
+        R.append(G * matrix_c[-1] * G.transpose() + W)  #LaTeX R_t &=& G C_{t-1} G' + W
+        Q.append(f_dash * R[-1] * f_dash.transpose() + V) #LaTeX Q_t &=& F'R_tF + v
+
+        #LaTeX A_t &=& R_t F  / Q_t
         matrix_a.append(R[-1] * f_dash.transpose() * np.linalg.inv(Q[-1]))
+
+         #C_t &=& R_t - A_t Q_t A'_t
         matrix_c.append(R[-1] - matrix_a[-1] * Q[-1] * matrix_a[-1].transpose())
+
+        #In general, set $Z_t = G(I-F\otimes A_t)$ and $Z = G(I-F \otimes A)$.
         Z.append(G * (np.eye(2) - matrix_a[-1] * f_dash))
 
     return n, m, W, V, matrix_c, R, Q, matrix_a, Z
@@ -984,6 +1206,25 @@ def p3_for_test_identification2(ylim, have_spectral, Tlim, error_spec, sequence_
                                error_AR1_mean, error_AR1_std,
                                have_kalman, error_Kalman_mean, error_Kalman_std, pp):
 
+    """
+    Plots Figure 2,5 after getting all the errors data.
+    LaTeX
+    In Figure 2, we compare the prediction error for 4 methods: 
+    the standard baseline last-value prediction $\hat{y}_{t+1} := y_t$, also 
+    known as persistence prediction, the spectral filtering of 
+    \cite{hazan2017online}, Kalman filter, and AR(2).
+
+    We first continue the Example \ref{HazanEx} form the main body of the 
+    paper, with a system given by (\ref{eq:experem1_system_hazan}) and 
+    $v=w=0.5$. Figure \ref{fig1}(right) shows a sample observations 
+    trajectory of the system, together with forecast for the four methods. 
+    Figure \ref{fig1}(left) show the mean and standard deviations of the 
+    errors for the first 500 time steps. Figure \ref{fig1brief} in the main 
+    text is the restriction of this Figure \ref{fig1}(left) to the first 20 
+    steps. Similarly to Figure \ref{fig1brief}, we observe that the AR(2) 
+    predictions are better than the spectral and persistence methods, and 
+    worse than the Kalman filter, since only two first terms are considered. 
+    """
     # p3 = plt.figure()
     p3, ax = plt.subplots()
     plt.ylim(ylim)
@@ -1033,10 +1274,17 @@ def p3_for_test_identification2(ylim, have_spectral, Tlim, error_spec, sequence_
 
 def prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y):
 
+    """
+    Auto-regression prediction values.
+    Finds the formula for Figure 1(AR(s+1)):
+    The unrolling of the forecast $f_{t+1}$.
+    The remainder term goes to zero exponentially fast with $s$, by Lemma
+    """
+
     Y_pred = []
     for t in range(t_t):
         Y_pred_term1 = f_dash * G * matrix_a[t] * sys.outputs[t]
-        if t == 0:
+        if t == 0:  #can deal with it to decrease time consumption
             Y_pred.append(Y_pred_term1)
             continue
         acc = 0
@@ -1047,12 +1295,15 @@ def prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y):
                     continue
                 ZZ = ZZ * Z[t - i]
             acc += ZZ * G * matrix_a[t - j - 1] * Y[t - j - 1]
-        Y_pred.append(Y_pred_term1 + f_dash * acc)
+        Y_pred.append(Y_pred_term1 + f_dash * acc) #Why didn't we add remainder term?
 
     return Y_pred
 
 
 def prediction_kalman(t_t, f_dash, G, matrix_a, sys, Z, Y):
+    """
+    Kalman filter prediction values
+    """
     Y_kalman = []
     for t in range(t_t):
         Y_pred_term1 = f_dash * G * matrix_a[t] * sys.outputs[t]
@@ -1061,6 +1312,7 @@ def prediction_kalman(t_t, f_dash, G, matrix_a, sys, Z, Y):
             continue
 
         accKalman = 0
+        #We don't have range(min(t,s)+1) as we do for prediction function
         for j in range(t + 1):
             for i in range(j + 1):
                 if i == 0:

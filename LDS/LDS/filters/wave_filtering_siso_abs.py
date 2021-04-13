@@ -28,7 +28,7 @@ class WaveFilteringSisoAbs(FilteringSiso):
 
         Args:
             sys: instance of DynamicalSystem class
-            t_t: integer
+            t_t: integer. Will write what it is.
             k: integer
         """
         super().__init__(sys, t_t)
@@ -36,6 +36,12 @@ class WaveFilteringSisoAbs(FilteringSiso):
 
     def var_calc(self):
         """
+        self.n - input vector
+        self.m - observation vector
+        self.k_dash - 
+        self.H - Hankel matrix
+        self.M - 
+
         Calculating all parameters of the filter.
         """
         self.n = self.sys.n
@@ -52,10 +58,10 @@ class WaveFilteringSisoAbs(FilteringSiso):
         Abstract method.
 
         Returns:
-            y_pred_full: empty array
+            y_pred_full: y prediction
             M: identity matrix
-            pred_error: empty array
-            pred_error_persistent: empty array
+            pred_error: prediction error
+            pred_error_persistent: error of the prediction method
         """
         y_pred_full = []
         pred_error = []

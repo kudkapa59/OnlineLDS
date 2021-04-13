@@ -10,7 +10,27 @@ class DynamicalSystem(object):
     def __init__(self,matrix_a,matrix_b,matrix_c,matrix_d, **kwargs):
         """
         Inits DynamicalSystem with four matrix args and
-        adds possibility of additional keywords in arguments
+        adds possibility of additional keywords in arguments.
+
+        G - matrix_a
+        matrix_b - np.zeros((2,1))
+        F_dash - matrix_c
+        matrix_d - np.zeros((1,1))
+
+        If a matrix_a is a number, transforms it into float 
+        and makes d-state vector equal to 1.
+        If a matrix_a is square y x y, set d equal to y.
+        If a matrix_b is a number, transform it into float
+        and set n-input vector equal to 1. 
+        matrix_b can't take place in case of single numbered
+        matrix_a.
+        If matrix_b is a matrix, number of its columns is assigned to n.
+        If matrix_c is a number, transform it into float
+        and set m-observation vector equal to 1.
+        matrix_c can be a number only if matrix_a is a number too.
+        If matrix_c is a matrix, number of its rows is assigned to m.
+        matrix_d can't be not zero number if matrix_b is a matrix.
+        Number of columns of matrix_d must be equal to n.
 
         Args:
             matrix_a: 2x2
@@ -19,7 +39,21 @@ class DynamicalSystem(object):
             matrix_d: 1x1
 
         Raises:
-            KeyError: in case of no additional keywords
+            KeyError: in case of no additional keywords.
+            Exits in case of wrong format of a matrix.
+            Exits in case of not square matrix_a.
+            Exits in case of having any matrix_b, but
+            matrix_a is a number.
+            Exits if number of rows of matrix_b isn't
+            equal to d.
+            Exits if matrix_c is a number, but matrix_a
+            is not.
+            Exits if number of columns of matrix_c is not
+            equalt to d.
+            Exits if matrix_b is a matrix, but matrix_d is
+            not zero number.
+            Exits if number of columns of matrix_d is not
+            equal to n-input vector.
         """
         self.matrix_a = matrix_a
         self.matrix_b = matrix_b
@@ -158,11 +192,43 @@ class DynamicalSystem(object):
 
     def solve(self, h_zero, inputs, t_t, **kwargs):
         """
+        Finds the outputs of the Dynamical System. We use
+        them to find the prediction errors of our filters.
+
+        t_t must be an integer greater than 1.
+        Length of h_zero array must be equal to
+        self.d(number of arrays in matrix A) if matrix_a
+        is matrix
+        If self.n-input vector is 1(matrix_b is a number),
+        self.inputs will be transformed to a columns with t_t
+        size.
+        If matrix_b is matrix, inputs must have n x t_t size.
+        If self.process_noise has Gaussian distribution, we
+        create it with size d x t_t. If it isn't of Gaussian,
+        we create matrix of zeros.
+        If self.observation_noise has Gaussian distribution, we
+        create it with size m x t_t. If it isn't of Gaussian,
+        we create matrix of zeros.
+        If it's wasn't given in init, we put earlies_event_time
+        to zero.
+
         Args:
             h_zero: 1x2 array
             inputs: array of zeros of t_t size
             t_t: integer
             kwargs: additional keywords
+
+        Raises:
+            Exits if t_t is 1 or a float.
+            Exits if matrix_a is a number, but
+            h_zero can't be transformed into float.
+            Exits if length of h_zero isn't equal
+            to d(if matrix_a is matrix).
+            Exits if self.n==1, but inputs don't have
+            a size of t_t. 
+            Exits if matrix_b is a matrix, but inputs
+            don't have n x t_t size.
+
         """
         if t_t == 1 or not isinstance(t_t,int):
             print("t_t must be an integer greater than 1")

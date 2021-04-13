@@ -1,4 +1,4 @@
-"""Implements WaveFilteringSisoFtl.
+"""Implements spectral filtering class.
 Originates from function wave_filtering_SISO_ftl from onlinelds.py."""
 
 import numpy as np
@@ -11,7 +11,8 @@ from LDS.filters.wave_filtering_siso_abs import WaveFilteringSisoAbs
 class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
     """
     Subclass of class WaveFilteringSisoAbs.
-    This one is not abstract, as we really use it.
+    This one is not abstract, as we really use it to implement
+    spectral filtering.
     Hierarchy tree ((ABC)):
 
         Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC)
@@ -21,6 +22,14 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
     def __init__(self, sys, t_t, k, verbose):
         """
         Inherits all the attributes of its superclass(see WaveFilteringSisoAbs).
+        
+        Variables initialized with var_calc():
+        self.n - input vector
+        self.m - observation vector
+        self.k_dash - 
+        self.H - Hankel matrix
+        self.M - 
+
         Uses method args4ftl_calc to create an array with m and k_dash.
         """
         super().__init__(sys, t_t, k)
@@ -35,6 +44,8 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
         """
         Creates a 5-element array with m on the zero position
         and k_dash on the first position. All others are zeros.
+        self.m - observation vector
+        self.k_dash - 
         """
         self.args4ftl = [0 for i in range(5)]
         self.args4ftl[0] = self.m
@@ -44,10 +55,10 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
     def predict(self):
         """
         Returns:
-            y_pred_full:
-            M:
-            pred_error:
-            pred_error_persistent:
+            y_pred_full: y prediction
+            M: identity matrix
+            pred_error: spectral error prediction error
+            pred_error_persistent: last-value prediction error
 
         """
         t_t = self.t_t

@@ -23,7 +23,7 @@ class FilteringSiso(Filtering):
     def __init__(self, sys, t_t):
         """
         Inherits abstract init method of Filtering.
-        Inits FilteringSiso with args and t_t, which
+        Inits FilteringSiso with sys and t_t, which
         are used as attributes.
 
         Args:
@@ -39,8 +39,8 @@ class FilteringSiso(Filtering):
         Creates two empty arrays.
 
         Returns:
-            y_pred_full: empty array
-            pred_error: empty array
+            y_pred_full: prediction of output
+            pred_error:  error prediction
         """
         y_pred_full, pred_error = [], []
         return y_pred_full, pred_error
