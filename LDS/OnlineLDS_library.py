@@ -327,10 +327,11 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
 # This is taken from pyplot documentation
 def heatmap(data, row_labels, col_labels, ax=None,
             cbar_kw={}, cbarlabel="", **kwargs):
-    '''
+    """
     from experiments.py
 
     Create a heatmap from a numpy array and two lists of labels.
+    Used by testNoiseImpact to implement Figure 3 and Figure 6.
 
     Arguments:
         data       : A 2D numpy array of shape (N,M)
@@ -346,7 +347,7 @@ def heatmap(data, row_labels, col_labels, ax=None,
                      :meth:`matplotlib.Figure.colorbar`.
         cbarlabel  : The label for the colorbar
     All other arguments are directly passed on to the imshow call.
-    '''
+    """
 
     if not ax:
         ax = plt.gca()
@@ -757,23 +758,29 @@ def gradient_ar(theta, *args):
 
 
 def test_arima_ogd(i, mk, lrate, data):
-    '''
-    to test arima_ogd function
-    the test casees are based on MATLAB:
-    the test numbers were taken from the output of MATLAB function
-    the random array w is fixed
-    :param i:
-    :param mk:
-    :param lrate:
-    :param data:
-    :return:
-    '''
+    """
+    Used to test arima_ogd function for i=10 case.
+    The test casees are based on MATLAB:
+    The test numbers were taken from the output of MATLAB function
+    the random array w is fixed.
+
+    Args:
+        i: Iterative number. In range from mk till data - 1.
+        mk: Integer number. Here we used 10.
+        lrate: Learning rate. Assigned 1 in example.py.
+        data: Array of 10000 elements.
+
+    Returns:
+
+    """
     # the random array w is fixed here
-    w = np.array([[0.276926, 0.023466, 0.480833, 0.507039, 0.710869, 0.188331, 0.374130, 0.290949, 0.724284, 0.562128]])
+    w = np.array([[0.276926, 0.023466, 0.480833, 0.507039, 0.710869, 0.188331, 0.374130,\
+        0.290949, 0.724284, 0.562128]])
 
     data_i_test = 0.0685
     diff_test = 0.0975 #out from MATLAB function
-    w_test = np.array([[0.39243, 0.17813, 0.59069, 0.52301, 0.60476, 0.10548, 0.37286, 0.29994, 0.72463, 0.49051]]) #out from MATLAB function
+    w_test = np.array([[0.39243, 0.17813, 0.59069, 0.52301, 0.60476, 0.10548, 0.37286,\
+        0.29994, 0.72463, 0.49051]]) #out from MATLAB function
 
     diff = diff_calc(w, data, mk, i)
     wi = w_calc(w, data, mk, i, diff, lrate)
@@ -838,19 +845,26 @@ def test_arima_ons(i, mk, lrate, data, A_trans_in):
         print('ERROR: arima_ogd - grad')
 
 def arima_ogd(data, options):
-    '''
-    ARIMA Online Newton Step algorithm
-    :param data:
-    :param options:
-    :return:
-    '''
+    """
+    from arima_ogd.m
+    Used by example.py. ARIMA Online Newton Step algorithm.
+    The function was originally written in MATLAB by Liu, C.; Hoi, S. C. H.; Zhao, P.; and Sun, J.
+    It's described in their work "Online arima algorithms for time series prediction." 
+
+    Args:
+        data: Array of 10000 elements.
+        options:Instance of ClassOptions class.
+    
+    Returns:
+
+    """
     # MATLAB:
     # mk = options.mk;
     # lrate = options.lrate;
     # w = options.init_w;
-    mk = options.mk
-    lrate = options.lrate
-    w = options.init_w
+    mk = options.mk    #10
+    lrate = options.lrate #learning rate. Assigned 1.
+    w = options.init_w  #Uniform distribution array with options.mk number of columns.
 
     # MATLAB:
     # list = [];
@@ -860,7 +874,7 @@ def arima_ogd(data, options):
 
     # MATLAB:
     # for i = mk+1:size(data,2)
-    for i in range(mk, len(data)):
+    for i in range(mk, len(data)):#from 10 till 9999
 
         #MATLAB:
         # diff = w*data(i-mk:i-1)'-data(i);%'
@@ -870,7 +884,7 @@ def arima_ogd(data, options):
 
         # MATLAB:
         #SE = SE + diff ^ 2;
-        SE = SE + diff**2
+        SE += diff**2
 
         # MATLAB:
         #if mod(i,options.t_tick)==0
@@ -890,44 +904,60 @@ def arima_ogd(data, options):
 
 
 def diff_calc(w, data, mk, i):
-    '''
+    """
+    Auxiliary function to implement ARIMA in python. Others functions use it in their
+    iterations.
     MATLAB: diff = w*data(i-mk:i-1)'-data(i);
     remember! MATLAB_data(1) == Python_data[0]
     we have to convert data[] from 1D vector to a numpy matrix (2D) to apply the transpose
     OR data[].reshape(-1,1) can be also used to mimick the transpose
 
-    :param w:
-    :param data:
-    :param mk:
-    :param i:
-    :return:
-    '''
+    Args:
+        w: Uniform distribution array with options.mk number of columns. 
+        data: Array of 10000 elements.
+        mk: Integer number. Here we used 10.
+        i: Iterative number. In range from mk till data - 1.
+    
+    Returns:
+
+    """
 
     return np.asscalar(np.dot(w, np.matrix(data[i - mk:i]).T) - data[i])
 
 
 def w_calc(w, data, mk, i, diff, lrate):
-    '''
+    """
+    Auxiliary function to implement ARIMA in python. Others functions use it in their
+    iterations.
     MATLAB: w = w - data(i-mk:i-1)*2*diff/sqrt(i-mk)*lrate;
-    :param w:
-    :param data:
-    :param mk:
-    :param i:
-    :param diff:
-    :param lrate:
-    :return:
-    '''
+    
+    Args:
+        w: Uniform distribution array with options.mk number of columns. 
+        data: Array of 10000 elements.
+        mk: Integer number. Here we used 10.
+        i: Iterative number. In range from mk till data - 1.
+        diff: Result of diff_calc function
+        lrate: Learning rate. Assigned 1 in example.py.
+    
+    Returns:
+    """
+
     return w - data[i - mk:i] * 2 * diff / np.sqrt(i - mk + 1) * lrate
 
 def grad_calc(data, i, mk, diff):
-    '''
-    MATLAB: grad = 2*data(i-mk:i-1)*diff;
-    :param data:
-    :param i:
-    :param mk:
-    :param diff:
-    :return:
-    '''
+    """
+    MATLAB: grad = 2*data(i-mk:i-1)*diff
+    Used by function arima_ons.
+
+    Args:
+        data: Array of 10000 elements.
+        i: Iterative number. In range from mk till data - 1.
+        mk: Integer number. Here we used 10.
+        diff: Result of diff_calc function
+
+    Returns:
+        Gradient.
+    """
     return 2 * data[i - mk:i] * diff
 
 def A_trans_calc(A_trans, grad):
@@ -935,33 +965,51 @@ def A_trans_calc(A_trans, grad):
     MATLAB:
     A_trans = A_trans - A_trans * grad' * grad * A_trans/(1 + grad * A_trans * grad');
     we have to convert data[] from 1D vector to a numpy matrix (2D) to apply the transpose
-    OR data[].reshape(-1,1) can be also used to mimick the transpose
+    OR data[].reshape(-1,1) can be also used to mimick the transpose.
+
+    Args:
+        A_trans: np.eye(mk) * epsilon
+        grad: Gradient, the return of the function grad_calc.
+
     :return:
     '''
     #@ is matrix multiply symbol
-    A_trans = A_trans - A_trans @ np.matrix(grad).T @ np.matrix(grad) @ A_trans / (1 + grad @ A_trans @ grad.T)
+    A_trans = A_trans - A_trans @ np.matrix(grad).T @ np.matrix(grad) @ A_trans / (1 +\
+        grad @ A_trans @ grad.T)
 
     return A_trans
 
 def w_calc_arima_ons(w, lrate, grad, A_trans):
-    '''
-    MATLAB: w = w - lrate * grad * A_trans ;
-    :param w:
-    :param lrate:
-    :param grad:
-    :param A_trans:
-    :return:
-    '''
+    """
+    MATLAB: w = w - lrate * grad * A_trans
+    Calculation of the weight with Gradient Descent algorithm.
+
+    Args:
+        w: Uniform distribution array with options.mk number of columns. 
+        lrate: Learning rate. Assigned 1 in example.py.
+        grad: Gradient, the return of the function grad_calc.
+        A_trans: Return of the function A_trans_calc.
+
+    Returns:
+        Weight after an iteration of the gradient descent algorithm.
+    """
+
     w = w - lrate * grad @ A_trans
     return w
 
 def arima_ons(data, options):
-    '''
-    ARIMA Online Newton Step algorithm
-    :param data:
-    :param options:
-    :return:
-    '''
+    """
+    from arima_ons.m. ARIMA Online Newton Step algorithm
+    Used by example.py.
+    The function was originally written in MATLAB by Liu, C.; Hoi, S. C. H.; Zhao, P.; and Sun, J.
+    It's described in their work "Online arima algorithms for time series prediction." 
+
+    Args:
+        data: Array of 10000 elements.
+        options:Instance of ClassOptions class.
+    
+    Returns:
+    """
 
     #MATLAB:
     #mk = options.mk;
@@ -983,7 +1031,7 @@ def arima_ons(data, options):
 
     # MATLAB:
     # for i = mk+1:size(data,2)
-    for i in range(mk, len(data)):
+    for i in range(mk, len(data)):  #from 10 till 9999
 
         #MATLAB: diff = w*data(i-mk:i-1)'-data(i);
         diff = diff_calc(w, data, mk, i)
@@ -991,11 +1039,12 @@ def arima_ons(data, options):
         #MATLAB: grad = 2*data(i-mk:i-1)*diff;
         grad = grad_calc(data, i, mk, diff)
 
-        # MATLAB: A_trans = A_trans - A_trans * grad' * grad * A_trans/(1 + grad * A_trans * grad');
+        # MATLAB: A_trans = A_trans - A_trans * grad' * grad * A_trans/(1 + grad *\
+        # A_trans * grad');
         A_trans = A_trans_calc(A_trans, grad)
 
         # MATLAB: w = w - lrate * grad * A_trans ;
-        w = w_calc_arima_ons(w, lrate, grad, A_trans)
+        w = w_calc_arima_ons(w, lrate, grad, A_trans) #weight modified by gradient descent
 
         # MATLAB:
         #SE = SE + diff ^ 2;

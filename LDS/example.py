@@ -9,7 +9,7 @@ settings_file_name = 'OARIMA_code_data/data/setting1.mat'
 
 # MATLAB:
 # load('../data/setting1.mat')
-data_in = loadmat(settings_file_name)
+data_in = loadmat(settings_file_name) #loading seq_d0(1x10000), seq_d1(1x10000)
 seq_d1 = data_in['seq_d1'][0]
 
 # create object 'options' from class 'ClassOptions'
@@ -21,7 +21,10 @@ options = ClassOptions()
 # options.init_w = rand([1, options.mk]);
 # options.t_tick = 1;
 options.mk = 10
+
+#Uniform distribution array with options.mk number of columns.
 options.init_w = np.random.rand(1, options.mk)
+
 options.t_tick = 1
 options.lrate = 1
 
