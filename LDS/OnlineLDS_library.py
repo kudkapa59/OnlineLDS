@@ -115,7 +115,8 @@ def test_identification(sys, filename_stub = "test", no_runs = 2,
                     wf_siso_ftl.pred_error #wf_siso_ftl.pred_error_persistent
             
             wf_siso_persistent = WaveFilteringSisoFtlPersistent(sys, t_t, k, VERBOSE)
-            predicted_persistent, M, error_persist_data = \
+            #Here I replaced error_persist_data with error_persist
+            predicted_persistent, M, error_persist = \   
                 wf_siso_persistent.y_pred_full, wf_siso_persistent.M,\
                     wf_siso_persistent.pred_error_persistent #wf_siso_ftl.pred_error_persistent
 

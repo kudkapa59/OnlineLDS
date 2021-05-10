@@ -1,5 +1,7 @@
-"""Implements WaveFilteringSISO. 
-Originates from function wave_filtering_SISO from onlineLDS.py."""
+"""
+Originates from function wave_filtering_SISO from onlineLDS.py.
+Originates from E.Hazan's paper "Learning Linear Dynamical Systems via Spectral Filtering.
+"""
 
 import numpy as np
 from LDS.filters.wave_filtering_siso_abs import WaveFilteringSisoAbs
@@ -7,10 +9,10 @@ from LDS.filters.wave_filtering_siso_abs import WaveFilteringSisoAbs
 class WaveFilteringSISO(WaveFilteringSisoAbs):
     """
     Subclass of abstract class WaveFilteringSisoAbs.
-    This one is not abstract, as we really use it.
+    Spectral filter implementation.
 
     Hierarchy tree ((ABC)):                                 
-                                                        WaveFilteringSisoPersistent
+                                                        WaveFilteringSISOPersistent
                                                             ^
                                                             |
     Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
@@ -28,16 +30,14 @@ class WaveFilteringSISO(WaveFilteringSisoAbs):
         self.r_m = r_m
 
         super().var_calc()
-        self.y_pred_full, self.M,\
-             self.pred_error, self.pred_error_persistent = self.predict()
+        self.y_pred_full, self.M, self.pred_error = self.predict()
 
     def predict(self):
         """
         Returns:
-            y_pred_full:
-            M:
-            pred_error:
-            pred_error_persistent:
+            y_pred_full: Signal prediction values.
+            M: Identity matrix.
+            pred_error: Spectral Filtering errors.
         """
 
         t_t = self.t_t
@@ -50,7 +50,6 @@ class WaveFilteringSISO(WaveFilteringSisoAbs):
 
         y_pred_full = []
         pred_error = []
-        pred_error_persistent = []
 
         for t in range(1, t_t):
             X = []
@@ -78,9 +77,8 @@ class WaveFilteringSISO(WaveFilteringSisoAbs):
                 M = r_m / frobenius_norm * M
 
             pred_error.append(loss)
-            pred_error_persistent.append(pow(np.linalg.norm(sys.outputs[t] - sys.outputs[t - 1]),\
-                 2))
+
 
             # print(loss)
 
-        return y_pred_full, M, pred_error, pred_error_persistent
+        return y_pred_full, M, pred_error
