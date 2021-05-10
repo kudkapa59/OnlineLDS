@@ -55,9 +55,9 @@ if __name__ == '__main__':
             testSeqD0()
 
             #These functions don't exist.
-            timeSeqD0()
-            testSeqD1()
-            testSeqD2()
+            #timeSeqD0()
+            #testSeqD1()
+            #testSeqD2()
             #testSisoInvariantLong()
             #testSYSID()
             gradient_AR_test(0)
