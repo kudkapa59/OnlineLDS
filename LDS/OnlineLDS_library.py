@@ -22,6 +22,7 @@ from LDS.ds.dynamical_system import DynamicalSystem
 from LDS.ts.time_series import TimeSeries
 #from LDS.filters.wave_filtering_siso import WaveFilteringSISO
 from LDS.filters.wave_filtering_siso_ftl import WaveFilteringSisoFtl
+from LDS.filters.wave_filtering_siso_ftl_persistent import WaveFilteringSisoFtlPersistent
 #from LDS.filters.kalman_filtering_siso import KalmanFilteringSISO
 from LDS.matlab_options.matlab_class_options import ClassOptions
 
@@ -109,9 +110,14 @@ def test_identification(sys, filename_stub = "test", no_runs = 2,
         if have_spectral: #Checks if we need spectral and persistent filters
             #using class WaveFilteringSisoFtl instead function WaveFilteringSisoFtl
             wf_siso_ftl = WaveFilteringSisoFtl(sys, t_t, k, VERBOSE)
-            predicted_spectral, M, error_spec, error_persist = \
+            predicted_spectral, M, error_spec = \
                 wf_siso_ftl.y_pred_full, wf_siso_ftl.M,\
-                    wf_siso_ftl.pred_error, wf_siso_ftl.pred_error_persistent
+                    wf_siso_ftl.pred_error #wf_siso_ftl.pred_error_persistent
+            
+            wf_siso_persistent = WaveFilteringSisoFtlPersistent(sys, t_t, k, VERBOSE)
+            predicted_spectral, M, error_spec = \
+                wf_siso_ftl.y_pred_full, wf_siso_ftl.M,\
+                    wf_siso_ftl.pred_error #wf_siso_ftl.pred_error_persistent
 
             if error_spec_data is None:
                 error_spec_data = error_spec
@@ -273,9 +279,9 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
             #using class WaveFilteringSisoFtl instead fubction WaveFilteringSisoFtl
             #predicted_output, M, error_spec, error_persist = WaveFilteringSisoFtl(sys, t_t, 5)
             wf_siso_ftl = WaveFilteringSisoFtl(sys, t_t, 5, VERBOSE)
-            predicted_output, M, error_spec, error_persist = \
+            predicted_output, M, error_spec = \
                 wf_siso_ftl.y_pred_full, wf_siso_ftl.M,\
-                     wf_siso_ftl.pred_error, wf_siso_ftl.pred_error_persistent
+                     wf_siso_ftl.pred_error #wf_siso_ftl.pred_error_persistent
 
             plt.plot(predicted_output, label='Spectral' + sequence_label,\
                  color='#1B2ACC', linewidth=2, antialiased = True)

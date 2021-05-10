@@ -1,17 +1,13 @@
-"""Implements WaveFilteringSISO. 
-Originates from function wave_filtering_SISO from onlineLDS.py."""
+""""""
 
 import numpy as np
 from LDS.filters.wave_filtering_siso_abs import WaveFilteringSisoAbs
 
-class WaveFilteringSISO(WaveFilteringSisoAbs):
+class WaveFilteringSisoPersistent(WaveFilteringSisoAbs):
     """
     Subclass of abstract class WaveFilteringSisoAbs.
-    This one is not abstract, as we really use it.
-
-    Hierarchy tree ((ABC)):                                 
                                                         WaveFilteringSisoPersistent
-                                                            ^
+    Hierarchy tree ((ABC)):                                 ^
                                                             |
     Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
                                      |                 |                |

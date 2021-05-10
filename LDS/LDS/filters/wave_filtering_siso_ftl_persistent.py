@@ -10,11 +10,12 @@ from LDS.filters.wave_filtering_siso_abs import WaveFilteringSisoAbs
 class WaveFilteringSisoFtlPersistent(WaveFilteringSisoAbs):
     """
     Subclass of class WaveFilteringSisoAbs.
-    This one is not abstract, as we really use it to implement
-    spectral filtering.
+    Persistent filter implementation.
     Hierarchy tree ((ABC)):
-
-        Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC)
+                                                        WaveFilteringSisoPersistent
+                                                            ^
+                                                            |
+    Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
                                      |                 |                |
                     KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
     """
