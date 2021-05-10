@@ -1,5 +1,4 @@
-"""Implements spectral filtering class.
-Originates from function wave_filtering_SISO_ftl from onlinelds.py."""
+"""Implements persistent filter."""
 
 import numpy as np
 import scipy.optimize as opt
@@ -8,7 +7,7 @@ import LDS.online_lds.cost_ftl as cost_ftl
 import LDS.online_lds.gradient_ftl as gradient_ftl
 from LDS.filters.wave_filtering_siso_abs import WaveFilteringSisoAbs
 
-class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
+class WaveFilteringSisoFtlPersistent(WaveFilteringSisoAbs):
     """
     Subclass of class WaveFilteringSisoAbs.
     This one is not abstract, as we really use it to implement
@@ -31,7 +30,7 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
         self.m - observation vector
         self.k_dash - 
         self.H - Hankel matrix
-        self.M - 
+        self.M - Identity matrix
 
         Uses method args4ftl_calc to create an array with m and k_dash.
         """
@@ -39,8 +38,8 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
         super().var_calc()
         self.args4ftl_calc()
         self.verbose = verbose
-        self.y_pred_full, self.M,\
-             self.pred_error, self.pred_error_persistent = self.predict()
+        self.y_pred_full, self.M, self.pred_error_persistent = self.predict()
+             #self.pred_error, self.pred_error_persistent = self.predict()
 
 
     def args4ftl_calc(self):
@@ -60,7 +59,6 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
     #     Returns:
     #         y_pred_full: y prediction
     #         M: identity matrix
-    #         pred_error: spectral error prediction error
     #         pred_error_persistent: last-value prediction error
 
     #     """
@@ -74,7 +72,6 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
     #     k_dash = self.k_dash
 
     #     y_pred_full = []
-    #     pred_error = []
     #     pred_error_persistent = []
 
     #     scalings = [pow(H.V[j], 0.25) for j in range(k)]
@@ -97,7 +94,6 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
     #         y_pred = np.real(M * X)
     #         y_pred = y_pred[0, 0]
     #         y_pred_full.append(y_pred)
-    #         loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2)
 
     #         args4ftl[2] = t
 
@@ -112,13 +108,13 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
 
     #         # result = opt.minimize(cost_ftl.cost_ftl, M.reshape(-1,1),\
     #         # args=args4ftl_tuple, method='CG', jac=gradient_ftl.gradient_ftl)
-    #         result = opt.minimize(cost_ftl.cost_ftl, M.reshape(-1, 1), args=args4ftl_tuple, jac=gradient_ftl.gradient_ftl)
+    #         result = opt.minimize(cost_ftl.cost_ftl, M.reshape(-1, 1), args=args4ftl_tuple, \
+    # jac=gradient_ftl.gradient_ftl)
 
     #         M = np.matrix(result.x).reshape(m, k_dash)
-    #         pred_error.append(loss)
     #         pred_error_persistent.append(pow(np.linalg.norm(sys.outputs[t] - sys.outputs[t - 1]),\
     #              2))
-    #     return y_pred_full, M, pred_error, pred_error_persistent
+    #     return y_pred_full, M, pred_error_persistent
 
     '''Gian-Reto Wiher version'''
     def predict(self):
@@ -126,7 +122,6 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
         Returns:
             y_pred_full: y prediction
             M: identity matrix
-            pred_error: spectral error prediction error
             pred_error_persistent: last-value prediction error
 
         """
@@ -134,7 +129,7 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
         args4ftl = self.args4ftl
 
         y_pred_full = []
-        pred_error = []
+        #pred_error = []
         pred_error_persistent = []
 
         scalings = [pow(self.H.V[j], 0.25) for j in range(self.k)]
@@ -158,7 +153,8 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
             y_pred = np.real(M * X)
             y_pred = y_pred[0, 0]
             y_pred_full.append(y_pred)
-            loss = pow(np.linalg.norm(self.sys.outputs[t] - y_pred), 2)
+            #loss = pow(np.linalg.norm(self.sys.outputs[t] - y_pred), 2)
+
             #print(self.sys.outputs[t],y_pred)
 
             args4ftl[2] = t
@@ -178,11 +174,11 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
                 jac=gradient_ftl.gradient_ftl)
 
             M = np.matrix(result.x).reshape(self.m, self.k_dash)
-            pred_error.append(loss)
+            #pred_error.append(loss)
             pred_error_persistent.append(pow(np.linalg.norm(self.sys.outputs[t] -\
                 self.sys.outputs[t - 1]),2))
             #print(self.sys.outputs[t],self.sys.outputs[t - 1])
         #print(y_pred_full[0],self.sys.outputs[0])
         #print(y_pred_full[1],self.sys.outputs[1])
         #print(y_pred_full[2],self.sys.outputs[2])
-        return y_pred_full, M, pred_error, pred_error_persistent
+        return y_pred_full, M, pred_error_persistent
