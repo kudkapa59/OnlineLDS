@@ -24,16 +24,14 @@ class WaveFilteringSisoPersistent(WaveFilteringSisoAbs):
         self.r_m = r_m
 
         super().var_calc()
-        self.y_pred_full, self.M,\
-             self.pred_error, self.pred_error_persistent = self.predict()
+        self.y_pred_full, self.M, self.pred_error_persistent = self.predict()
 
     def predict(self):
         """
         Returns:
-            y_pred_full:
-            M:
-            pred_error:
-            pred_error_persistent:
+            y_pred_full: Signal prediction values.
+            M: Identity matrix.
+            pred_error_persistent: Persistent filter error.
         """
 
         t_t = self.t_t
@@ -45,7 +43,6 @@ class WaveFilteringSisoPersistent(WaveFilteringSisoAbs):
         r_m = self.r_m
 
         y_pred_full = []
-        pred_error = []
         pred_error_persistent = []
 
         for t in range(1, t_t):
