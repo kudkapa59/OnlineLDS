@@ -22,6 +22,7 @@ from LDS.ds.dynamical_system import DynamicalSystem
 from LDS.ts.time_series import TimeSeries
 #from LDS.filters.wave_filtering_siso import WaveFilteringSISO
 from LDS.filters.wave_filtering_siso_ftl import WaveFilteringSisoFtl
+from LDS.filters.wave_filtering_siso_ftl_persistent import WaveFilteringSisoFtlPersistent
 #from LDS.filters.kalman_filtering_siso import KalmanFilteringSISO
 from LDS.matlab_options.matlab_class_options import ClassOptions
 
@@ -109,9 +110,14 @@ def test_identification(sys, filename_stub = "test", no_runs = 2,
         if have_spectral: #Checks if we need spectral and persistent filters
             #using class WaveFilteringSisoFtl instead function WaveFilteringSisoFtl
             wf_siso_ftl = WaveFilteringSisoFtl(sys, t_t, k, VERBOSE)
-            predicted_spectral, M, error_spec, error_persist = \
+            predicted_spectral, M, error_spec = \
                 wf_siso_ftl.y_pred_full, wf_siso_ftl.M,\
-                    wf_siso_ftl.pred_error, wf_siso_ftl.pred_error_persistent
+                    wf_siso_ftl.pred_error #wf_siso_ftl.pred_error_persistent
+            
+            wf_siso_persistent = WaveFilteringSisoFtlPersistent(sys, t_t, k, VERBOSE)
+            predicted_persistent, M, error_persist_data = \
+                wf_siso_persistent.y_pred_full, wf_siso_persistent.M,\
+                    wf_siso_persistent.pred_error_persistent #wf_siso_ftl.pred_error_persistent
 
             if error_spec_data is None:
                 error_spec_data = error_spec
@@ -225,8 +231,8 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
         ############################################
 
         ########## PRE-COMPUTE FILTER PARAMS ###################
-        n, m, W, V, matrix_c, R, Q, matrix_a, Z = pre_comp_filter_params(G, f_dash, proc_noise_std,\
-             obs_noise_std, t_t)           #Kalman filtering results
+        n, m, W, V, matrix_c, R, Q, matrix_a, Z = pre_comp_filter_params(G, f_dash,\
+            proc_noise_std, obs_noise_std, t_t)           #Kalman filtering results
 
         #PREDICTION
         plt.plot(Y, label='Output', color='#000000', linewidth=2, antialiased = True)
@@ -273,9 +279,9 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
             #using class WaveFilteringSisoFtl instead fubction WaveFilteringSisoFtl
             #predicted_output, M, error_spec, error_persist = WaveFilteringSisoFtl(sys, t_t, 5)
             wf_siso_ftl = WaveFilteringSisoFtl(sys, t_t, 5, VERBOSE)
-            predicted_output, M, error_spec, error_persist = \
+            predicted_output, M, error_spec = \
                 wf_siso_ftl.y_pred_full, wf_siso_ftl.M,\
-                     wf_siso_ftl.pred_error, wf_siso_ftl.pred_error_persistent
+                     wf_siso_ftl.pred_error #wf_siso_ftl.pred_error_persistent
 
             plt.plot(predicted_output, label='Spectral' + sequence_label,\
                  color='#1B2ACC', linewidth=2, antialiased = True)
@@ -285,6 +291,10 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
             #last-value error
             if error_persist_data is None: error_persist_data = error_persist
             else: error_persist_data = np.vstack((error_persist_data, error_persist))
+
+        else:
+            error_spec = []
+            error_persist = []
 
         plt.legend()
         plt.savefig(p_p, format='pdf')
@@ -309,8 +319,8 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     else:
         error_Kalman_mean, error_Kalman_std = [], []
 
-    if error_spec is None: error_spec = []
-    if error_persist is None: error_persist = []
+    #if error_spec is None: error_spec = []
+    #if error_persist is None: error_persist = []
     for (ylim, alphaValue) in [((0, 100.0), 0.2), ((0.0, 1.0), 0.05)]:
         for Tlim in [t_t-1, min(t_t-1, 20)]:
             #Plots Figure 2 and './outputs/AR.pdf'
@@ -961,7 +971,7 @@ def grad_calc(data, i, mk, diff):
     return 2 * data[i - mk:i] * diff
 
 def A_trans_calc(A_trans, grad):
-    '''
+    """
     MATLAB:
     A_trans = A_trans - A_trans * grad' * grad * A_trans/(1 + grad * A_trans * grad');
     we have to convert data[] from 1D vector to a numpy matrix (2D) to apply the transpose
@@ -971,8 +981,9 @@ def A_trans_calc(A_trans, grad):
         A_trans: np.eye(mk) * epsilon
         grad: Gradient, the return of the function grad_calc.
 
-    :return:
-    '''
+    Returns:
+    
+    """
     #@ is matrix multiply symbol
     A_trans = A_trans - A_trans @ np.matrix(grad).T @ np.matrix(grad) @ A_trans / (1 +\
         grad @ A_trans @ grad.T)
@@ -1253,7 +1264,7 @@ def p3_for_test_identification2(ylim, have_spectral, Tlim, error_spec, sequence_
                                error_spec_mean, error_spec_std, alphaValue,
                                error_persist, error_persist_mean, error_persist_std,
                                error_AR1_mean, error_AR1_std,
-                               have_kalman, error_Kalman_mean, error_Kalman_std, pp):
+                               have_kalman, error_Kalman_mean, error_Kalman_std, p_p):
 
     """
     Plots Figure 2,5 after getting all the errors data.
@@ -1278,16 +1289,16 @@ def p3_for_test_identification2(ylim, have_spectral, Tlim, error_spec, sequence_
     p3, ax = plt.subplots()
     plt.ylim(ylim)
     if have_spectral:
-        plt.plot(range(0, Tlim), error_spec[:Tlim], label='Spectral' + sequence_label, color='#1B2ACC', linewidth=2,
-                 antialiased=True)
-        plt.fill_between(range(0, Tlim), (error_spec_mean - error_spec_std)[:Tlim],
-                         (error_spec_mean + error_spec_std)[:Tlim], alpha=alphaValue, edgecolor='#1B2ACC',
-                         facecolor='#089FFF', linewidth=1, antialiased=True)
-        plt.plot(range(0, Tlim), error_persist[:Tlim], label='Persistence' + sequence_label, color='#CC1B2A',
-                 linewidth=2, antialiased=True)
-        plt.fill_between(range(0, Tlim), (error_persist_mean - error_persist_std)[:Tlim],
-                         (error_persist_mean + error_persist_std)[:Tlim], alpha=alphaValue, edgecolor='#CC1B2A',
-                         facecolor='#FF0800', linewidth=1, antialiased=True)
+        plt.plot(range(0, Tlim), error_spec[:Tlim], label='Spectral' + sequence_label,\
+            color='#1B2ACC', linewidth=2, antialiased=True)
+        plt.fill_between(range(0, Tlim), (error_spec_mean - error_spec_std)[:Tlim],\
+                         (error_spec_mean + error_spec_std)[:Tlim], alpha=alphaValue,\
+                        edgecolor='#1B2ACC',facecolor='#089FFF', linewidth=1, antialiased=True)
+        plt.plot(range(0, Tlim), error_persist[:Tlim], label='Persistence' + sequence_label,\
+            color='#CC1B2A', linewidth=2, antialiased=True)
+        plt.fill_between(range(0, Tlim), (error_persist_mean - error_persist_std)[:Tlim],\
+                        (error_persist_mean + error_persist_std)[:Tlim], alpha=alphaValue,\
+                        edgecolor='#CC1B2A',facecolor='#FF0800', linewidth=1, antialiased=True)
 
     # import matplotlib.transforms as mtransforms
     # trans = mtransforms.blended_transform_factory(ax.transData, ax.transData)
@@ -1299,20 +1310,24 @@ def p3_for_test_identification2(ylim, have_spectral, Tlim, error_spec, sequence_
     # print(error_AR1_data)
     # print(error_AR1_mean)
     # print(Tlim)
-    plt.plot(error_AR1_mean[:Tlim], label='AR(2)' + sequence_label, color=cAR1, linewidth=2, antialiased=True)
-    plt.fill_between(range(0, Tlim), (error_AR1_mean - error_AR1_std)[:Tlim], (error_AR1_mean + error_AR1_std)[:Tlim],
-                     alpha=alphaValue, edgecolor=cAR1, facecolor=bAR1, linewidth=1,
-                     antialiased=True)  # transform=trans) #offset_position="data") alpha=alphaValue,
+    plt.plot(error_AR1_mean[:Tlim], label='AR(2)' + sequence_label, color=cAR1, linewidth=2,\
+        antialiased=True)
+    plt.fill_between(range(0, Tlim), (error_AR1_mean - error_AR1_std)[:Tlim],\
+        (error_AR1_mean + error_AR1_std)[:Tlim],\
+            alpha=alphaValue, edgecolor=cAR1, facecolor=bAR1, linewidth=1,\
+                antialiased=True)  # transform=trans) #offset_position="data") alpha=alphaValue,
 
     if have_kalman:
         cK = (42.0 / 255.0, 204.0 / 255.0, 200.0 / 255.0)
         bK = (1.0, 204.0 / 255.0, 200.0 / 255.0)  # alphaValue
         print(cK)
         print(bK)
-        plt.plot(error_Kalman_mean[:Tlim], label='Kalman' + sequence_label, color=cK, linewidth=2, antialiased=True)
-        plt.fill_between(range(0, Tlim), (error_Kalman_mean - error_Kalman_std)[:Tlim],
-                         (error_Kalman_mean + error_Kalman_std)[:Tlim], alpha=alphaValue, facecolor=bK, edgecolor=cK,
-                         linewidth=1, antialiased=True)  # transform = trans) #offset_position="data")
+        plt.plot(error_Kalman_mean[:Tlim], label='Kalman' + sequence_label, color=cK,\
+            linewidth=2, antialiased=True)
+        plt.fill_between(range(0, Tlim), (error_Kalman_mean - error_Kalman_std)[:Tlim],\
+                         (error_Kalman_mean + error_Kalman_std)[:Tlim], alpha=alphaValue,\
+                            facecolor=bK, edgecolor=cK, linewidth=1,\
+                                antialiased=True)  # transform = trans) #offset_position="data")
 
     plt.legend()
     plt.xlabel('Time')

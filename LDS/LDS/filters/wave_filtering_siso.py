@@ -9,9 +9,11 @@ class WaveFilteringSISO(WaveFilteringSisoAbs):
     Subclass of abstract class WaveFilteringSisoAbs.
     This one is not abstract, as we really use it.
 
-    Hierarchy tree ((ABC)):
-
-        Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC)
+    Hierarchy tree ((ABC)):                                 
+                                                        WaveFilteringSisoPersistent
+                                                            ^
+                                                            |
+    Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
                                      |                 |                |
                     KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
     """
