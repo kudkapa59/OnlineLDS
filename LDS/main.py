@@ -46,13 +46,16 @@ if __name__ == '__main__':
             test_identification2(t_t = 100, no_runs = 10, have_spectral = True)
             '''Plots only auto-regression'''
             test_identification2(200, 10, have_spectral = False)
+
             #This function doesn't exist.
-            timeSeqD0()
+            #timeSeqD0()
             #testSisoInvariantShort(100)
+
             '''Plots without Kalman'''
             test_identification2(100)
+
             #Plots seq0, seq1, seq2, logratio pdfs.
-            testSeqD0()
+            #testSeqD0()
 
             #These functions don't exist.
             #timeSeqD0()
@@ -60,7 +63,7 @@ if __name__ == '__main__':
             #testSeqD2()
             #testSisoInvariantLong()
             #testSYSID()
-            gradient_AR_test(0)
+            #gradient_AR_test(0)
 
             #Implements Algorithm 1.
             test_AR()
