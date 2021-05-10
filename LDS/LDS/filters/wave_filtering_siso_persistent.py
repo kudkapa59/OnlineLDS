@@ -1,11 +1,15 @@
-""""""
+"""
+Originates from function wave_filtering_SISO from onlineLDS.py.
+Originates from E.Hazan's paper "Learning Linear Dynamical Systems via Spectral Filtering."
+"""
 
 import numpy as np
 from LDS.filters.wave_filtering_siso_abs import WaveFilteringSisoAbs
 
-class WaveFilteringSisoPersistent(WaveFilteringSisoAbs):
+class WaveFilteringSISOPersistent(WaveFilteringSisoAbs):
     """
     Subclass of abstract class WaveFilteringSisoAbs.
+    Implements Persistent filter.
                                                         WaveFilteringSisoPersistent
     Hierarchy tree ((ABC)):                                 ^
                                                             |
@@ -64,16 +68,16 @@ class WaveFilteringSisoPersistent(WaveFilteringSisoAbs):
             y_pred = y_pred[0, 0]
             y_pred_full.append(y_pred)
             # loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2)
-            loss = pow(np.linalg.norm(sys.outputs[t] + y_pred), 2)
+            #loss = pow(np.linalg.norm(sys.outputs[t] + y_pred), 2)
             M = M - 2 * eta * (sys.outputs[t] - y_pred) * X.transpose()
             frobenius_norm = np.linalg.norm(M, 'fro')
             if frobenius_norm >= r_m:
                 M = r_m / frobenius_norm * M
 
-            pred_error.append(loss)
+            #pred_error.append(loss)
             pred_error_persistent.append(pow(np.linalg.norm(sys.outputs[t] - sys.outputs[t - 1]),\
                  2))
 
             # print(loss)
 
-        return y_pred_full, M, pred_error, pred_error_persistent
+        return y_pred_full, M, pred_error_persistent
