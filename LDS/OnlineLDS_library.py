@@ -284,6 +284,12 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                 wf_siso_ftl.y_pred_full, wf_siso_ftl.M,\
                      wf_siso_ftl.pred_error #wf_siso_ftl.pred_error_persistent
 
+            wf_siso_persistent = WaveFilteringSisoFtlPersistent(sys, t_t, 5, VERBOSE)
+            #Here I replaced error_persist_data with error_persist
+            predicted_persistent, M, error_persist = \   
+                wf_siso_persistent.y_pred_full, wf_siso_persistent.M,\
+                    wf_siso_persistent.pred_error_persistent
+
             plt.plot(predicted_output, label='Spectral' + sequence_label,\
                  color='#1B2ACC', linewidth=2, antialiased = True)
             #spectral error
