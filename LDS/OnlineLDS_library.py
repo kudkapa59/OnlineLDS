@@ -264,6 +264,11 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                 else:
                     error_Kalman_data = np.vstack((error_Kalman_data,\
                          [pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
+
+#            loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2) 
+
+#            pred_error.append(loss)
+
                 plt.plot([i[0,0] for i in Y_pred], label="Kalman" + sequence_label,\
                      color=(42.0/255.0, 204.0 / 255.0, 200.0/255.0),\
                           linewidth=2, antialiased = True)

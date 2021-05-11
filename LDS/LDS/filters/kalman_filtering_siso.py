@@ -7,11 +7,11 @@ from LDS.filters.filtering_siso import FilteringSiso
 class KalmanFilteringSISO(FilteringSiso):
     """
     Subclass of class FilteringSiso.
-    This one is not abstract, as we really use it.
 
-    Hierarchy tree ((ABC)):
-
-        Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC)
+                                                        WaveFilteringSisoPersistent
+                                                            ^
+                                                            |
+    Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
                                      |                 |                |
                     KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
     """
