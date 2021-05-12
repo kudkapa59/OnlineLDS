@@ -1260,6 +1260,8 @@ def pre_comp_filter_params(G, f_dash, proc_noise_std, obs_noise_std, t_t):
 
     for t in range(t_t):
         R.append(G * matrix_c[-1] * G.transpose() + W)
+        if t == 1:
+            print(R)
         Q.append(f_dash * R[-1] * f_dash.transpose() + V) #LaTeX Q_t &=& F'R_tF + v
 
         #LaTeX A_t &=& R_t F  / Q_t

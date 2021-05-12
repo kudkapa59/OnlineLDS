@@ -82,12 +82,12 @@ class KalmanFilteringSISO(FilteringSiso):
 
         y_pred_full = [0]
         pred_error = [sys.outputs[0]]
-
+        
         for t in range(1, t_t):
 
             a = np.dot(G, m_prev)   #LaTeX a_t &=& G m_{t-1}
-            #R.append(G * matrix_c[-1] * G.transpose() + W)
-            R = np.dot(G, np.dot(c_prev, G.t_t))  # + W    #LaTeX R_t &=& G C_{t-1} G' + W
+            #R.append(G * matrix_c[-1] * G.transpose() + W) #new
+            R = np.dot(G, np.dot(c_prev, G.t_t)) + W
 
             f = np.dot(f_dash, a)           #f_t = F' a_t.   
             RF = np.dot(R, F)               #R_tF
