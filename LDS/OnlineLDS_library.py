@@ -194,6 +194,11 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     uses function p3_for_test_identification2 for plotting them.
     Plots Figure 2,5 of the main paper.
 
+    Args:
+        t_t: Time horizon.
+        no_runs: Number of runs.
+        s_choices: 
+
     Raises:
         Exits if number of runs is less than 2.
     """
@@ -258,12 +263,16 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
             if s == t_t:
                 # For the spectral filtering etc, we use:
                 # loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2)
+
+                #I want to replace this chunk by kalman_filtering_siso.py
                 if error_Kalman_data is None:
                     error_Kalman_data = np.array([pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]),\
                          2) for i in range(len(Y))])
                 else:
                     error_Kalman_data = np.vstack((error_Kalman_data,\
                          [pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
+
+
 
 #            loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2) 
 
@@ -1233,7 +1242,7 @@ def error_stat(error_spec_data, error_persist_data):
 
 def pre_comp_filter_params(G, f_dash, proc_noise_std, obs_noise_std, t_t):
     """
-    Kalman filter auxiliary parameters calculation
+    Kalman filter auxiliary parameters calculation.
 
     The Kalman filter satisfies the following recursive update equations: 
     Set

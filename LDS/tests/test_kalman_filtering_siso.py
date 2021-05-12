@@ -3,6 +3,15 @@ import numpy as np
 from LDS.filters.kalman_filtering_siso import KalmanFilteringSISO
 from LDS.ds.dynamical_system import DynamicalSystem
 
+
+
+
+'''def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
+                        have_kalman = False, have_spectral = True,
+                        G = np.matrix([[0.999,0],[0,0.5]]),
+                        f_dash = np.matrix([[1,1]]), sequence_label = ""):'''
+#Need to use these parameters to check if this Kalman works the same way.
+
 sys = DynamicalSystem(np.matrix([[0.999,0],[0,0.5]]),np.zeros((2,1)),np.matrix([[1,1]]),np.zeros((1,1)),
                                process_noise='gaussian',
                                observation_noise='gaussian',

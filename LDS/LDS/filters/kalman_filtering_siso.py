@@ -19,53 +19,61 @@ class KalmanFilteringSISO(FilteringSiso):
     def __init__(self, sys, t_t):
         """
         Inherits init method of FilteringSiso.
-        Inits KalmanFilteringSISO with args sys, t_t, which
-        are used as attributes.
+        Created to easily find the Kalman filter prediction.
 
         Args:
-            sys: instance of DynamicalSystem class.
-            t_t: time horizon.
+            sys: Linear Dynamical System.
+            t_t: Time horizon.
         """
         super().__init__(sys, t_t)
 
     def predict(self):
         """
-        Creates G - square identity matrix 4x4
+        Creates G - State transition matrix, square identity matrix 4x4.
                 n - number of rows of G
-                F - matrix 4x1 of 0.5
+                F - Observation matrix, matrix 4x1 of 0.5.
                 Id - identity matrix 4x4
                 m_prev - 0
                 c_prev - matrix nxn of zeros 
                 
-                Matrices from the paper:
+                Kalman filter recursive equations:
                 a = G.m_prev
-                R
+                R, Q, matrix_a
+
                 F
                 RF
-                Q
-                matrix_a
 
         Returns:
-            y_pred_full:
-            pred_error:
+            y_pred_full: Predicted output.
+            pred_error:  Error prediction.
 
         Raises:
             Q can't be zero.
         """
 
-        sys = self.sys
+        sys = self.sys                       #LDS
         t_t = self.t_t                       #time horizon
 
         G = np.diag(np.array(np.ones(4)))    #$G \in \RR^{n\times n}$ is the state transition 
                                              #matrix which defines the system dynamics
-        n = G.shape[0]
+
+
+        #def pre_comp_filter_params(G, f_dash, proc_noise_std, obs_noise_std, t_t):
+        n = G.shape[0] #
+        m = f_dash.shape[0] #new
+        #No noise covariance matrix was written yet.
+        matrix_c = [np.matrix(np.eye(2))] #new
+        #R = []
+        #Q = []
+        #matrix_a = []
+        #Z = []
 
         F = np.ones(n)[:, np.newaxis] / np.sqrt(n) #$F \in \RR^{n\times1}$ 
                                                    #is the observation direction
         Id = np.eye(n)
         m_prev = 0                           #m_{t-1} is the last hidden state
-        c_prev = np.zeros((n, n))            #C_{t-1} is the covariance matrix of $\phi_{t-1}$ given 
-                                             #$Y_0,\ldots,Y_{t-1}$. 
+        c_prev = np.zeros((n, n))            #C_{t-1} is the covariance matrix of $\phi_{t-1}$ 
+                                             #given $Y_0,\ldots,Y_{t-1}$. 
 
         y_pred_full = [0]
         pred_error = [sys.outputs[0]]

@@ -27,16 +27,15 @@ class FilteringSiso(Filtering):
         are used as attributes.
 
         Args:
-            sys: instance of DynamicalSystem class
-            t_t: integer
+            sys: instance of DynamicalSystem class.
+            t_t: time horizon.
         """
         super().__init__(sys, t_t)
 
     @abstractmethod
     def predict(self):
         """
-        Abstract method.
-        Creates two empty arrays.
+        Creates predicted output and prediction error arrays.
 
         Returns:
             y_pred_full: prediction of output
