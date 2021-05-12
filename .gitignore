@@ -1,0 +1,11 @@
+.git-old
+
+dist
+
+LDS.egg-info
+
+/LDS/__pycache__
+
+/LDS/.vscode/.ropeproject
+
+/LDS/.DS_Store
