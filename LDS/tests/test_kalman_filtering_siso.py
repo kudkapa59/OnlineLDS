@@ -12,11 +12,12 @@ from LDS.ds.dynamical_system import DynamicalSystem
                         f_dash = np.matrix([[1,1]]), sequence_label = ""):'''
 #Need to use these parameters to check if this Kalman works the same way.
 
-sys = DynamicalSystem(np.matrix([[0.999,0],[0,0.5]]),np.zeros((2,1)),np.matrix([[1,1]]),np.zeros((1,1)),
+sys = DynamicalSystem(G = np.matrix([[0.999,0],[0,0.5]]),np.zeros((2,1)),
+                               f_dash,np.zeros((1,1)),
                                process_noise='gaussian',
                                observation_noise='gaussian',
-                               process_noise_std=0.5,
-                               observation_noise_std=0.5,
+                               process_noise_std=proc_noise_std,
+                               observation_noise_std=obs_noise_std,
                                timevarying_multiplier_b = None)
 sys.solve([[1],[1]],np.zeros(100),100)
 
@@ -43,7 +44,9 @@ class TestKalmanFilteringSISO(unittest.TestCase):
 
     def test_kalman(self):
         self.assertEqual(self.kalman.t_t,100)
-    
+
+    def test_predict(self):
+        self.assertEqual(self.)
 
 if __name__ == '__main__':
     unittest.main()

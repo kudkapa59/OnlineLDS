@@ -54,9 +54,10 @@ class KalmanFilteringSISO(FilteringSiso):
         sys = self.sys                       #LDS
         t_t = self.t_t                       #time horizon
 
-        G = np.diag(np.array(np.ones(4)))    #$G \in \RR^{n\times n}$ is the state transition 
+        #G = np.diag(np.array(np.ones(4)))    #$G \in \RR^{n\times n}$ is the state transition 
                                              #matrix which defines the system dynamics
-
+        
+        #G = np.matrix([[0.999,0],[0,0.5]])   #state transition matrix
 
         #def pre_comp_filter_params(G, f_dash, proc_noise_std, obs_noise_std, t_t):
         n = G.shape[0] #
@@ -83,15 +84,24 @@ class KalmanFilteringSISO(FilteringSiso):
         y_pred_full = [0]
         pred_error = [sys.outputs[0]]
         
-        for t in range(1, t_t):
+        for t in range(t_t):                #Changed from range(1,t_t)
 
-            a = np.dot(G, m_prev)   #LaTeX a_t &=& G m_{t-1}
+            a = np.dot(G, m_prev)
             #R.append(G * matrix_c[-1] * G.transpose() + W) #new
-            R = np.dot(G, np.dot(c_prev, G.t_t)) + W
+
+            #R = np.dot(G, np.dot(c_prev, G.t_t)) + W
+            R = np.dot(G, np.dot(matrix_c[-1], G.transpose())) + W
+
+            """Result from the main file. We need to make it the same
+            [matrix([[1.248001, 0.      ],
+            [0.      , 0.5     ]]), matrix([[ 0.71753214, -0.15600005],
+            [-0.15600005,  0.34371873]])]"""
+            if t == 0:
+                print(R) 
 
             f = np.dot(f_dash, a)           #f_t = F' a_t.   
             RF = np.dot(R, F)               #R_tF
-            Q = np.dot(F.t_t, RF)  # + V    #LaTeX Q_t &=& F'R_tF + v
+            Q = np.dot(f_dash, RF)  # + V   
 
             matrix_a = RF                   
             try:
