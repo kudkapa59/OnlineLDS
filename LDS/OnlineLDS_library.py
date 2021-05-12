@@ -187,7 +187,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                         G = np.matrix([[0.999,0],[0,0.5]]),
                         f_dash = np.matrix([[1,1]]), sequence_label = ""):
     """
-    Originates from experiments.py
+    Originates from experiments.py.
 
     Implements Example 7 from Experiments section of the paper.
     Creates './outputs/AR.pdf'.Finds all the filters' errors and
@@ -1242,17 +1242,9 @@ def error_stat(error_spec_data, error_persist_data):
 
 def pre_comp_filter_params(G, f_dash, proc_noise_std, obs_noise_std, t_t):
     """
-    Kalman filter auxiliary parameters calculation.
-
-    The Kalman filter satisfies the following recursive update equations: 
-    Set
-    begin{eqnarray*}
-    a_t &=& G m_{t-1}
-    R_t &=& G C_{t-1} G' + W \\ % R_{t+1}  = W + G*(R_t -  A\times A *Q)*G'
-    Q_t &=& F'R_tF + v
-    A_t &=& R_t F  / Q_t
-    \end{eqnarray*}
+    Kalman filter auxiliary recursive parameters calculation.
     """
+
     n = G.shape[0]   #input vector
     m = f_dash.shape[0] #observation vector
 
@@ -1267,7 +1259,7 @@ def pre_comp_filter_params(G, f_dash, proc_noise_std, obs_noise_std, t_t):
     Z = []
 
     for t in range(t_t):
-        R.append(G * matrix_c[-1] * G.transpose() + W)  #LaTeX R_t &=& G C_{t-1} G' + W
+        R.append(G * matrix_c[-1] * G.transpose() + W)
         Q.append(f_dash * R[-1] * f_dash.transpose() + V) #LaTeX Q_t &=& F'R_tF + v
 
         #LaTeX A_t &=& R_t F  / Q_t

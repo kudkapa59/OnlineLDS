@@ -63,13 +63,18 @@ class KalmanFilteringSISO(FilteringSiso):
         m = f_dash.shape[0] #new
         #No noise covariance matrix was written yet.
         matrix_c = [np.matrix(np.eye(2))] #new
+        W = proc_noise_std ** 2 * np.matrix(np.eye(n))  #new, covariance matrix of process noise
+        V = obs_noise_std ** 2 * np.matrix(np.eye(m))   #new, observation noise covariance
         #R = []
         #Q = []
         #matrix_a = []
         #Z = []
 
-        F = np.ones(n)[:, np.newaxis] / np.sqrt(n) #$F \in \RR^{n\times1}$ 
-                                                   #is the observation direction
+        F = np.ones(n)[:, np.newaxis] / np.sqrt(n)
+
+        #Take the example
+        f_dash = np.matrix([[1,1]])  #new                  #is the observation direction
+        
         Id = np.eye(n)
         m_prev = 0                           #m_{t-1} is the last hidden state
         c_prev = np.zeros((n, n))            #C_{t-1} is the covariance matrix of $\phi_{t-1}$ 
@@ -81,11 +86,10 @@ class KalmanFilteringSISO(FilteringSiso):
         for t in range(1, t_t):
 
             a = np.dot(G, m_prev)   #LaTeX a_t &=& G m_{t-1}
+            #R.append(G * matrix_c[-1] * G.transpose() + W)
             R = np.dot(G, np.dot(c_prev, G.t_t))  # + W    #LaTeX R_t &=& G C_{t-1} G' + W
 
-            f = np.dot(F.t_t, a)            #f_t = F' a_t. In particular, in this paper we refer
-                                            #to the sequence $f_{t}$ as the 
-                                            #Kalman filter associated with the LDS $L=(G,F,v,W)$. 
+            f = np.dot(f_dash, a)           #f_t = F' a_t.   
             RF = np.dot(R, F)               #R_tF
             Q = np.dot(F.t_t, RF)  # + V    #LaTeX Q_t &=& F'R_tF + v
 
