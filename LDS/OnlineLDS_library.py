@@ -237,7 +237,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
         ############################################
 
         #Replacing with Kalman class #Need to check if we don't have repetitive vars
-        #kalman_siso = KalmanFilteringSISO(sys, G, f_dash,proc_noise_std, obs_noise_std, t_t)
+        #kalman_siso = KalmanFilteringSISO(sys, G, f_dash,proc_noise_std, obs_noise_std, t_t,Y)
         #predicted_kalman, error_kalman = kalman_siso.y_pred_full, kalman_siso.pred_error
         
 

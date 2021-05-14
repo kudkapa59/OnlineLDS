@@ -16,7 +16,7 @@ class KalmanFilteringSISO(FilteringSiso):
                     KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
     """
 
-    def __init__(self, sys, G, f_dash,proc_noise_std, obs_noise_std, t_t):
+    def __init__(self, sys, G, f_dash,proc_noise_std, obs_noise_std, t_t, Y):
         """
         Inherits init method of FilteringSiso.
         Created to easily find the Kalman filter prediction.
@@ -30,6 +30,7 @@ class KalmanFilteringSISO(FilteringSiso):
         self.f_dash = f_dash
         self.proc_noise_std = proc_noise_std
         self.obs_noise_std = obs_noise_std
+        self.Y = Y
 
         self.y_pred_full, self.pred_error = self.predict() #?
 
@@ -90,6 +91,29 @@ class KalmanFilteringSISO(FilteringSiso):
             Z.append(self.G * (np.eye(2) - matrix_a[-1] * self.f_dash))
 
         #return n, m, W, V, matrix_c, R, Q, matrix_a, Z
+
+        #Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
+        #Y_kalman = prediction_kalman(t_t, f_dash, G, matrix_a, sys, Z, Y)
+
+        Y_kalman = []
+        for t in range(self.t_t):
+            Y_pred_term1 = self.f_dash * self.G * matrix_a[t] * sys.outputs[t]
+            if t == 0:
+                Y_kalman.append(Y_pred_term1)
+                continue
+
+            accKalman = 0
+            #We don't have range(min(t,s)+1) as we do for prediction function
+            for j in range(t + 1):
+                for i in range(j + 1):
+                    if i == 0:
+                        ZZ = Z[t - i]
+                        continue
+                    ZZ = ZZ * Z[t - i]
+                accKalman += ZZ * self.G * matrix_a[t - j - 1] * self.Y[t - j - 1]
+            Y_kalman.append(Y_pred_term1 + self.f_dash * accKalman)
+
+        #return Y_kalman
 
 
         
