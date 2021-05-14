@@ -23,7 +23,7 @@ from LDS.ts.time_series import TimeSeries
 #from LDS.filters.wave_filtering_siso import WaveFilteringSISO
 from LDS.filters.wave_filtering_siso_ftl import WaveFilteringSisoFtl
 from LDS.filters.wave_filtering_siso_ftl_persistent import WaveFilteringSisoFtlPersistent
-#from LDS.filters.kalman_filtering_siso import KalmanFilteringSISO
+from LDS.filters.kalman_filtering_siso import KalmanFilteringSISO
 from LDS.matlab_options.matlab_class_options import ClassOptions
 
 matplotlib.rcParams['pdf.fonttype'] = 42
@@ -235,6 +235,12 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
         Y = [i[0,0] for i in sys.outputs]    #real outputs
         #pdb.set_trace()
         ############################################
+
+        #Replacing with Kalman class #Need to check if we don't have repetitive vars
+        #kalman_siso = KalmanFilteringSISO(sys, G, f_dash,proc_noise_std, obs_noise_std, t_t)
+        #predicted_kalman, error_kalman = kalman_siso.y_pred_full, kalman_siso.pred_error
+        
+
 
         ########## PRE-COMPUTE FILTER PARAMS ###################
         n, m, W, V, matrix_c, R, Q, matrix_a, Z = pre_comp_filter_params(G, f_dash,\

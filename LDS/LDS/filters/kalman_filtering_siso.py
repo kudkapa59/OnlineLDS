@@ -16,7 +16,7 @@ class KalmanFilteringSISO(FilteringSiso):
                     KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
     """
 
-    def __init__(self, sys, t_t):
+    def __init__(self, sys, G, f_dash,proc_noise_std, obs_noise_std, t_t):
         """
         Inherits init method of FilteringSiso.
         Created to easily find the Kalman filter prediction.
@@ -26,15 +26,25 @@ class KalmanFilteringSISO(FilteringSiso):
             t_t: Time horizon.
         """
         super().__init__(sys, t_t)
+        self.G = G
+        self.f_dash = f_dash
+        self.proc_noise_std = proc_noise_std
+        self.obs_noise_std = obs_noise_std
+
+        self.y_pred_full, self.pred_error = self.predict() #?
 
     def predict(self):
         """
+        The above part is create by me. The below part is created by prof.Marecek.
+
         Creates G - State transition matrix, square identity matrix 4x4.
                 n - number of rows of G
                 F - Observation matrix, matrix 4x1 of 0.5.
                 Id - identity matrix 4x4
                 m_prev - 0
-                c_prev - matrix nxn of zeros 
+                c_prev - matrix nxn of zeros
+
+                R - 
                 
                 Kalman filter recursive equations:
                 a = G.m_prev
@@ -50,6 +60,39 @@ class KalmanFilteringSISO(FilteringSiso):
         Raises:
             Q can't be zero.
         """
+
+        n = self.G.shape[0]   #input vector
+        m = self.f_dash.shape[0] #observation vector
+
+        W = self.proc_noise_std ** 2 * np.matrix(np.eye(n))  #covariance matrix of process noise
+        V = self.obs_noise_std ** 2 * np.matrix(np.eye(m))   #observation noise covariance
+
+        # m_t = [np.matrix([[0],[0]])]
+        matrix_c = [np.matrix(np.eye(2))]
+        R = []
+        Q = []
+        matrix_a = []
+        Z = []
+
+        for t in range(self.t_t):
+            R.append(self.G * matrix_c[-1] * self.G.transpose() + W)
+            if t == 1:
+                print(R)
+            Q.append(self.f_dash * R[-1] * self.f_dash.transpose() + V)
+
+            #LaTeX A_t &=& R_t F  / Q_t
+            matrix_a.append(R[-1] * self.f_dash.transpose() * np.linalg.inv(Q[-1]))
+
+            #C_t &=& R_t - A_t Q_t A'_t
+            matrix_c.append(R[-1] - matrix_a[-1] * Q[-1] * matrix_a[-1].transpose())
+
+            #In general, set $Z_t = G(I-F\otimes A_t)$ and $Z = G(I-F \otimes A)$.
+            Z.append(self.G * (np.eye(2) - matrix_a[-1] * self.f_dash))
+
+        #return n, m, W, V, matrix_c, R, Q, matrix_a, Z
+
+
+        
 
         sys = self.sys                       #LDS
         t_t = self.t_t                       #time horizon
