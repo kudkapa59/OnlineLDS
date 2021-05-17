@@ -237,7 +237,8 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
         ############################################
 
         #Replacing with Kalman class #Need to check if we don't have repetitive vars
-        #kalman_siso = KalmanFilteringSISO(sys, G, f_dash,proc_noise_std, obs_noise_std, t_t,Y)
+        #if have_kalman
+        kalman_siso = KalmanFilteringSISO(sys, G, f_dash,proc_noise_std, obs_noise_std, t_t,Y)
         #predicted_kalman, error_kalman = kalman_siso.y_pred_full, kalman_siso.pred_error
         
 
@@ -254,8 +255,12 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                             #Figure 1.
             #Prediction with no remainder term
             Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
+            Y_pred_new = kalman_siso.prediction_new(s)
 
+            #print('Check')
             #print(np.linalg.norm([Y_pred[i][0,0] - Y[i] for i in range(len(Y))]))
+            #print(np.linalg.norm([Y_pred_new[i][0,0] - Y[i] for i in range(len(Y))]))
+            #print('Mate')
 
             #print(lab)
             if s == 1:
@@ -274,9 +279,13 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                 if error_Kalman_data is None:
                     error_Kalman_data = np.array([pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]),\
                          2) for i in range(len(Y))])
+                    error_Kalman_data_new = np.array([pow(np.linalg.norm(Y_pred_new[i][0,0] - \
+                        Y[i]), 2) for i in range(len(Y))])
                 else:
                     error_Kalman_data = np.vstack((error_Kalman_data,\
                          [pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
+                    error_Kalman_data_new = np.vstack((error_Kalman_data_new,\
+                         [pow(np.linalg.norm(Y_pred_new[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
 
 
 
@@ -286,6 +295,9 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
 
                 plt.plot([i[0,0] for i in Y_pred], label="Kalman" + sequence_label,\
                      color=(42.0/255.0, 204.0 / 255.0, 200.0/255.0),\
+                          linewidth=2, antialiased = True)
+                plt.plot([i[0,0] for i in Y_pred_new], label="Kalman_new" + sequence_label,\
+                     color=(255.0/255.0, 165.0/255.0, 0),\
                           linewidth=2, antialiased = True)
             else:
                 plt.plot([i[0,0] for i in Y_pred], label='AR(%i)' % (s+1)  + sequence_label,\
@@ -343,8 +355,11 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     if have_kalman:#mean and stdev of kalman filter
         error_Kalman_mean = np.mean(error_Kalman_data, 0)
         error_Kalman_std = np.std(error_Kalman_data, 0)
+        error_Kalman_mean_new = np.mean(error_Kalman_data_new, 0)
+        error_Kalman_std_new = np.std(error_Kalman_data_new, 0)
     else:
         error_Kalman_mean, error_Kalman_std = [], []
+        error_Kalman_mean_new, error_Kalman_std_new = [], []
 
     #if error_spec is None: error_spec = []
     #if error_persist is None: error_persist = []
@@ -1266,8 +1281,10 @@ def pre_comp_filter_params(G, f_dash, proc_noise_std, obs_noise_std, t_t):
 
     for t in range(t_t):
         R.append(G * matrix_c[-1] * G.transpose() + W)
-        if t == 1:
-            print(R)
+        # if t == 1:
+        #     print('d')
+        #     print(R)
+        #     print('f')
         Q.append(f_dash * R[-1] * f_dash.transpose() + V)
 
         #LaTeX A_t &=& R_t F  / Q_t
