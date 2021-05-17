@@ -6,8 +6,8 @@
 from OnlineLDS_library import *
 
 #input settings
-#version = "FinalAAAI"
-version = "Working"
+version = "FinalAAAI"
+#version = "Working"
 #version = "Extended"
 
 if __name__ == '__main__':
@@ -26,14 +26,17 @@ if __name__ == '__main__':
             Finds all the filters' errors and
             uses function p3_for_test_identification2 for plotting them.
             '''
-            test_identification2(500, no_runs = 10, s_choices = [1],\
-                have_kalman = True, have_spectral = True)
+            #test_identification2(500, no_runs = 10, s_choices = [1],\
+            #    have_kalman = True, have_spectral = True)
+
             '''Plots heatmap of process and observation noises' variance'''
             testNoiseImpact()
             '''Creates file './outputs/impacts.pdf', which stores
             plots of average error of auto-regression as a function of
             regression depth s.'''
-            testImpactOfS()
+
+            #testImpactOfS()
+
         if version == "Working":
             # These calls produce illuminating plots, which did not make it into the final 
             # 8-page version of the paper.

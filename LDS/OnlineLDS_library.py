@@ -211,7 +211,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
         print("Number of runs has to be larger than 1.")
         exit()
 
-    filename = './outputs/AR_new.pdf'
+    filename = './outputs/AR.pdf'
     p_p = PdfPages(filename)
 
     ################# SYSTEM ###################
@@ -256,7 +256,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                             #Figure 1.
             #Prediction with no remainder term
             #Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
-            Y_pred_new = kalman_siso.prediction_new(s)
+            Y_pred_new = kalman_siso.predict(s)
 
             #print('Check')
             #print(np.linalg.norm([Y_pred[i][0,0] - Y[i] for i in range(len(Y))]))
@@ -468,7 +468,7 @@ def testNoiseImpact(t_t = 50, no_runs = 10, discretisation = 10):
     the variance of the process noise (vertical axis) and observation noise (horizontal axis). 
     """
     
-    filename = './outputs/noise.pdf'
+    filename = './outputs/noise_new.pdf'
     p_p = PdfPages(filename)
 
     for s in [1, 2, 3, 7]:
@@ -506,15 +506,18 @@ def testNoiseImpact(t_t = 50, no_runs = 10, discretisation = 10):
                     Y = [i[0,0] for i in sys.outputs]
                     #pdb.set_trace()
                     ############################################
-
+                    #kalman_siso = KalmanFilteringSISO(sys, G, f_dash,proc_noise_std, \
+                    #    obs_noise_std, t_t,Y)
                     ########## PRE-COMPUTE FILTER PARAMS ###################
                     n, m, W, V, matrix_c, R, Q, matrix_a, Z = pre_comp_filter_params(G,\
                         f_dash, proc_noise_std, obs_noise_std, t_t)
 
                     #PREDICTION
                     #AR prediction
+                    #Y_pred_new = kalman_siso.predict(s)
                     Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
                     #Kalman prediction
+                    #Y_kalman_new = kalman_siso.predict_kalman()
                     Y_kalman = prediction_kalman(t_t, f_dash, G, matrix_a, sys, Z, Y)
 
                     '''Root-mean-square error(RMSE) of AR'''

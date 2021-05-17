@@ -34,9 +34,6 @@ class KalmanFilteringSISO(FilteringSiso):
         #a, b = self.predict()
         self.parameters() #?
 
-    def predict(self):
-        pass
-
     def parameters(self):
         """
         The above part is create by me. The below part is created by prof.Marecek.
@@ -101,13 +98,13 @@ class KalmanFilteringSISO(FilteringSiso):
         #Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
         #Y_kalman = prediction_kalman(t_t, f_dash, G, matrix_a, sys, Z, Y)
 
-    def prediction_new(self,s):
+    def predict(self,s):
 
-        self.Y_kalman = []
+        y_pred_full = []
         for t in range(self.t_t):
             Y_pred_term1 = self.f_dash * self.G * self.matrix_a[t] * self.sys.outputs[t]
             if t == 0:
-                self.Y_kalman.append(Y_pred_term1)
+                y_pred_full.append(Y_pred_term1)
                 continue
 
             self.accKalman = 0
@@ -119,11 +116,31 @@ class KalmanFilteringSISO(FilteringSiso):
                         continue
                     ZZ = ZZ * self.Z[t - i]
                 self.accKalman += ZZ * self.G * self.matrix_a[t - j - 1] * self.Y[t - j - 1]
-            self.Y_kalman.append(Y_pred_term1 + self.f_dash * self.accKalman)
+            y_pred_full.append(Y_pred_term1 + self.f_dash * self.accKalman)
 
-        return self.Y_kalman
+        return y_pred_full
 
+    def predict_kalman(self):
 
+        y_pred_kalman = []
+        for t in range(self.t_t):
+            Y_pred_term1 = self.f_dash * self.G * self.matrix_a[t] * self.sys.outputs[t]
+            if t == 0:
+                y_pred_kalman.append(Y_pred_term1)
+                continue
+
+            self.accKalman = 0
+            #We don't have range(min(t,s)+1) as we do for prediction function
+            for j in range(t + 1):
+                for i in range(j + 1):
+                    if i == 0:
+                        ZZ = self.Z[t - i]
+                        continue
+                    ZZ = ZZ * self.Z[t - i]
+                self.accKalman += ZZ * self.G * self.matrix_a[t - j - 1] * self.Y[t - j - 1]
+            y_pred_kalman.append(Y_pred_term1 + self.f_dash * self.accKalman)
+
+        return y_pred_kalman
         
 
         # sys = self.sys                       #LDS
