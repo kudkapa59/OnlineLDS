@@ -211,7 +211,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
         print("Number of runs has to be larger than 1.")
         exit()
 
-    filename = './outputs/AR.pdf'
+    filename = './outputs/AR_new.pdf'
     p_p = PdfPages(filename)
 
     ################# SYSTEM ###################
@@ -222,6 +222,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     error_persist_data = None        #error of persistance prediction
     error_AR1_data = None            #error of auto-regression
     error_Kalman_data = None         #error of Kalman filtering
+    error_Kalman_data_new = None 
 
     for runNo in range(no_runs):
         sys = DynamicalSystem(G,np.zeros((2,1)),f_dash,np.zeros((1,1)),
@@ -244,8 +245,8 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
 
 
         ########## PRE-COMPUTE FILTER PARAMS ###################
-        n, m, W, V, matrix_c, R, Q, matrix_a, Z = pre_comp_filter_params(G, f_dash,\
-            proc_noise_std, obs_noise_std, t_t)           #Kalman filtering results
+        #n, m, W, V, matrix_c, R, Q, matrix_a, Z = pre_comp_filter_params(G, f_dash,\
+        #    proc_noise_std, obs_noise_std, t_t)           #Kalman filtering results
 
         #PREDICTION
         plt.plot(Y, label='Output', color='#000000', linewidth=2, antialiased = True)
@@ -254,7 +255,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                             #the expectation \eqref{thatexpintext} has the form displayed in 
                             #Figure 1.
             #Prediction with no remainder term
-            Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
+            #Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
             Y_pred_new = kalman_siso.prediction_new(s)
 
             #print('Check')
@@ -265,25 +266,25 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
             #print(lab)
             if s == 1:
                 if error_AR1_data is None:
-                    error_AR1_data = np.array([pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]),\
+                    error_AR1_data = np.array([pow(np.linalg.norm(Y_pred_new[i][0,0] - Y[i]),\
                          2) for i in range(len(Y))])   #quadratic loss
                 else:
                     #print(error_AR1_data.shape)
                     error_AR1_data = np.vstack((error_AR1_data,\
-                         [pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
+                         [pow(np.linalg.norm(Y_pred_new[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
             if s == t_t:
                 # For the spectral filtering etc, we use:
                 # loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2)
 
                 #I want to replace this chunk by kalman_filtering_siso.py
-                if error_Kalman_data is None:
-                    error_Kalman_data = np.array([pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]),\
-                         2) for i in range(len(Y))])
+                if error_Kalman_data_new is None:
+                    #error_Kalman_data = np.array([pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]),\
+                    #     2) for i in range(len(Y))])
                     error_Kalman_data_new = np.array([pow(np.linalg.norm(Y_pred_new[i][0,0] - \
                         Y[i]), 2) for i in range(len(Y))])
                 else:
-                    error_Kalman_data = np.vstack((error_Kalman_data,\
-                         [pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
+                    #error_Kalman_data = np.vstack((error_Kalman_data,\
+                    #     [pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
                     error_Kalman_data_new = np.vstack((error_Kalman_data_new,\
                          [pow(np.linalg.norm(Y_pred_new[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
 
@@ -293,14 +294,14 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
 
 #            pred_error.append(loss)
 
-                plt.plot([i[0,0] for i in Y_pred], label="Kalman" + sequence_label,\
-                     color=(42.0/255.0, 204.0 / 255.0, 200.0/255.0),\
-                          linewidth=2, antialiased = True)
+                #plt.plot([i[0,0] for i in Y_pred], label="Kalman" + sequence_label,\
+                #     color=(42.0/255.0, 204.0 / 255.0, 200.0/255.0),\
+                #          linewidth=2, antialiased = True)
                 plt.plot([i[0,0] for i in Y_pred_new], label="Kalman_new" + sequence_label,\
                      color=(255.0/255.0, 165.0/255.0, 0),\
                           linewidth=2, antialiased = True)
             else:
-                plt.plot([i[0,0] for i in Y_pred], label='AR(%i)' % (s+1)  + sequence_label,\
+                plt.plot([i[0,0] for i in Y_pred_new], label='AR(%i)' % (s+1)  + sequence_label,\
                      color=(42.0/255.0, 204.0 / 255.0, float(min(255.0,s))/255.0),\
                           linewidth=2, antialiased = True)
 
@@ -353,12 +354,12 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     error_AR1_mean = np.mean(error_AR1_data, 0)
     error_AR1_std = np.std(error_AR1_data, 0)
     if have_kalman:#mean and stdev of kalman filter
-        error_Kalman_mean = np.mean(error_Kalman_data, 0)
-        error_Kalman_std = np.std(error_Kalman_data, 0)
+        #error_Kalman_mean = np.mean(error_Kalman_data, 0)
+        #error_Kalman_std = np.std(error_Kalman_data, 0)
         error_Kalman_mean_new = np.mean(error_Kalman_data_new, 0)
         error_Kalman_std_new = np.std(error_Kalman_data_new, 0)
     else:
-        error_Kalman_mean, error_Kalman_std = [], []
+        #error_Kalman_mean, error_Kalman_std = [], []
         error_Kalman_mean_new, error_Kalman_std_new = [], []
 
     #if error_spec is None: error_spec = []
@@ -370,7 +371,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                                error_spec_mean, error_spec_std, alphaValue,
                                error_persist, error_persist_mean, error_persist_std,
                                error_AR1_mean, error_AR1_std,
-                               have_kalman, error_Kalman_mean, error_Kalman_std, p_p)
+                               have_kalman, error_Kalman_mean_new, error_Kalman_std_new, p_p)
 
 
     p_p.close()
