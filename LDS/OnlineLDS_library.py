@@ -222,7 +222,9 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     error_persist_data = None        #error of persistance prediction
     error_AR1_data = None            #error of auto-regression
     error_Kalman_data = None         #error of Kalman filtering
-    error_Kalman_data_new = None 
+    error_kalman_data_new = None 
+    error_AR1_data_1 = None
+    error_kalman_data_new_1 = None
 
     for runNo in range(no_runs):
         sys = DynamicalSystem(G,np.zeros((2,1)),f_dash,np.zeros((1,1)),
@@ -256,7 +258,8 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                             #Figure 1.
             #Prediction with no remainder term
             #Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
-            Y_pred_new = kalman_siso.predict(s)
+            Y_pred_new, error_AR1_data, error_kalman_data_new = kalman_siso.predict(s,\
+                error_AR1_data, error_kalman_data_new)
 
             #print('Check')
             #print(np.linalg.norm([Y_pred[i][0,0] - Y[i] for i in range(len(Y))]))
@@ -264,30 +267,29 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
             #print('Mate')
 
             #print(lab)
-            if s == 1:
-                if error_AR1_data is None:
-                    error_AR1_data = np.array([pow(np.linalg.norm(Y_pred_new[i][0,0] - Y[i]),\
-                         2) for i in range(len(Y))])   #quadratic loss
-                else:
+            #if s == 1:
+            #    if error_AR1_data is None:
+            #        error_AR1_data = np.array([pow(np.linalg.norm(Y_pred_new[i][0,0] - Y[i]),\
+            #             2) for i in range(len(Y))])   #quadratic loss
+            #    else:
                     #print(error_AR1_data.shape)
-                    error_AR1_data = np.vstack((error_AR1_data,\
-                         [pow(np.linalg.norm(Y_pred_new[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
-            if s == t_t:
+            #        error_AR1_data = np.vstack((error_AR1_data,\
+            #             [pow(np.linalg.norm(Y_pred_new[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
+            #if s == t_t:
                 # For the spectral filtering etc, we use:
                 # loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2)
 
                 #I want to replace this chunk by kalman_filtering_siso.py
-                if error_Kalman_data_new is None:
+            #    if error_kalman_data_new is None:
                     #error_Kalman_data = np.array([pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]),\
                     #     2) for i in range(len(Y))])
-                    error_Kalman_data_new = np.array([pow(np.linalg.norm(Y_pred_new[i][0,0] - \
-                        Y[i]), 2) for i in range(len(Y))])
-                else:
+            #        error_kalman_data_new = np.array([pow(np.linalg.norm(Y_pred_new[i][0,0] - \
+            #            Y[i]), 2) for i in range(len(Y))])
+            #    else:
                     #error_Kalman_data = np.vstack((error_Kalman_data,\
                     #     [pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
-                    error_Kalman_data_new = np.vstack((error_Kalman_data_new,\
-                         [pow(np.linalg.norm(Y_pred_new[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
-
+            #        error_kalman_data_new = np.vstack((error_kalman_data_new,\
+            #             [pow(np.linalg.norm(Y_pred_new[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
 
 
 #            loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2) 
@@ -307,7 +309,13 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
 
             plt.xlabel('Time')
             plt.ylabel('Prediction')
-
+            #try:
+            #print('AR')
+            #print(error_AR1_data==error_AR1_data_1)
+            #print('Kalman')
+            #print(error_kalman_data_new==error_kalman_data_new_1)
+            #except:
+                #None
 
         if have_spectral:   #Spectral filtering and last-value prediction
             #using class WaveFilteringSisoFtl instead fubction WaveFilteringSisoFtl
@@ -356,11 +364,11 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     if have_kalman:#mean and stdev of kalman filter
         #error_Kalman_mean = np.mean(error_Kalman_data, 0)
         #error_Kalman_std = np.std(error_Kalman_data, 0)
-        error_Kalman_mean_new = np.mean(error_Kalman_data_new, 0)
-        error_Kalman_std_new = np.std(error_Kalman_data_new, 0)
+        error_kalman_mean_new = np.mean(error_kalman_data_new, 0)
+        error_kalman_std_new = np.std(error_kalman_data_new, 0)
     else:
         #error_Kalman_mean, error_Kalman_std = [], []
-        error_Kalman_mean_new, error_Kalman_std_new = [], []
+        error_kalman_mean_new, error_kalman_std_new = [], []
 
     #if error_spec is None: error_spec = []
     #if error_persist is None: error_persist = []
@@ -371,7 +379,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                                error_spec_mean, error_spec_std, alphaValue,
                                error_persist, error_persist_mean, error_persist_std,
                                error_AR1_mean, error_AR1_std,
-                               have_kalman, error_Kalman_mean_new, error_Kalman_std_new, p_p)
+                               have_kalman, error_kalman_mean_new, error_kalman_std_new, p_p)
 
 
     p_p.close()

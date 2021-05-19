@@ -6,6 +6,7 @@ from LDS.filters.filtering_siso import FilteringSiso
 
 class KalmanFilteringSISO(FilteringSiso):
     """
+    Calculates Kalman filter parameters. Finds the prediction for Kalman and AR.
     Subclass of class FilteringSiso.
 
                                                         WaveFilteringSisoPersistent
@@ -98,7 +99,7 @@ class KalmanFilteringSISO(FilteringSiso):
         #Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
         #Y_kalman = prediction_kalman(t_t, f_dash, G, matrix_a, sys, Z, Y)
 
-    def predict(self,s):
+    def predict(self,s,error_AR1_data,error_kalman_data_new):
 
         y_pred_full = []
         for t in range(self.t_t):
@@ -118,7 +119,30 @@ class KalmanFilteringSISO(FilteringSiso):
                 self.accKalman += ZZ * self.G * self.matrix_a[t - j - 1] * self.Y[t - j - 1]
             y_pred_full.append(Y_pred_term1 + self.f_dash * self.accKalman)
 
-        return y_pred_full
+        if s == 1:
+            if error_AR1_data is None:
+                error_AR1_data = np.array([pow(np.linalg.norm(y_pred_full[i][0,0] - self.Y[i]),\
+                        2) for i in range(len(self.Y))])   #quadratic loss
+            else:
+                #print(error_AR1_data.shape)
+                error_AR1_data = np.vstack((error_AR1_data,\
+                        [pow(np.linalg.norm(y_pred_full[i][0,0] - self.Y[i]), 2) for i in range(len(self.Y))]))
+        
+        if s == self.t_t:
+            #For the spectral filtering etc, we use:
+            #loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2)
+
+            #I want to replace this chunk by kalman_filtering_siso.py
+            if error_kalman_data_new is None:
+                error_kalman_data_new = np.array([pow(np.linalg.norm(y_pred_full[i][0,0] - \
+                    self.Y[i]), 2) for i in range(len(self.Y))])
+            else:
+                error_Kalman_data_new = np.vstack((error_Kalman_data_new,\
+                        [pow(np.linalg.norm(y_pred_full[i][0,0] - self.Y[i]), 2) for i in range(len(self.Y))]))
+
+        return y_pred_full, error_AR1_data, error_kalman_data_new
+
+
 
     def predict_kalman(self):
 
