@@ -19,12 +19,16 @@ class KalmanFilteringSISO(FilteringSiso):
 
     def __init__(self, sys, G, f_dash,proc_noise_std, obs_noise_std, t_t, Y):
         """
-        Inherits init method of FilteringSiso.
-        Created to easily find the Kalman filter prediction.
+        Inherits init method of FilteringSiso. Calls parameters method.
 
         Args:
-            sys: Linear Dynamical System.
-            t_t: Time horizon.
+            sys: linear dynamical system.
+            G: state transition matrix.
+            f_dash: observation direction.
+            proc_noise_std: standard deviation of processing noise.
+            obs_noise_std: standard deviation of observation noise.
+            t_t: time horizon.
+            Y: scalar observations.
         """
         super().__init__(sys, t_t)
         self.G = G
@@ -37,37 +41,19 @@ class KalmanFilteringSISO(FilteringSiso):
 
     def parameters(self):
         """
-        The above part is create by me. The below part is created by prof.Marecek.
+        Finds Kalman filter's parameters:
+            W: processing noise covariance.
+            V: observation noise covariance.
 
-        Creates G - State transition matrix, square identity matrix 4x4.
-                n - number of rows of G
-                F - Observation matrix, matrix 4x1 of 0.5.
-                Id - identity matrix 4x4
-                m_prev - 0
-                c_prev - matrix nxn of zeros
-
-                R - 
-                
-                Kalman filter recursive equations:
-                a = G.m_prev
-                R, Q, matrix_a
-
-                F
-                RF
-
-        Returns:
-            y_pred_full: Predicted output.
-            pred_error:  Error prediction.
-
-        Raises:
+        Raises:  #Not raises yet
             Q can't be zero.
         """
 
         self.n = self.G.shape[0]   #input vector
         self.m = self.f_dash.shape[0] #observation vector
 
-        self.W = self.proc_noise_std ** 2 * np.matrix(np.eye(self.n))  #covariance matrix of process noise
-        self.V = self.obs_noise_std ** 2 * np.matrix(np.eye(self.m))   #observation noise covariance
+        self.W = self.proc_noise_std ** 2 * np.matrix(np.eye(self.n))
+        self.V = self.obs_noise_std ** 2 * np.matrix(np.eye(self.m))
 
         # m_t = [np.matrix([[0],[0]])]
         self.matrix_c = [np.matrix(np.eye(2))]
@@ -84,7 +70,6 @@ class KalmanFilteringSISO(FilteringSiso):
             #     print('Kalman')
             self.Q.append(self.f_dash * self.R[-1] * self.f_dash.transpose() + self.V)
 
-            #LaTeX A_t &=& R_t F  / Q_t
             self.matrix_a.append(self.R[-1] * self.f_dash.transpose() * np.linalg.inv(self.Q[-1]))
 
             #C_t &=& R_t - A_t Q_t A'_t
@@ -119,16 +104,17 @@ class KalmanFilteringSISO(FilteringSiso):
                 self.accKalman += ZZ * self.G * self.matrix_a[t - j - 1] * self.Y[t - j - 1]
             y_pred_full.append(Y_pred_term1 + self.f_dash * self.accKalman)
 
-        if s == 1:
+        if s == 1:  ###?
             if error_AR1_data is None:
                 error_AR1_data = np.array([pow(np.linalg.norm(y_pred_full[i][0,0] - self.Y[i]),\
                         2) for i in range(len(self.Y))])   #quadratic loss
             else:
                 #print(error_AR1_data.shape)
                 error_AR1_data = np.vstack((error_AR1_data,\
-                        [pow(np.linalg.norm(y_pred_full[i][0,0] - self.Y[i]), 2) for i in range(len(self.Y))]))
+                        [pow(np.linalg.norm(y_pred_full[i][0,0] - self.Y[i]), 2) for i\
+                            in range(len(self.Y))]))
         
-        if s == self.t_t:
+        if s == self.t_t: ###?
             #For the spectral filtering etc, we use:
             #loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2)
 
@@ -138,13 +124,14 @@ class KalmanFilteringSISO(FilteringSiso):
                     self.Y[i]), 2) for i in range(len(self.Y))])
             else:
                 error_kalman_data_new = np.vstack((error_kalman_data_new,\
-                        [pow(np.linalg.norm(y_pred_full[i][0,0] - self.Y[i]), 2) for i in range(len(self.Y))]))
+                        [pow(np.linalg.norm(y_pred_full[i][0,0] - self.Y[i]), 2) for i\
+                            in range(len(self.Y))]))
 
         return y_pred_full, error_AR1_data, error_kalman_data_new
 
 
 
-    def predict_kalman(self):
+    def predict_kalman(self,s,error_AR1_data,error_kalman_data_new):
 
         y_pred_kalman = []
         for t in range(self.t_t):
@@ -164,7 +151,30 @@ class KalmanFilteringSISO(FilteringSiso):
                 self.accKalman += ZZ * self.G * self.matrix_a[t - j - 1] * self.Y[t - j - 1]
             y_pred_kalman.append(Y_pred_term1 + self.f_dash * self.accKalman)
 
-        return y_pred_kalman
+        if s == 1: ###?
+            if error_AR1_data is None:
+                error_AR1_data = np.array([pow(np.linalg.norm(y_pred_kalman[i][0,0] - self.Y[i]),\
+                        2) for i in range(len(self.Y))])   #quadratic loss
+            else:
+                #print(error_AR1_data.shape)
+                error_AR1_data = np.vstack((error_AR1_data,\
+                        [pow(np.linalg.norm(y_pred_kalman[i][0,0] - self.Y[i]), 2) for i\
+                            in range(len(self.Y))]))
+        
+        if s == self.t_t:###?
+            #For the spectral filtering etc, we use:
+            #loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2)
+
+            #I want to replace this chunk by kalman_filtering_siso.py
+            if error_kalman_data_new is None:
+                error_kalman_data_new = np.array([pow(np.linalg.norm(y_pred_kalman[i][0,0] - \
+                    self.Y[i]), 2) for i in range(len(self.Y))])
+            else:
+                error_kalman_data_new = np.vstack((error_kalman_data_new,\
+                        [pow(np.linalg.norm(y_pred_kalman[i][0,0] - self.Y[i]), 2) for i\
+                            in range(len(self.Y))]))
+
+        return y_pred_kalman, error_AR1_data, error_kalman_data_new
         
 
         # sys = self.sys                       #LDS

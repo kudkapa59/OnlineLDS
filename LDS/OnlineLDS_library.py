@@ -515,18 +515,19 @@ def testNoiseImpact(t_t = 50, no_runs = 10, discretisation = 10):
                     Y = [i[0,0] for i in sys.outputs]
                     #pdb.set_trace()
                     ############################################
-                    #kalman_siso = KalmanFilteringSISO(sys, G, f_dash,proc_noise_std, \
-                    #    obs_noise_std, t_t,Y)
+                    kalman_siso = KalmanFilteringSISO(sys, G, f_dash,proc_noise_std, \
+                        obs_noise_std, t_t,Y)
                     ########## PRE-COMPUTE FILTER PARAMS ###################
                     n, m, W, V, matrix_c, R, Q, matrix_a, Z = pre_comp_filter_params(G,\
                         f_dash, proc_noise_std, obs_noise_std, t_t)
 
                     #PREDICTION
                     #AR prediction
-                    #Y_pred_new = kalman_siso.predict(s)
+                    Y_pred_new,error_AR1_data,_ = \
+                        kalman_siso.predict(s,errAR,errKalman)
                     Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
                     #Kalman prediction
-                    #Y_kalman_new = kalman_siso.predict_kalman()
+                    Y_kalman_new,_,error_kalman_data_new = kalman_siso.predict_kalman()
                     Y_kalman = prediction_kalman(t_t, f_dash, G, matrix_a, sys, Z, Y)
 
                     '''Root-mean-square error(RMSE) of AR'''
@@ -547,6 +548,8 @@ def testNoiseImpact(t_t = 50, no_runs = 10, discretisation = 10):
                     #Auto-regression error
                     errAR[proc_noise_i][obs_noise_i] += pow(np.linalg.norm([Y_pred[i][0,\
                         0] - Y[i] for i in range(len(Y))]), 2)
+                    print(error_AR1_data==errAR)
+                    print(error_kalman_data_new==errKalman)
 
         '''Calculating the average'''
         data = data / no_runs
