@@ -280,16 +280,16 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                 # loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2)
 
                 #I want to replace this chunk by kalman_filtering_siso.py
-            #    if error_kalman_data_new is None:
+                #if error_kalman_data_new is None:
                     #error_Kalman_data = np.array([pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]),\
                     #     2) for i in range(len(Y))])
-            #        error_kalman_data_new = np.array([pow(np.linalg.norm(Y_pred_new[i][0,0] - \
-            #            Y[i]), 2) for i in range(len(Y))])
-            #    else:
+                #    error_kalman_data_new = np.array([pow(np.linalg.norm(Y_pred_new[i][0,0] - \
+                #        Y[i]), 2) for i in range(len(Y))])
+                #else:
                     #error_Kalman_data = np.vstack((error_Kalman_data,\
                     #     [pow(np.linalg.norm(Y_pred[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
-            #        error_kalman_data_new = np.vstack((error_kalman_data_new,\
-            #             [pow(np.linalg.norm(Y_pred_new[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
+                #    error_kalman_data_new = np.vstack((error_kalman_data_new,\
+                #         [pow(np.linalg.norm(Y_pred_new[i][0,0] - Y[i]), 2) for i in range(len(Y))]))
 
 
 #            loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2) 
@@ -299,6 +299,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                 #plt.plot([i[0,0] for i in Y_pred], label="Kalman" + sequence_label,\
                 #     color=(42.0/255.0, 204.0 / 255.0, 200.0/255.0),\
                 #          linewidth=2, antialiased = True)
+            if s == t_t: 
                 plt.plot([i[0,0] for i in Y_pred_new], label="Kalman_new" + sequence_label,\
                      color=(255.0/255.0, 165.0/255.0, 0),\
                           linewidth=2, antialiased = True)

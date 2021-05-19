@@ -137,7 +137,7 @@ class KalmanFilteringSISO(FilteringSiso):
                 error_kalman_data_new = np.array([pow(np.linalg.norm(y_pred_full[i][0,0] - \
                     self.Y[i]), 2) for i in range(len(self.Y))])
             else:
-                error_Kalman_data_new = np.vstack((error_Kalman_data_new,\
+                error_kalman_data_new = np.vstack((error_kalman_data_new,\
                         [pow(np.linalg.norm(y_pred_full[i][0,0] - self.Y[i]), 2) for i in range(len(self.Y))]))
 
         return y_pred_full, error_AR1_data, error_kalman_data_new
