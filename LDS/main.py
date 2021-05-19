@@ -26,16 +26,18 @@ if __name__ == '__main__':
             Finds all the filters' errors and
             uses function p3_for_test_identification2 for plotting them.
             '''
-            #test_identification2(500, no_runs = 10, s_choices = [1],\
-            #    have_kalman = True, have_spectral = True)
+            test_identification2(500, no_runs = 10, s_choices = [1],\
+                have_kalman = True, have_spectral_persistent = True)
 
             '''Plots heatmap of process and observation noises' variance'''
-            testNoiseImpact()
+            '''Gives errors.'''
+            #testNoiseImpact()
+
             '''Creates file './outputs/impacts.pdf', which stores
             plots of average error of auto-regression as a function of
             regression depth s.'''
 
-            #testImpactOfS()
+            testImpactOfS()
 
         if version == "Working":
             # These calls produce illuminating plots, which did not make it into the final 
@@ -46,9 +48,9 @@ if __name__ == '__main__':
             uses function p3_for_test_identification2 for plotting them.Plots without Kalman.
             '''
             #Gives the error
-            test_identification2(t_t = 100, no_runs = 10, have_spectral = True)
+            test_identification2(t_t = 100, no_runs = 10, have_spectral_persistent = True)
             '''Plots only auto-regression'''
-            test_identification2(200, 10, have_spectral = False)
+            test_identification2(200, 10, have_spectral_persistent = False)
 
             #This function doesn't exist.
             #timeSeqD0()
@@ -74,7 +76,7 @@ if __name__ == '__main__':
             transition = np.matrix([[1.,-0.8],[-.6,.3]])
             observation = np.matrix([[1.0,1.0]])
             test_identification2(20, no_runs = 100, s_choices = [1], have_kalman = True,\
-                have_spectral = True, G = transition, f_dash = observation)
+                have_spectral_persistent = True, G = transition, f_dash = observation)
 
     except (KeyboardInterrupt, SystemExit):
         raise

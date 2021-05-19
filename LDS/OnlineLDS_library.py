@@ -20,7 +20,7 @@ import numpy as np
 from scipy.io import loadmat
 from LDS.ds.dynamical_system import DynamicalSystem
 from LDS.ts.time_series import TimeSeries
-#from LDS.filters.wave_filtering_siso import WaveFilteringSISO
+from LDS.filters.wave_filtering_siso import WaveFilteringSISO
 from LDS.filters.wave_filtering_siso_ftl import WaveFilteringSisoFtl
 from LDS.filters.wave_filtering_siso_ftl_persistent import WaveFilteringSisoFtlPersistent
 from LDS.filters.kalman_filtering_siso import KalmanFilteringSISO
@@ -44,7 +44,7 @@ def close_all_figs():
 
 def test_identification(sys, filename_stub = "test", no_runs = 2,
                        t_t = 100, k = 5, eta_zeros = None, ymin = None, ymax = None,
-                       sequence_label = None, have_spectral = True):
+                       sequence_label = None, have_spectral_persistent = True):
     """
     from experiments.py
     no_runs is the number of runs, t_t is the time horizon, k is the number of filters.
@@ -107,27 +107,28 @@ def test_identification(sys, filename_stub = "test", no_runs = 2,
         inputs = np.zeros(t_t)
         sys.solve([[1],[0]],inputs,t_t)
 
-        if have_spectral: #Checks if we need spectral and persistent filters
+        if have_spectral_persistent: #Checks if we need spectral and persistent filters
             #using class WaveFilteringSisoFtl instead function WaveFilteringSisoFtl
             wf_siso_ftl = WaveFilteringSisoFtl(sys, t_t, k, VERBOSE)
             predicted_spectral, M, error_spec = \
                 wf_siso_ftl.y_pred_full, wf_siso_ftl.M,\
                     wf_siso_ftl.pred_error #wf_siso_ftl.pred_error_persistent
-            
-            wf_siso_persistent = WaveFilteringSisoFtlPersistent(sys, t_t, k, VERBOSE)
-            #Here I replaced error_persist_data with error_persist
-            predicted_persistent, M, error_persist = \
-                wf_siso_persistent.y_pred_full, wf_siso_persistent.M,\
-                    wf_siso_persistent.pred_error_persistent #wf_siso_ftl.pred_error_persistent
 
             if error_spec_data is None:
                 error_spec_data = error_spec
             else:
                 error_spec_data = np.vstack((error_spec_data, error_spec))
+
+            wf_siso_persistent = WaveFilteringSisoFtlPersistent(sys, t_t, k, VERBOSE)
+            #Here I replaced error_persist_data with error_persist
+            predicted_persistent, M, error_persist = \
+                wf_siso_persistent.y_pred_full, wf_siso_persistent.M,\
+                    wf_siso_persistent.pred_error_persistent #wf_siso_ftl.pred_error_persistent
             if error_persist_data is None:
                 error_persist_data = error_persist
             else:
                 error_persist_data = np.vstack((error_persist_data, error_persist))
+
 
         for eta_zero in eta_zeros:
             error_ar = np.zeros(t_t)
@@ -153,25 +154,23 @@ def test_identification(sys, filename_stub = "test", no_runs = 2,
             else: #appending error values
                 error_ar_data = np.vstack((error_ar_data, error_ar))
 
-            if not have_spectral: #If we don't plot spectal and persistent filters
+            if not have_spectral_persistent: #If we don't plot spectal and persistent filters
                 predicted_spectral = []
-            plot_p1(ymin, ymax, inputs, sequence_label, have_spectral,
+                error_spec, error_persist = [], []
+            plot_p1(ymin, ymax, inputs, sequence_label, have_spectral_persistent,
                     predicted_spectral, predicted_ar,
                     sys, p_p)
-
-            if not have_spectral: #If we don't plot spectal and persistent filters
-                error_spec, error_persist = [], []
-            plot_p2(have_spectral, error_spec, error_persist, error_ar, lab, p_p)
+            plot_p2(have_spectral_persistent, error_spec, error_persist, error_ar, lab, p_p)
 
     error_ar_mean = np.mean(error_ar_data, 0)
     error_ar_std = np.std(error_ar_data, 0)
-    if have_spectral:
+    if have_spectral_persistent:
         error_spec_mean, error_spec_std, error_persist_mean, error_persist_std = \
             error_stat(error_spec_data, error_persist_data)
     else:
         error_spec_mean, error_spec_std, error_persist_mean, error_persist_std = [], [], [], []
 
-    plot_p3(ymin, ymax, have_spectral, error_spec_mean, error_spec_std,
+    plot_p3(ymin, ymax, have_spectral_persistent, error_spec_mean, error_spec_std,
             error_persist_mean, error_persist_std,
             error_ar_mean, error_ar_std,
             t_t, p_p)
@@ -183,7 +182,7 @@ def test_identification(sys, filename_stub = "test", no_runs = 2,
 
 
 def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
-                        have_kalman = False, have_spectral = True,
+                        have_kalman = False, have_spectral_persistent = True,
                         G = np.matrix([[0.999,0],[0,0.5]]),
                         f_dash = np.matrix([[1,1]]), sequence_label = ""):
     """
@@ -318,7 +317,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
             #except:
                 #None
 
-        if have_spectral:   #Spectral filtering and last-value prediction
+        if have_spectral_persistent:   #Spectral filtering and last-value prediction
             #using class WaveFilteringSisoFtl instead fubction WaveFilteringSisoFtl
             #predicted_output, M, error_spec, error_persist = WaveFilteringSisoFtl(sys, t_t, 5)
             wf_siso_ftl = WaveFilteringSisoFtl(sys, t_t, 5, VERBOSE)
@@ -353,7 +352,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     #In case we don't plot any of the filter, we assigns its error
     #parameters to [].
 
-    if have_spectral:#means and stdevs of methods' errors
+    if have_spectral_persistent:#means and stdevs of methods' errors
         error_spec_mean, error_spec_std, error_persist_mean, error_persist_std = \
             error_stat(error_spec_data, error_persist_data)
     else:
@@ -376,8 +375,8 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     for (ylim, alphaValue) in [((0, 100.0), 0.2), ((0.0, 1.0), 0.05)]:
         for Tlim in [t_t-1, min(t_t-1, 20)]:
             #Plots Figure 2 and './outputs/AR.pdf'
-            p3_for_test_identification2(ylim, have_spectral, Tlim, error_spec, sequence_label,
-                               error_spec_mean, error_spec_std, alphaValue,
+            p3_for_test_identification2(ylim, have_spectral_persistent, Tlim, error_spec,
+                               sequence_label, error_spec_mean, error_spec_std, alphaValue,
                                error_persist, error_persist_mean, error_persist_std,
                                error_AR1_mean, error_AR1_std,
                                have_kalman, error_kalman_mean_new, error_kalman_std_new, p_p)
@@ -699,16 +698,16 @@ def testSeqD0(no_runs = 100):
         ts = TimeSeries(matlabfile = matlabfile_in, varname="seq_d0")
         t_t = len(ts.outputs)
         test_identification(ts, "%s-complete"%varname_in, no_runs, t_t, 5,\
-            sequence_label = varname_in, have_spectral = False)
+            sequence_label = varname_in, have_spectral_persistent = False)
         t_t = min(20000, len(ts.outputs))
         test_identification(ts, "%s-20000"%varname_in, no_runs, t_t, 5,\
-            sequence_label = varname_in, have_spectral = False)
+            sequence_label = varname_in, have_spectral_persistent = False)
         t_t = min(2000, len(ts.outputs))
         test_identification(ts, "%s-2000"%varname_in, no_runs, t_t, 5,\
-            sequence_label = varname_in, have_spectral = False)
+            sequence_label = varname_in, have_spectral_persistent = False)
         t_t = min(200, len(ts.outputs))
         test_identification(ts, "%s-200"%varname_in, no_runs, t_t, 5,\
-            sequence_label = varname_in, have_spectral = False)
+            sequence_label = varname_in, have_spectral_persistent = False)
         t_t = min(100, len(ts.outputs))
         test_identification(ts, "%s-short-k5"%varname_in, 1, t_t, 5,\
             sequence_label = varname_in)
@@ -721,16 +720,16 @@ def testSeqD0(no_runs = 100):
         ts.logratio()
         t_t = len(ts.outputs) # has to go after the log-ratio truncation by one
         test_identification(ts, "logratio-complete", no_runs, t_t, 5, sequence_label = varname_in,\
-            have_spectral = False)
+            have_spectral_persistent = False)
         t_t = min(20000, len(ts.outputs))
         test_identification(ts, "logratio-20000", no_runs, t_t, 5,  sequence_label = varname_in,\
-            have_spectral = False)
+            have_spectral_persistent = False)
         t_t = min(2000, len(ts.outputs))
         test_identification(ts, "logratio-2000", no_runs, t_t, 5, sequence_label = varname_in,\
-            have_spectral = False)
+            have_spectral_persistent = False)
         t_t = min(200, len(ts.outputs))
         test_identification(ts, "logratio-200", no_runs, t_t, 5, sequence_label = varname_in,\
-            have_spectral = False)
+            have_spectral_persistent = False)
         t_t = min(100, len(ts.outputs))
         test_identification(ts, "logratio-short-k5", no_runs, t_t, 5, sequence_label = varname_in)
 
@@ -1148,23 +1147,23 @@ def lab(s, eta_zero):
     return lab1
 
 
-def plot_p1(ymin, ymax, inputs, sequence_label, have_spectral,
+def plot_p1(ymin, ymax, inputs, sequence_label, have_spectral_persistent,
             predicted_spectral, predicted_ar,
             sys, p_p):
     """
     Plots seq0, seq1, seq2, logratio pdf files.
 
     Args:
-        ymin:               Minimal value of y-axis.
-        ymax:               Maximal value of y-axis.
-        inputs:             Input to the system matrix.
-        sequence_label:     Plot's label.
-        have_spectral:      True if we want to build spectral and persistent filters.
-        predicted_spectral: Predicted values of spectral filter. If have_spectral is False,
-                            it's equal to an empty list.
-        predicted_ar:       Predicted values of auto-regression.
-        sys:                Linear Dynamical System created with DynamicalSystem class.
-        p_p:                PDF file, to which are export the plots.
+        ymin:                       Minimal value of y-axis.
+        ymax:                       Maximal value of y-axis.
+        inputs:                     Input to the system matrix.
+        sequence_label:             Plot's label.
+        have_spectral_persistent:   True if we want to build spectral and persistent filters.
+        predicted_spectral:         Predicted values of spectral filter. If
+                                    have_spectral_persistent is False, it's equal to an empty list.
+        predicted_ar:               Predicted values of auto-regression.
+        sys:                        Linear Dynamical System created with DynamicalSystem class.
+        p_p:                        PDF file, to which are export the plots.
     """
 
     p1 = plt.figure()
@@ -1178,7 +1177,7 @@ def plot_p1(ymin, ymax, inputs, sequence_label, have_spectral,
         linewidth=2, antialiased=True)
     # plt.plot([-i for i in predicted_output], label='Predicted output') #for some reason,\
     # usual way produces -ve estimate
-    if have_spectral:
+    if have_spectral_persistent:
         plt.plot([i for i in predicted_spectral], label='Spectral')
 
     plt.plot(predicted_ar, label=lab)
@@ -1189,22 +1188,22 @@ def plot_p1(ymin, ymax, inputs, sequence_label, have_spectral,
     p1.savefig(p_p, format='pdf')
 
 
-def plot_p2(have_spectral, error_spec, error_persist, error_ar, lab, p_p):
+def plot_p2(have_spectral_persistent, error_spec, error_persist, error_ar, lab, p_p):
     """
     Plots seq0, seq1, seq2, logratio pdf files.
 
     Args:
-        have_spectral:      True if we want to build spectral and persistent filters.
-        error_spec:         Spectral filter error.
-        error_persist:      Persistent filter error.
-        error_ar:           Auto-regression error.
-        lab:                Auto-regression plot label.
-        p_p:                PDF file, to which are export the plots.
+        have_spectral_persistent:      True if we want to build spectral and persistent filters.
+        error_spec:                    Spectral filter error.
+        error_persist:                 Persistent filter error.
+        error_ar:                      Auto-regression error.
+        lab:                           Auto-regression plot label.
+        p_p:                           PDF file, to which are export the plots.
     """
 
     p2 = plt.figure()
     plt.ylim(0, 20)
-    if have_spectral:
+    if have_spectral_persistent:
         plt.plot(error_spec, label='Spectral')
         plt.plot(error_persist, label='Persistence')
     plt.plot(error_ar, label=lab)
@@ -1215,7 +1214,7 @@ def plot_p2(have_spectral, error_spec, error_persist, error_ar, lab, p_p):
     p2.savefig(p_p, format='pdf')
 
 
-def plot_p3(ymin, ymax, have_spectral, error_spec_mean, error_spec_std,
+def plot_p3(ymin, ymax, have_spectral_persistent, error_spec_mean, error_spec_std,
             error_persist_mean, error_persist_std,
             error_ar_mean, error_ar_std,
             t_t, p_p):
@@ -1223,21 +1222,21 @@ def plot_p3(ymin, ymax, have_spectral, error_spec_mean, error_spec_std,
     Plots seq0, seq1, seq2, logratio pdf files.
 
     Args:
-        ymin:               Minimal value of y-axis.
-        ymax:               Maximal value of y-axis.
-        have_spectral:      True if we want to build spectral and persistent filters.
-        error_spec_mean:    Mean error of spectral filtering.
-        error_spec_std:     Std of spectral filtering error.
-        error_persist_mean: Mean error of last-value prediction.
-        error_persist_std:  Std of last-value prediction error.
-        error_ar_mean:      Mean error of auto-regression.
-        error_ar_std:       Std of auto-regression error.
-        p_p:                PDF file, to which are export the plots.
+        ymin:                          Minimal value of y-axis.
+        ymax:                          Maximal value of y-axis.
+        have_spectral_persistent:      True if we want to build spectral and persistent filters.
+        error_spec_mean:               Mean error of spectral filtering.
+        error_spec_std:                Std of spectral filtering error.
+        error_persist_mean:            Mean error of last-value prediction.
+        error_persist_std:             Std of last-value prediction error.
+        error_ar_mean:                 Mean error of auto-regression.
+        error_ar_std:                  Std of auto-regression error.
+        p_p:                           PDF file, to which are export the plots.
     """
 
     p3 = plt.figure()
     if ymax and ymin: plt.ylim(ymin, ymax)
-    if have_spectral:
+    if have_spectral_persistent:
         plt.plot(error_spec_mean, label='Spectral', color='#1B2ACC', linewidth=2, antialiased=True)
         plt.fill_between(range(0, t_t - 1), error_spec_mean - error_spec_std,\
             error_spec_mean + error_spec_std, alpha=0.2,edgecolor='#1B2ACC', facecolor='#089FFF',\
@@ -1262,7 +1261,7 @@ def plot_p3(ymin, ymax, have_spectral, error_spec_mean, error_spec_std,
 
 def error_stat(error_spec_data, error_persist_data):
     """
-    if have_spectral:
+    if have_spectral_persistent:
     Returns:
         error_spec_mean:    Mean error of spectral filtering
         error_spec_std:     Std of spectral filtering error
@@ -1314,7 +1313,7 @@ def pre_comp_filter_params(G, f_dash, proc_noise_std, obs_noise_std, t_t):
 
     return n, m, W, V, matrix_c, R, Q, matrix_a, Z
 
-def p3_for_test_identification2(ylim, have_spectral, Tlim, error_spec, sequence_label,
+def p3_for_test_identification2(ylim, have_spectral_persistent, Tlim, error_spec, sequence_label,
                                error_spec_mean, error_spec_std, alphaValue,
                                error_persist, error_persist_mean, error_persist_std,
                                error_AR1_mean, error_AR1_std,
@@ -1342,7 +1341,7 @@ def p3_for_test_identification2(ylim, have_spectral, Tlim, error_spec, sequence_
     # p3 = plt.figure()
     p3, ax = plt.subplots()
     plt.ylim(ylim)
-    if have_spectral:
+    if have_spectral_persistent:
         plt.plot(range(0, Tlim), error_spec[:Tlim], label='Spectral' + sequence_label,\
             color='#1B2ACC', linewidth=2, antialiased=True)
         plt.fill_between(range(0, Tlim), (error_spec_mean - error_spec_std)[:Tlim],\
