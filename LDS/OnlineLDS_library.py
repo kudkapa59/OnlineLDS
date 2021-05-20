@@ -222,8 +222,6 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     error_AR1_data = None            #error of auto-regression
     error_Kalman_data = None         #error of Kalman filtering
     error_kalman_data_new = None 
-    error_AR1_data_1 = None
-    error_kalman_data_new_1 = None
 
     for runNo in range(no_runs):
         sys = DynamicalSystem(G,np.zeros((2,1)),f_dash,np.zeros((1,1)),
@@ -298,6 +296,7 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                 #plt.plot([i[0,0] for i in Y_pred], label="Kalman" + sequence_label,\
                 #     color=(42.0/255.0, 204.0 / 255.0, 200.0/255.0),\
                 #          linewidth=2, antialiased = True)
+            print(Y_pred_new)
             if s == t_t: 
                 plt.plot([i[0,0] for i in Y_pred_new], label="Kalman_new" + sequence_label,\
                      color=(255.0/255.0, 165.0/255.0, 0),\

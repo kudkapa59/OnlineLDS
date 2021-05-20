@@ -7,14 +7,14 @@ from LDS.filters.filtering_abc_class import Filtering
 class FilteringSiso(Filtering):
     """
     Abstract class.
-    Subclass of abstract class Filtering.
-    Superclass of classes KalmanFilteringSISO and WaveFilteringSisoAbs.
-    Implements the ancestor to KalmanFilteringSISO, WaveFilteringSISO and
-    WaveFilteringSisoFtl classes, which have a real use.
+    Specifically written to separate Kalman filter and AR from spectral and persistent filters.
 
     Hierarchy tree ((ABC)):
 
-        Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC)
+                                                        WaveFilteringSisoPersistent
+                                                            ^
+                                                            |
+    Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
                                      |                 |                |
                     KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
 
@@ -27,19 +27,21 @@ class FilteringSiso(Filtering):
         are used as attributes.
 
         Args:
-            sys: instance of DynamicalSystem class.
+            sys: linear dynamical system. DynamicalSystem object.
             t_t: time horizon.
         """
+
         super().__init__(sys, t_t)
 
     @abstractmethod
     def predict(self):
         """
-        Creates predicted output and prediction error arrays.
+        Abstract method for output prediction and prediction error.
 
         Returns:
-            y_pred_full: prediction of output
-            pred_error:  error prediction
+            y_pred_full: output prediction.
+            pred_error:  prediction error.
         """
+
         y_pred_full, pred_error = [], []
         return y_pred_full, pred_error

@@ -1,5 +1,4 @@
-"""Implements an ancestor of real classes WaveFilteringSISO and 
-WaveFilteringSisoFtl."""
+"""Abstract class for creation of persistent and spectral filters."""
 
 import numpy as np
 from abc import abstractmethod
@@ -9,38 +8,37 @@ from LDS.h_m.hankel import Hankel
 
 class WaveFilteringSisoAbs(FilteringSiso):
     """
-    Abstract class.
-    Subclass of abstract class FilteringSiso.
-    Superclass of classes WaveFilteringSISO and WaveFilteringSisoFtl.
+    Abstract class for creation of persistent and spectral filters.
 
     Hierarchy tree ((ABC)):
 
-        Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC)
+                                                        WaveFilteringSisoPersistent
+                                                            ^
+                                                            |
+    Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
                                      |                 |                |
                     KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
     """
 
     def __init__(self, sys, t_t, k):
         """
-        Inherits init method of FilteringSiso.
-        Inits WaveFilteringSisoAbs with args sys, t_t, k, which
-        are used as attributes.
+        Inherits FilteringSiso method. Adds k
 
         Args:
-            sys: instance of DynamicalSystem class
-            t_t: integer. Will write what it is.
-            k: integer
+            sys: linear dynamical system. DynamicalSystem object.
+            t_t: time horizon.
+            k: 
         """
         super().__init__(sys, t_t)
         self.k = k
 
     def var_calc(self):
         """
-        self.n - input vector
-        self.m - observation vector
-        self.k_dash - 
-        self.H - Hankel matrix
-        self.M - 
+        n - input vector
+        m - observation vector
+        k_dash - 
+        H - Hankel matrix
+        M - 
 
         Calculating all parameters of the filter.
         """

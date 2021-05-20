@@ -3,14 +3,14 @@ from abc import ABC, abstractmethod
 
 class Filtering(ABC):
     """
-    Abstract class for abstraction of filters.
-    Superclass of class FilteringSiso.
-    Implements the ancestor to KalmanFilteringSISO, WaveFilteringSISO and
-    WaveFilteringSisoFtl classes, which have a real use.
+    Abstract class for creation of filters.
     
     Hierarchy tree ((ABC)):
 
-        Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC)
+                                                        WaveFilteringSisoPersistent
+                                                            ^
+                                                            |
+    Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
                                      |                 |                |
                     KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
     """
@@ -18,13 +18,11 @@ class Filtering(ABC):
     @abstractmethod
     def __init__(self, sys, t_t):
         """
-        Abstract method.
-        Inits Filtering with args sys and t_t, which
-        are used as attributes.
+        Initializing a basic filter.
 
         Args:
-            sys: instance of DynamicalSystem class
-            t_t: integer
+            sys: linear dynamical system. DynamicalSystem object.
+            t_t: time horizon.
         """
         self.sys = sys
         self.t_t = t_t

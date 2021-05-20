@@ -9,6 +9,8 @@ class KalmanFilteringSISO(FilteringSiso):
     Calculates Kalman filter parameters. Finds the prediction for Kalman and AR.
     Subclass of class FilteringSiso.
 
+    Hierarchy tree ((ABC)):
+
                                                         WaveFilteringSisoPersistent
                                                             ^
                                                             |
@@ -22,7 +24,7 @@ class KalmanFilteringSISO(FilteringSiso):
         Inherits init method of FilteringSiso. Calls parameters method.
 
         Args:
-            sys: linear dynamical system.
+            sys: linear dynamical system. DynamicalSystem object.
             G: state transition matrix.
             f_dash: observation direction.
             proc_noise_std: standard deviation of processing noise.
@@ -36,26 +38,27 @@ class KalmanFilteringSISO(FilteringSiso):
         self.proc_noise_std = proc_noise_std
         self.obs_noise_std = obs_noise_std
         self.Y = Y
-        #a, b = self.predict()
-        self.parameters() #?
+        self.parameters()
 
     def parameters(self):
         """
         Finds Kalman filter's parameters:
+            n: input vector.
+            m: observation vector.
             W: processing noise covariance.
             V: observation noise covariance.
+            Need to describe all parameters.
 
         Raises:  #Not raises yet
             Q can't be zero.
         """
 
-        self.n = self.G.shape[0]   #input vector
-        self.m = self.f_dash.shape[0] #observation vector
+        self.n = self.G.shape[0]
+        self.m = self.f_dash.shape[0]
 
         self.W = self.proc_noise_std ** 2 * np.matrix(np.eye(self.n))
         self.V = self.obs_noise_std ** 2 * np.matrix(np.eye(self.m))
 
-        # m_t = [np.matrix([[0],[0]])]
         self.matrix_c = [np.matrix(np.eye(2))]
         self.R = []
         self.Q = []
@@ -64,27 +67,27 @@ class KalmanFilteringSISO(FilteringSiso):
 
         for t in range(self.t_t):
             self.R.append(self.G * self.matrix_c[-1] * self.G.transpose() + self.W)
-            # if t == 1:
-            #     print('muj')
-            #     print(self.R)
-            #     print('Kalman')
             self.Q.append(self.f_dash * self.R[-1] * self.f_dash.transpose() + self.V)
-
             self.matrix_a.append(self.R[-1] * self.f_dash.transpose() * np.linalg.inv(self.Q[-1]))
-
-            #C_t &=& R_t - A_t Q_t A'_t
             self.matrix_c.append(self.R[-1] - self.matrix_a[-1] * self.Q[-1] *\
                self.matrix_a[-1].transpose())
-
-            #In general, set $Z_t = G(I-F\otimes A_t)$ and $Z = G(I-F \otimes A)$.
             self.Z.append(self.G * (np.eye(2) - self.matrix_a[-1] * self.f_dash))
 
-        #return n, m, W, V, matrix_c, R, Q, matrix_a, Z
 
-        #Y_pred = prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y)
-        #Y_kalman = prediction_kalman(t_t, f_dash, G, matrix_a, sys, Z, Y)
+    def predict(self,s,error_AR1_data,error_kalman_data):
+        """
+        Calculates output predictions and errors for AR and Kalman filter.
 
-    def predict(self,s,error_AR1_data,error_kalman_data_new):
+        Args:
+            s: AR time index. ???
+            error_AR1_data: AR error. 2-norm.
+            error_kalman_data: Kalman error. 2-norm.
+        
+        Returns:
+            y_pred_full: output prediction.
+            error_AR1_data: AR error. 2-norm.
+            error_kalman_data: Kalman error. 2-norm. 
+        """
 
         y_pred_full = []
         for t in range(self.t_t):
@@ -119,19 +122,19 @@ class KalmanFilteringSISO(FilteringSiso):
             #loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2)
 
             #I want to replace this chunk by kalman_filtering_siso.py
-            if error_kalman_data_new is None:
-                error_kalman_data_new = np.array([pow(np.linalg.norm(y_pred_full[i][0,0] - \
+            if error_kalman_data is None:
+                error_kalman_data = np.array([pow(np.linalg.norm(y_pred_full[i][0,0] - \
                     self.Y[i]), 2) for i in range(len(self.Y))])
             else:
-                error_kalman_data_new = np.vstack((error_kalman_data_new,\
+                error_kalman_data = np.vstack((error_kalman_data,\
                         [pow(np.linalg.norm(y_pred_full[i][0,0] - self.Y[i]), 2) for i\
                             in range(len(self.Y))]))
 
-        return y_pred_full, error_AR1_data, error_kalman_data_new
+        return y_pred_full, error_AR1_data, error_kalman_data
 
 
 
-    def predict_kalman(self,s,error_AR1_data,error_kalman_data_new):
+    def predict_kalman(self,s,error_AR1_data,error_kalman_data):
 
         y_pred_kalman = []
         for t in range(self.t_t):
@@ -166,15 +169,15 @@ class KalmanFilteringSISO(FilteringSiso):
             #loss = pow(np.linalg.norm(sys.outputs[t] - y_pred), 2)
 
             #I want to replace this chunk by kalman_filtering_siso.py
-            if error_kalman_data_new is None:
-                error_kalman_data_new = np.array([pow(np.linalg.norm(y_pred_kalman[i][0,0] - \
+            if error_kalman_data is None:
+                error_kalman_data = np.array([pow(np.linalg.norm(y_pred_kalman[i][0,0] - \
                     self.Y[i]), 2) for i in range(len(self.Y))])
             else:
-                error_kalman_data_new = np.vstack((error_kalman_data_new,\
+                error_kalman_data = np.vstack((error_kalman_data,\
                         [pow(np.linalg.norm(y_pred_kalman[i][0,0] - self.Y[i]), 2) for i\
                             in range(len(self.Y))]))
 
-        return y_pred_kalman, error_AR1_data, error_kalman_data_new
+        return y_pred_kalman, error_AR1_data, error_kalman_data
         
 
         # sys = self.sys                       #LDS
