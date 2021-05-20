@@ -1,6 +1,7 @@
 """
 Originates from function wave_filtering_SISO from onlineLDS.py.
-Originates from E.Hazan's paper "Learning Linear Dynamical Systems via Spectral Filtering."
+Theoretical background can be found in E.Hazan's paper 
+"Spectral Filtering for General Linear Dynamical Systems."
 """
 
 import numpy as np
@@ -8,7 +9,6 @@ from LDS.filters.wave_filtering_siso_abs import WaveFilteringSisoAbs
 
 class WaveFilteringSISOPersistent(WaveFilteringSisoAbs):
     """
-    Subclass of abstract class WaveFilteringSisoAbs.
     Implements Persistent filter.
                                                         WaveFilteringSisoPersistent
     Hierarchy tree ((ABC)):                                 ^
@@ -21,7 +21,14 @@ class WaveFilteringSISOPersistent(WaveFilteringSisoAbs):
     def __init__(self, sys, t_t, k, eta, r_m):
         """
         Inits all the attributes of its superclass(see WaveFilteringSisoAbs) and
-        adds attributes eta and r_m.
+        adds eta and r_m. Goes through all the methods and gets the predictions.
+
+        Args:
+            sys: linear dynamical system. DynamicalSystem object.
+            t_t: time horizon.
+            k: 
+            eta: 
+            r_m: 
         """
         super().__init__(sys, t_t, k)
         self.eta = eta
@@ -32,10 +39,12 @@ class WaveFilteringSISOPersistent(WaveFilteringSisoAbs):
 
     def predict(self):
         """
+        Calculation of output predictions and prediction errors.
+
         Returns:
-            y_pred_full: Signal prediction values.
-            M: Identity matrix.
-            pred_error_persistent: Persistent filter error.
+            y_pred_full: signal prediction values.
+            M: identity matrix. ???
+            pred_error_persistent: persistent filter error.
         """
 
         t_t = self.t_t

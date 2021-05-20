@@ -34,10 +34,10 @@ class WaveFilteringSisoAbs(FilteringSiso):
 
     def var_calc(self):
         """
-        n - input vector
-        m - observation vector
+        n - input vector.
+        m - observation vector.
         k_dash - 
-        H - Hankel matrix
+        H - Hankel matrix.
         M - 
 
         Calculating all parameters of the filter.
@@ -53,13 +53,13 @@ class WaveFilteringSisoAbs(FilteringSiso):
     @abstractmethod
     def predict(self):
         """
-        Abstract method.
+        Abstract method for calculating output predictions and errors.
 
         Returns:
-            y_pred_full: y prediction
-            M: identity matrix
-            pred_error: prediction error
-            pred_error_persistent: error of the prediction method
+            y_pred_full: output prediction.
+            M: identity matrix ????
+            pred_error: spectral filter prediction error.
+            pred_error_persistent: persistent filter error.
         """
         y_pred_full = []
         pred_error = []

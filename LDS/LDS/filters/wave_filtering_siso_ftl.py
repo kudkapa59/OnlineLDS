@@ -1,4 +1,4 @@
-"""Implements spectral filtering class. Deleted persistent filter from here.
+"""Implements spectral filtering class with follow-the-leader algorithm.
 Originates from function wave_filtering_SISO_ftl from onlinelds.py."""
 
 import numpy as np
@@ -10,8 +10,7 @@ from LDS.filters.wave_filtering_siso_abs import WaveFilteringSisoAbs
 
 class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
     """
-    Subclass of class WaveFilteringSisoAbs.
-    Spectral filter implementation.
+    Spectral filter with follow-the-leader algorithm.
     Hierarchy tree ((ABC)):
 
                                                         WaveFilteringSisoPersistent
@@ -24,16 +23,20 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
     def __init__(self, sys, t_t, k, verbose):
         """
         Inherits all the attributes of its superclass(see WaveFilteringSisoAbs).
+        With initialization goes through all the methods and gets the predictions.
         
         Args:
-            verbose - we initialize it as False.
+            sys: linear dynamical system. DynamicalSystem object.
+            t_t: time horizon.
+            k: 
+            verbose: Will be replaced.
 
         Variables initialized with var_calc():
-        self.n - input vector
-        self.m - observation vector
-        self.k_dash - 
-        self.H - Hankel matrix
-        self.M - 
+        n - input vector.
+        m - observation vector.
+        k_dash - 
+        H - Hankel matrix.
+        M - 
 
         Uses method args4ftl_calc to create an array with m and k_dash.
         """
@@ -42,20 +45,19 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
         self.args4ftl_calc()
         self.verbose = verbose
         self.y_pred_full, self.M,self.pred_error = self.predict()
-             #self.pred_error, self.pred_error_persistent = self.predict()
 
 
     def args4ftl_calc(self):
         """
-        Creates a 5-element array with m on the zero position
-        and k_dash on the first position. All others are zeros.
-        self.m - observation vector
+        Parameters calculation.Creates a 5-element array with m 
+        on the zero position and k_dash on the first position. 
+        All others are zeros.
+        self.m - observation vector.
         self.k_dash - 
         """
         self.args4ftl = [0 for i in range(5)]
         self.args4ftl[0] = self.m
         self.args4ftl[1] = self.k_dash
-        #print(self.m,self.k_dash)
 
     # def predict(self):
     #     """
