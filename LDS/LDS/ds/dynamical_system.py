@@ -33,10 +33,10 @@ class DynamicalSystem(object):
         Number of columns of matrix_d must be equal to n.
 
         Args:
-            matrix_a: 2x2
-            matrix_b: 2x1
-            matrix_c: 1x2
-            matrix_d: 1x1
+            matrix_a: the evolution, system, transfer or state matrix (G matrix). Shape n x n
+            matrix_b: 
+            matrix_c:
+            matrix_d: 
 
         Raises:
             KeyError: in case of no additional keywords.

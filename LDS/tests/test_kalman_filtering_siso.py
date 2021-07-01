@@ -22,10 +22,6 @@ sys = DynamicalSystem(G = np.matrix([[0.999,0],[0,0.5]]),np.zeros((2,1)),
 sys.solve([[1],[1]],np.zeros(100),100)
 
 class TestKalmanFilteringSISO(unittest.TestCase):
-    """
-    Can't understand G.T in function predict of KalmanFilteringSISO class.
-    G is a numpy array. No realization in the main code.
-    """
 
     @classmethod
     def setUpClass(cls):

@@ -12,14 +12,18 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath(os.path.join('..', '..',)
-
+sys.path.insert(0, os.path.abspath('../..'))
+sys.setrecursionlimit(1500)
 
 
 # -- Project information -----------------------------------------------------
-project = 'Linear'
+
+project = 'Linear Dynamical Systems'
 copyright = '2021, Kapa Kudaibergenov'
 author = 'Kapa Kudaibergenov'
+
+# The full version, including alpha/beta/rc tags
+release = '1.0.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -28,7 +32,6 @@ author = 'Kapa Kudaibergenov'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -51,6 +54,3 @@ html_theme = 'alabaster'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
-
-
-# -- Extension configuration -------------------------------------------------
