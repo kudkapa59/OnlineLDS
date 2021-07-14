@@ -3,6 +3,12 @@
 # source for each function is given in comments (experiments.py, onlinelds.py, inputlds.py, etc)
 ###
 
+#The papers, which is mentioned here is 
+#Mark Kozdoba, Jakub Marecek,Tigran Tchrakian, and Shie Mannor
+# On-Line Learning of Linear Dynamical Systems:Exponential Forgetting in Kalman Filters
+
+
+
 
 from __future__ import print_function
 import rlcompleter
@@ -35,54 +41,45 @@ pdb.Pdb.complete=rlcompleter.Completer(locals()).complete
 #from def4lib import *
 
 VERBOSE = False
+G_mat = np.random.rand(2,2)
+f_dash_mat = np.random.rand(1,2)
 
 def close_all_figs():
-    '''
-    from experiments.py
-    '''
+    """
+
+    Closes all the figures. Originally the function comes from experiments.py file.
+
+    """
     plt.close('all')
 
 def test_identification(sys, filename_stub = "test", no_runs = 2,
                        t_t = 100, k = 5, eta_zeros = None, ymin = None, ymax = None,
                        sequence_label = None, have_spectral_persistent = True):
     """
-    from experiments.py
-    no_runs is the number of runs, t_t is the time horizon, k is the number of filters.
+
     Implements here On-line Gradient Descent Algorithm 1 by the use of cost_ar and gradient_ar
     functions. 
-    Data found is used by plot_p1,plot_p2, plot_p3 functions which create seq0, logration pdfs.
+    Data found is used by plot_p1,plot_p2, plot_p3 functions which create "seq0", "logration" pdfs.    
+    Implements Example 8 from Experiments section of the original paper. 
+    Plots Figures 7,8.
+    Originally the function comes from experiments.py file.
 
-    "Our on-line algorithm maintains a state estimate, which is represented by the regression 
-    coefficients $\theta\in \RR^s$, where $s$ is the regression depth,
-    a parameter of the algorithm.  
-    At time step $t$, the algorithm first produces a prediction of the 
-    observation $Y_t$, using the current state $\theta$ and previous 
-    observations, $Y_{t-1},\ldots,Y_0$."
-
-    
-    Implements Example 8 from Experiments section of the paper. Plots Figure 7.
-    "This is illustrated in Figure \ref{figImpactC} on sequence d0. 
-    As can be seen from the top-left plot, low values of $c$ may lead to slow 
-    convergence and hence high errors initially.
-    It may hence be preferable to 
-    increase the $c$, as illustrated on the right.
-    We note that for the (essentially stationary) sequences d1 and d2 
-    from Example ~\ref{realistic}, $c= 1$ works well. "
-
-    Plots Figure 8.
-    "In Figure \ref{fig2} we compare the predictive performance of Algorithm 
-    \ref{alg:OGD} to spectral filtering and to the persistence (last seen 
-    value) predictor on the first $T = 100$ elements of the 
-    three sequences of Example~\ref{realistic}. The errors of spectral 
-    filtering are two to three orders of magnitude larger than for the last-
-    value prediction (940 vs. 1.47, 299 vs. 3.58, 4689 vs. 11.02). While some 
-    of this is due to the large spikes, the errors are non-negligible 
-    throughout. Algorithm \ref{alg:OGD} performs substantially better than 
-    either method used for comparison."
-
+    Args:
+        sys                     : LDS.
+        filename_stub           : name of the output file.
+        no_runs                 : number of runs.
+        t_t                     : time horizon.
+        k                       : number of filters.
+        eta_zeros               : 
+        y_min                   : 
+        y_max                   : 
+        sequence_label          : 
+        have_spectral_persistent: False if there's no need to plot spectral and persistent filters.
+                                  Default value - True.
 
     Raises:
         Exits if k > t_t.
+
     """
 
 
@@ -183,23 +180,31 @@ def test_identification(sys, filename_stub = "test", no_runs = 2,
 
 def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
                         have_kalman = False, have_spectral_persistent = True,
-                        G = np.matrix([[0.999,0],[0,0.5]]),
-                        f_dash = np.matrix([[1,1]]), sequence_label = ""):
+                        G = G_mat, f_dash = f_dash_mat,sequence_label = ""):
+                        #G = np.matrix([[0.999,0],[0,0.5]]),
+                        #f_dash = np.matrix([[1,1]]) ):
     """
-    Originates from experiments.py.
 
     Implements Example 7 from Experiments section of the paper.
     Creates './outputs/AR.pdf'.Finds all the filters' errors and
     uses function p3_for_test_identification2 for plotting them.
-    Plots Figure 2,5 of the main paper.
+    Plots Figure 2,5 of the main paper. Originally the function comes from experiments.py file.
 
     Args:
-        t_t: Time horizon.
-        no_runs: Number of runs.
-        s_choices: 
+        t_t                     : time horizon.
+        no_runs                 : number of runs.
+        s_choices               : 
+        have_kalman             : False if there's no need to plot kalman filter.
+                                  Default value - True.  
+        have_spectral_persistent: False if there's no need to plot spectral and persistent filters.
+                                  Default value - True.
+        G                       : state matrix.
+        f_dash                  : first derivative of the observation direction.
+        sequence_label          : 
 
     Raises:
         Exits if number of runs is less than 2.
+
     """
     if have_kalman:
         s_choices = s_choices + [t_t]
@@ -384,16 +389,16 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     p_p.close()
 
 
-# This is taken from pyplot documentation
 def heatmap(data, row_labels, col_labels, ax=None,
             cbar_kw={}, cbarlabel="", **kwargs):
     """
-    from experiments.py
 
+    The function is taken from pyplot documentation.
     Create a heatmap from a numpy array and two lists of labels.
     Used by testNoiseImpact to implement Figure 3 and Figure 6.
+    Originally the function comes from experiments.py file.
 
-    Arguments:
+    Args:
         data       : A 2D numpy array of shape (N,M)
         row_labels : A list or array of length N with the labels
                      for the rows
@@ -485,8 +490,10 @@ def testNoiseImpact(t_t = 50, no_runs = 10, discretisation = 10):
         errKalman = np.zeros((discretisation, discretisation))
         errAR = np.zeros((discretisation, discretisation))
         ################# SYSTEM ###################
-        G = np.matrix([[0.999,0],[0,0.5]])   #G = \diag([0.999,0.5])
-        f_dash = np.matrix([[1,1]])          #F' = [1, 1]
+        #G = np.matrix([[0.999,0],[0,0.5]])   #G = \diag([0.999,0.5])
+        G = G_mat
+        #f_dash = np.matrix([[1,1]])          #F' = [1, 1]
+        f_dash = f_dash_mat
 
         #Finding stdev of process and observation noises
         for proc_noise_i in range(discretisation):
@@ -616,8 +623,10 @@ def testImpactOfS(t_t = 200, no_runs = 100, sMax = 15):
         (0.1, 1.0, "dashdot"),  (1.0, 0.1, "dashed"), (1.0, 1.0, "solid") ]:
         errAR = np.zeros((sMax+1, no_runs))  #Auto-regression
         ################# SYSTEM ###################
-        G = np.matrix([[0.999,0],[0,0.5]])
-        f_dash = np.matrix([[1,1]])
+        #G = np.matrix([[0.999,0],[0,0.5]])
+        #f_dash = np.matrix([[1,1]])
+        G = G_mat
+        f_dash = f_dash_mat
         for s in range(1, sMax):
 
             for runNo in range(no_runs):
