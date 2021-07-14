@@ -11,9 +11,9 @@ class DynamicalSystem(object):
         adds possibility of additional keywords in arguments.
 
         G - matrix_a
-        matrix_b - np.zeros((2,1))
+        w - process noise
         F_dash - matrix_c
-        matrix_d - np.zeros((1,1))
+        v - sensor noise.
 
         If a matrix_a is a number, transforms it into float 
         and makes d-state vector equal to 1.
@@ -31,10 +31,22 @@ class DynamicalSystem(object):
         Number of columns of matrix_d must be equal to n.
 
         Args:
-            matrix_a: the evolution, system, transfer or state matrix (G matrix). Shape n x n.
-            matrix_b: 
-            matrix_c:
-            matrix_d: 
+            matrix_a                 : Evolution, system, transfer or state matrix (G matrix). 
+                                       Shape nxn.
+            matrix_b                 : Control matrix.
+            
+            %Processing noise. Shape nx1. Shape of covariance matrix nxn.%
+            matrix_c                 : First derivative of the observation 
+                                       direction(aka design matrix F(nxm)). Shape mxn.
+            matrix_d                 : Feedthrough matrix.
+            
+            %Sensor noise or observational error. Shape mx1. Shape of covariance matrix mxm.%
+        Optional arguments:
+            process_noise            : Processing noise w.
+            observation_noise        : Observation noise v.
+            timevarying_multiplier_b : 
+            corrupt_probability      : 
+
 
         Raises:
             KeyError: in case of no additional keywords.
@@ -168,17 +180,16 @@ class DynamicalSystem(object):
 
     def check_input(self, operator):
         """
-        Checks variable type of matrices A,B,C,D
+        Checks variable type of matrices A,B,C,D.
 
         Args:
-            operator:a number or a matrix
+            operator : Number or a matrix.
 
         Returns:
             1
 
         Raises:
-            TypeError: an error occured if the argument is none of
-            possible formats
+            TypeError:  This error occurs if the argument is none of possible formats.
         """
         if isinstance(operator, int) or isinstance(operator, float):
             return 1
@@ -190,8 +201,7 @@ class DynamicalSystem(object):
 
     def solve(self, h_zero, inputs, t_t, **kwargs):
         """
-        Finds the outputs of the Dynamical System. We use
-        them to find the prediction errors of our filters.
+        Finds outputs of LDS. The function is used in filters to find the error of prediction.
 
         t_t must be an integer greater than 1.
         Length of h_zero array must be equal to
@@ -211,10 +221,12 @@ class DynamicalSystem(object):
         to zero.
 
         Args:
-            h_zero: 1x2 array
-            inputs: array of zeros of t_t size
-            t_t: integer
-            kwargs: additional keywords
+            h_zero              : 1x2 array.
+            inputs              : Array of zeros of t_t size.
+            t_t                 : Time horizon.
+
+        Optional arguments:
+            earliest_event_time : 
 
         Raises:
             Exits if t_t is 1 or a float.
