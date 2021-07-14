@@ -6,9 +6,9 @@
 from OnlineLDS_library import *
 
 #input settings
-version = "FinalAAAI"
+#version = "FinalAAAI"
 #version = "Working"
-#version = "Extended"
+version = "Extended"
 
 if __name__ == '__main__':
     try:

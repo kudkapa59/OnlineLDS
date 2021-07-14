@@ -1,11 +1,9 @@
-"""Implements class originating from inputlds.py"""
+"""Originally the class comes from inputlds.py file."""
 import numpy as np
 
 class DynamicalSystem(object):
     """
-    Class originated from inputlds.py, which
-    was the first version of the algorithm. 
-    Used as a model instance for our filters.
+    Creates LDS.
     """
     def __init__(self,matrix_a,matrix_b,matrix_c,matrix_d, **kwargs):
         """
@@ -33,7 +31,7 @@ class DynamicalSystem(object):
         Number of columns of matrix_d must be equal to n.
 
         Args:
-            matrix_a: the evolution, system, transfer or state matrix (G matrix). Shape n x n
+            matrix_a: the evolution, system, transfer or state matrix (G matrix). Shape n x n.
             matrix_b: 
             matrix_c:
             matrix_d: 

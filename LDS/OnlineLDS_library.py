@@ -66,13 +66,13 @@ def test_identification(sys, filename_stub = "test", no_runs = 2,
 
     Args:
         sys                     : LDS.
-        filename_stub           : name of the output file.
-        no_runs                 : number of runs.
-        t_t                     : time horizon.
-        k                       : number of filters.
-        eta_zeros               : 
-        y_min                   : 
-        y_max                   : 
+        filename_stub           : Name of the output file.
+        no_runs                 : Number of runs.
+        t_t                     : Time horizon.
+        k                       : Number of filters.
+        eta_zeros               : Learning rate. 
+        y_min                   : Minimal value of y-axis.
+        y_max                   : Maximal value of y-axis.
         sequence_label          : 
         have_spectral_persistent: False if there's no need to plot spectral and persistent filters.
                                   Default value - True.
@@ -191,14 +191,14 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
     Plots Figure 2,5 of the main paper. Originally the function comes from experiments.py file.
 
     Args:
-        t_t                     : time horizon.
-        no_runs                 : number of runs.
+        t_t                     : Time horizon.
+        no_runs                 : Number of runs.
         s_choices               : 
         have_kalman             : False if there's no need to plot kalman filter.
                                   Default value - True.  
         have_spectral_persistent: False if there's no need to plot spectral and persistent filters.
                                   Default value - True.
-        G                       : state matrix.
+        G                       : State matrix.
         f_dash                  : first derivative of the observation direction.
         sequence_label          : 
 
@@ -392,7 +392,6 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
 def heatmap(data, row_labels, col_labels, ax=None,
             cbar_kw={}, cbarlabel="", **kwargs):
     """
-
     The function is taken from pyplot documentation.
     Create a heatmap from a numpy array and two lists of labels.
     Used by testNoiseImpact to implement Figure 3 and Figure 6.
@@ -453,19 +452,11 @@ def heatmap(data, row_labels, col_labels, ax=None,
 
 def testNoiseImpact(t_t = 50, no_runs = 10, discretisation = 10):
     """
-    from experiments.py
     Produces './outputs/noise.pdf'. Plots heatmap of process noise variance
     vs observation noise variance based on relative error between any two
     predictive algorithms. LaTeX shows the example of the ratio of the errors 
-    of Kalman filter and AR(2) on Figure 3 of Example 7.
-
-    LaTeX:
-    In Figure~\ref{figNoisebrief}, we compare the performance of AR(2) and 
-    Kalman filter under varying magnitude of noises $v,w$. 
-    In particular, colour indicates the ratio of the errors of Kalman filter
-    to the errors of AR(2), wherein the errors are the average prediction 
-    error over 10 trajectories of (\ref{eq:experem1_system_hazan})
-    for each cell of the heat-map, with each trajectory of length 50. 
+    of Kalman filter and AR(2)(see Figure 3 of Example 7).
+    Originally the function comes from experiments.py file.
 
     Plots RMSE of AR Figure 6(left): 
     average RMSE of predictions of AR(s+ 1) as a function of the variance of the
@@ -477,7 +468,12 @@ def testNoiseImpact(t_t = 50, no_runs = 10, discretisation = 10):
 
     Plots Figure 6(right):
     The ratio (70) of the errors of Kalman filters and AR(s + 1) as a function of
-    the variance of the process noise (vertical axis) and observation noise (horizontal axis). 
+    the variance of the process noise (vertical axis) and observation noise (horizontal axis).
+
+    Args:
+        t_t            : Time horizon.
+        no_runs        : Number of runs.
+        discretisation : Number of trajectories.  
     """
     
     filename = './outputs/noise_new.pdf'
@@ -595,18 +591,18 @@ def testNoiseImpact(t_t = 50, no_runs = 10, discretisation = 10):
 
 def testImpactOfS(t_t = 200, no_runs = 100, sMax = 15):
     """
-    from experiments.py
-    Creates file './outputs/impacts.pdf', which stores
-    plots of average error of auto-regression as a function of
-    regression depth s. In the main paper we present it again with Example 7 and Figure 4.
+    Creates file './outputs/impacts.pdf', which stores plots of average error of auto-regression 
+    as a function of regression depth s. In the main paper we present it again with Example 7 
+    and Figure 4.
+    Increasing s decreases the error, until the error approaches that of the Kalman filter. 
+    For a given value of the observation noise, the convergence w.r.t s is slower for 
+    smaller process noise.
+    Originally the function comes from experiments.py file.
 
-    LaTeX:
-    in Figure~\ref{figNoise2brief}, we illustrate the decay of the 
-    remainder term by presenting the mean (line) and standard deviation 
-    (shaded area) of the error as a function of the regression depth $s$. 
-    There, 4 choices of the covariance matrix $W$ of the process noise
-    and the variance $v$ of the observation noise are considered within Example ~\ref{HazanEx}
-    and the error is averaged over $N = 100$ runs of length $T = 200$.
+    Args:
+        t_t     : Time horizon.
+        no_runs : Number of runs.
+        sMax    : Number of auto-regressive terms.
 
     Raises:
         Exits if sMax > t_t. 
@@ -675,22 +671,13 @@ def testImpactOfS(t_t = 200, no_runs = 100, sMax = 15):
         plt.ylim(0, 1.5)
         plt.legend()
         plt.savefig(p_p, format='pdf')
-    '''
-    Of course, as expected, increasing $s$ 
-    decreases the error, until the error approaches that of the Kalman filter. 
-    Observe again that for a given value of the observation noise, the convergence 
-    w.r.t $s$ is slower for \textit{smaller} process noise, consistently 
-    with our theoretical observations.
-    '''
-
     p_p.close()
 
 
 def testSeqD0(no_runs = 100):
     """
-    from experiments.py
-    Makes several initiations of test_identification function so as to plot logratio and
-    seq0, seq1, seq2 pdfs.
+    Makes several initiations of test_identification function so as to plot "logratio.pdf" and
+    "seq0.pdf", "seq1.pdf", "seq2.pdf". Originally the function comes from experiments.py file.
 
     Args:
         no_runs: Number of runs.
@@ -744,8 +731,7 @@ def testSeqD0(no_runs = 100):
 def test_AR():
     """
     Function implements Algorithm 1(On-line Gradient Descent).
-
-    from experiments.py
+    Originally the function comes from experiments.py file.
     """
     matlabfile_in = './OARIMA_code_data/data/setting6.mat'
     varname_in = "seq_d0"
@@ -781,24 +767,19 @@ def test_AR():
 
 def cost_ar(theta, *args):
     """
-    from onlinelds.py
-    Loss function of auto-regression. 
-    After the prediction is made, the true observation $Y_t$ is revealed to 
-    the algorithm, and a loss associated with the prediction is computed. 
-    Here we consider the quadratic loss for simplicity:  
-    We define $\ell(x,y)$ as $(x-y)^2$. The loss function at time $t$ will be given by 
-    \begin{align}
-    \label{eq:loss}
-    \ell_t(\theta) := \ell(Y_t,\hat{y}_t(\theta)). 
-    \end{align}
+    Loss function of auto-regression.
+    After the prediction is made, the true observation is revealed to 
+    the algorithm, and a loss associated with the prediction is computed.
+    Here we consider the quadratic loss for simplicity.
+    Originally the function comes from onlinelds.py file.
 
     Args:
-        theta: s parameters
-        args[0]: observation at time t
-        args[1]: past s observations (most most to least recent: t-1 to t-1-s)
+        theta   : auto-regressive parameters.
+        args[0] : observation at time t
+        args[1] : past s observations (most to least recent: t-1 to t-1-s)
 
     Returns:
-        Loss function of auto-regression
+        Quadratic loss function of auto-regression.
     """
     #\hat{y}_t(\theta) = \sum_{i=0}^{s-1} \theta_{i} Y_{t-i-1}
     #\ell_t(\theta) := \ell(Y_t,\hat{y}_t(\theta))
@@ -808,16 +789,16 @@ def cost_ar(theta, *args):
 
 def gradient_ar(theta, *args):
     """
-    from onlinelds.py
     Gradient function of auto-regression.
-    We use the general scheme of on-line gradient decent algorithms, \cite{Zinkevich2003},
+    We use the general scheme of on-line gradient decent algorithms,
     where the update goes against the direction of the gradient of the current loss. 
     In addition, it is useful to restrict the state to a bounded domain.
+    Originally the function comes from onlinelds.py file.
 
     Args:
-        theta: s parameters
-        args[0]: observation
-        args[1]: past s observations
+        theta   : s parameters.
+        args[0] : Observation.
+        args[1] : Past s observations.
 
     Returns:
         Gradient function of auto-regression.
@@ -835,17 +816,17 @@ def gradient_ar(theta, *args):
 def test_arima_ogd(i, mk, lrate, data):
     """
     Used to test arima_ogd function for i=10 case.
-    The test casees are based on MATLAB:
-    The test numbers were taken from the output of MATLAB function
+    The test cases are based on MATLAB:
+    The test numbers were taken from the output of MATLAB function,
     the random array w is fixed.
 
     Args:
-        i: Iterative number. In range from mk till data - 1.
-        mk: Integer number. Here we used 10.
-        lrate: Learning rate. Assigned 1 in example.py.
-        data: Array of 10000 elements.
+        i     : Iterative number. In range from mk till data - 1.
+        mk    : Integer number. Here we used 10.
+        lrate : Learning rate. Assigned 1 in example.py.
+        data  : Array of 10000 elements.
 
-    Returns:
+    Raises:
 
     """
     # the random array w is fixed here
