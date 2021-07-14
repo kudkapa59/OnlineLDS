@@ -3,7 +3,7 @@
 What's done 
 1.All the classes, their methods and arguments are named according to styleguide requirements. Method was named predict.
 
-2.Created folder AddClasses. Each folder inside contains some similar classes and their corresponding unit tests. Consists of folders: ds(Dynamical System), ts(Time Series), h_m(Hankel), matlab_options(Matlab class options), filters, online_lds(cost_ftl,gradient_ftl,print_verbose).
+2.Created folder LDS. Each folder inside contains some similar classes and their corresponding unit tests. Consists of folders: ds(Dynamical System), ts(Time Series), h_m(Hankel), matlab_options(Matlab class options), filters, online_lds(cost_ftl,gradient_ftl,print_verbose).
 Folder filters contains filtering_abc_class, filtering_siso, wave_filtering_siso_abs programs and folder real_filters with kalman_filtering_siso, wave_filtering_siso, wave_filtering_siso_ftl programs.
 Folder online_lds is created only for the wave_filtering_siso_ftl program. Three function from previous onlinelds.py were moved here.
 Inside the programs all the classes are named according to traditional style.
