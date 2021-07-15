@@ -1,4 +1,6 @@
-"""Abstract class for creation of persistent and spectral filters."""
+"""In FilteringSiso we separated KalmanFilteringSISO. By doing this we dedicated 
+the written below class to be the abstract class for spectral and persistent filters.
+"""
 
 import numpy as np
 from abc import abstractmethod
@@ -22,25 +24,24 @@ class WaveFilteringSisoAbs(FilteringSiso):
 
     def __init__(self, sys, t_t, k):
         """
-        Inherits FilteringSiso method. Adds k
+        Inherits FilteringSiso method.
 
         Args:
-            sys: linear dynamical system. DynamicalSystem object.
-            t_t: time horizon.
-            k: 
+            sys : LDS. DynamicalSystem object.
+            t_t : Time horizon.
+            k   : Number of wave-filters for a spectral filter.
         """
         super().__init__(sys, t_t)
         self.k = k
 
     def var_calc(self):
         """
-        n - input vector.
-        m - observation vector.
-        k_dash - 
-        H - Hankel matrix.
-        M - 
-
-        Calculating all parameters of the filter.
+        Initializes spectral filter's parameters:
+            n      : Input vector. Shape of processing noise.
+            m      : Observation vector. Shape of observational error.
+            k_dash : 
+            H      : Hankel matrix.
+            M      :  
         """
         self.n = self.sys.n
         self.m = self.sys.m
@@ -56,10 +57,10 @@ class WaveFilteringSisoAbs(FilteringSiso):
         Abstract method for calculating output predictions and errors.
 
         Returns:
-            y_pred_full: output prediction.
-            M: identity matrix ????
-            pred_error: spectral filter prediction error.
-            pred_error_persistent: persistent filter error.
+            y_pred_full           : Output prediction.
+            M                     : identity matrix ????
+            pred_error            : Spectral filter prediction error.
+            pred_error_persistent : Persistent filter error.
         """
         y_pred_full = []
         pred_error = []
