@@ -6,8 +6,8 @@ from LDS.filters.filtering_siso import FilteringSiso
 
 class KalmanFilteringSISO(FilteringSiso):
     """
-    Calculates Kalman filter parameters. Finds the prediction for Kalman and AR.
-    Subclass of class FilteringSiso.
+    Calculates Kalman filter parameters. Finds the prediction for Kalman and auto-regression.
+    Uses abstract superclass FilteringSiso.
 
     Hierarchy tree ((ABC)):
 
@@ -21,16 +21,17 @@ class KalmanFilteringSISO(FilteringSiso):
 
     def __init__(self, sys, G, f_dash,proc_noise_std, obs_noise_std, t_t, Y):
         """
-        Inherits init method of FilteringSiso. Calls parameters method.
+        Inherits init method of FilteringSiso. Assignment variable names to LDS matrices.
+        Calls to method "parameters".
 
         Args:
-            sys: linear dynamical system. DynamicalSystem object.
-            G: state transition matrix.
-            f_dash: observation direction.
-            proc_noise_std: standard deviation of processing noise.
-            obs_noise_std: standard deviation of observation noise.
-            t_t: time horizon.
-            Y: scalar observations.
+            sys            : LDS. DynamicalSystem object.
+            G              : State transition matrix. Shape nxn.
+            f_dash         : Observation direction. Shape mxn.
+            proc_noise_std : Standard deviation of processing noise.
+            obs_noise_std  : Standard deviation of observation noise.
+            t_t            : Time horizon.
+            Y              : Observations.
         """
         super().__init__(sys, t_t)
         self.G = G
@@ -43,16 +44,20 @@ class KalmanFilteringSISO(FilteringSiso):
     def parameters(self):
         """
         Finds Kalman filter's parameters:
-            n: input vector.
-            m: observation vector.
-            W: processing noise covariance.
-            V: observation noise covariance.
-            Need to describe all parameters.
+            n        : Input vector. Shape of processing noise.
+            m        : Observation vector. Shape of observational error.
+            W        : Processing noise covariance.
+            V        : Observation noise covariance.
+            matrix_c : Covariance matrix of state.
+            R        : Covariance matrix of observation noise.
+            Q        : Covariance matrix of processing noise.
+            matrix_a : Kalman filter parameter. Not the same as matrix_a in DynamicalSystem class.
+            Z        : Kalman filter parameter.
+
 
         Raises:  #Not raises yet
             Q can't be zero.
         """
-
         self.n = self.G.shape[0]
         self.m = self.f_dash.shape[0]
 
@@ -76,19 +81,18 @@ class KalmanFilteringSISO(FilteringSiso):
 
     def predict(self,s,error_AR1_data,error_kalman_data):
         """
-        Calculates output predictions and errors for AR and Kalman filter.
+        Calculates output predictions and errors for auto-regression and Kalman filter.
 
         Args:
-            s: AR time index. ???
-            error_AR1_data: AR error. 2-norm.
-            error_kalman_data: Kalman error. 2-norm.
+            s                 : Auto-regression term.
+            error_AR1_data    : Auto-regression error. 2-norm.
+            error_kalman_data : Kalman error. 2-norm.
         
         Returns:
-            y_pred_full: output prediction.
-            error_AR1_data: AR error. 2-norm.
-            error_kalman_data: Kalman error. 2-norm. 
+            y_pred_full       : Output prediction.
+            error_AR1_data    : Auto-regression error. 2-norm.
+            error_kalman_data : Kalman error. 2-norm. 
         """
-
         y_pred_full = []
         for t in range(self.t_t):
             Y_pred_term1 = self.f_dash * self.G * self.matrix_a[t] * self.sys.outputs[t]
@@ -135,7 +139,19 @@ class KalmanFilteringSISO(FilteringSiso):
 
 
     def predict_kalman(self,s,error_AR1_data,error_kalman_data):
+        """
+        Calculates output predictions and errors for auto-regression and Kalman filter.
 
+        Args:
+            s                 : Auto-regression term.
+            error_AR1_data    : Auto-regression error. 2-norm.
+            error_kalman_data : Kalman error. 2-norm.
+        
+        Returns:
+            y_pred_full       : Output prediction.
+            error_AR1_data    : Auto-regression error. 2-norm.
+            error_kalman_data : Kalman error. 2-norm. 
+        """
         y_pred_kalman = []
         for t in range(self.t_t):
             Y_pred_term1 = self.f_dash * self.G * self.matrix_a[t] * self.sys.outputs[t]
