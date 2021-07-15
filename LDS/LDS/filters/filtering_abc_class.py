@@ -21,8 +21,8 @@ class Filtering(ABC):
         Initializing a basic filter.
 
         Args:
-            sys: linear dynamical system. DynamicalSystem object.
-            t_t: time horizon.
+            sys : LDS. DynamicalSystem object.
+            t_t : Time horizon.
         """
         self.sys = sys
         self.t_t = t_t

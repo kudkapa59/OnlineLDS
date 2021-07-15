@@ -7,7 +7,8 @@ from LDS.filters.filtering_abc_class import Filtering
 class FilteringSiso(Filtering):
     """
     Abstract class.
-    Specifically written to separate Kalman filter and AR from spectral and persistent filters.
+    Specifically written to separate Kalman filter and auto-regression from spectral and 
+    persistent filters.
 
     Hierarchy tree ((ABC)):
 
@@ -22,13 +23,11 @@ class FilteringSiso(Filtering):
 
     def __init__(self, sys, t_t):
         """
-        Inherits abstract init method of Filtering.
-        Inits FilteringSiso with sys and t_t, which
-        are used as attributes.
+        Inherits init method of Filtering.
 
         Args:
-            sys: linear dynamical system. DynamicalSystem object.
-            t_t: time horizon.
+            sys : LDS. DynamicalSystem object.
+            t_t : Time horizon.
         """
 
         super().__init__(sys, t_t)
@@ -36,11 +35,11 @@ class FilteringSiso(Filtering):
     @abstractmethod
     def predict(self):
         """
-        Abstract method for output prediction and prediction error.
+        Creates empty lists for prediction and error of filters.
 
         Returns:
-            y_pred_full: output prediction.
-            pred_error:  prediction error.
+            y_pred_full : Output prediction.
+            pred_error  : Prediction error.
         """
 
         y_pred_full, pred_error = [], []
