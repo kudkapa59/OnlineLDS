@@ -1,7 +1,8 @@
 """
 Originates from function wave_filtering_SISO from onlineLDS.py.
-Theoretical background can be found in E.Hazan's paper 
-"Spectral Filtering for General Linear Dynamical Systems."
+The related work is 
+"Spectral Filtering for General Linear Dynamical Systems" by E.Hazan, K.Singh, H.Lee 
+                                                                            and C.Zhang. 
 """
 
 import numpy as np

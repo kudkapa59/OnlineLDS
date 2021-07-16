@@ -1,5 +1,9 @@
 """Implements spectral filtering class with follow-the-leader algorithm.
-Originates from function wave_filtering_SISO_ftl from onlinelds.py."""
+Originates from function wave_filtering_SISO_ftl from onlinelds.py.
+The related work is 
+"Spectral Filtering for General Linear Dynamical Systems" by E.Hazan, K.Singh, H.Lee 
+                                                                            and C.Zhang. 
+"""
 
 import logging
 import numpy as np

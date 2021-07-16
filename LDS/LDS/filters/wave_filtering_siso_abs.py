@@ -11,7 +11,13 @@ from LDS.h_m.hankel import Hankel
 class WaveFilteringSisoAbs(FilteringSiso):
     """
     Abstract class for creation of persistent and spectral filters.
-
+    The subclass WaveFilteringSISO is spectral filter only for symmetric transition matrix.
+    The related work is
+    "Learning Linear Dynamical Systems via Spectral Filtering" by E.Hazan, K.Singh and C.Zhang.
+    WaveFilteringSisoFtl is the class for general case prediction.
+    The related work is 
+    "Spectral Filtering for General Linear Dynamical Systems" by E.Hazan, K.Singh, H.Lee 
+                                                                            and C.Zhang. 
     Hierarchy tree ((ABC)):
 
                                                         WaveFilteringSisoPersistent
@@ -39,9 +45,10 @@ class WaveFilteringSisoAbs(FilteringSiso):
         Initializes spectral filter's parameters:
             n      : Input vector. Shape of processing noise.
             m      : Observation vector. Shape of observational error.
-            k_dash : 
+            k_dash : Siso filter parameter.
             H      : Hankel matrix.
-            M      :  
+            M      : Matrix specifying a linear map from featurized inputs to predictions. 
+                     Siso filter parameter. 
         """
         self.n = self.sys.n
         self.m = self.sys.m
@@ -58,7 +65,8 @@ class WaveFilteringSisoAbs(FilteringSiso):
 
         Returns:
             y_pred_full           : Output prediction.
-            M                     : identity matrix ????
+            M                     : Matrix specifying a linear map from featurized inputs to predictions. 
+                                    Siso filter parameter. 
             pred_error            : Spectral filter prediction error.
             pred_error_persistent : Persistent filter error.
         """
