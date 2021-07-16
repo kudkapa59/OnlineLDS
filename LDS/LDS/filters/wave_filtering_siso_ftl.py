@@ -1,12 +1,15 @@
 """Implements spectral filtering class with follow-the-leader algorithm.
 Originates from function wave_filtering_SISO_ftl from onlinelds.py."""
 
+import logging
 import numpy as np
 import scipy.optimize as opt
-import LDS.online_lds.print_verbose as print_verb
 import LDS.online_lds.cost_ftl as cost_ftl
 import LDS.online_lds.gradient_ftl as gradient_ftl
 from LDS.filters.wave_filtering_siso_abs import WaveFilteringSisoAbs
+
+logging.basicConfig(filename='filter.log',level=logging.INFO,filemode='w',
+                    format='%(levelname)s:%(filename)s:%(message)s')
 
 class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
     """
@@ -20,7 +23,7 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
                                      |                 |                |
                     KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
     """
-    def __init__(self, sys, t_t, k, verbose):
+    def __init__(self, sys, t_t, k):
         """
         Inherits all the attributes of its superclass(see WaveFilteringSisoAbs).
         With initialization goes through all the methods and gets the predictions.
@@ -29,7 +32,6 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
             sys: linear dynamical system. DynamicalSystem object.
             t_t: time horizon.
             k: 
-            verbose: Will be replaced.
 
         Variables initialized with var_calc():
         n - input vector.
@@ -43,7 +45,6 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
         super().__init__(sys, t_t, k)
         super().var_calc()
         self.args4ftl_calc()
-        self.verbose = verbose
         self.y_pred_full, self.M,self.pred_error = self.predict()
 
 
@@ -137,7 +138,7 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
 
         scalings = [pow(self.H.V[j], 0.25) for j in range(self.k)]
         for t in range(1, self.t_t):
-            print_verb.print_verbose("step %d of %d" % (t + 1, self.t_t), self.verbose)
+            logging.info("step %d of %d" % (t + 1, self.t_t))
             X = np.zeros((self.m, self.k_dash))
             for j in range(self.k):
                 scaling = scalings[j]

@@ -40,7 +40,7 @@ pdb.Pdb.complete=rlcompleter.Completer(locals()).complete
 
 #from def4lib import *
 
-VERBOSE = False
+#VERBOSE = False
 G_mat = np.random.rand(2,2)
 f_dash_mat = np.random.rand(1,2)
 
@@ -106,7 +106,7 @@ def test_identification(sys, filename_stub = "test", no_runs = 2,
 
         if have_spectral_persistent: #Checks if we need spectral and persistent filters
             #using class WaveFilteringSisoFtl instead function WaveFilteringSisoFtl
-            wf_siso_ftl = WaveFilteringSisoFtl(sys, t_t, k, VERBOSE)
+            wf_siso_ftl = WaveFilteringSisoFtl(sys, t_t, k)
             predicted_spectral, M, error_spec = \
                 wf_siso_ftl.y_pred_full, wf_siso_ftl.M,\
                     wf_siso_ftl.pred_error #wf_siso_ftl.pred_error_persistent
@@ -116,7 +116,7 @@ def test_identification(sys, filename_stub = "test", no_runs = 2,
             else:
                 error_spec_data = np.vstack((error_spec_data, error_spec))
 
-            wf_siso_persistent = WaveFilteringSisoFtlPersistent(sys, t_t, k, VERBOSE)
+            wf_siso_persistent = WaveFilteringSisoFtlPersistent(sys, t_t, k)
             #Here I replaced error_persist_data with error_persist
             predicted_persistent, M, error_persist = \
                 wf_siso_persistent.y_pred_full, wf_siso_persistent.M,\
@@ -324,12 +324,12 @@ def test_identification2(t_t = 100, no_runs = 10, s_choices = [15,3,1],
         if have_spectral_persistent:   #Spectral filtering and last-value prediction
             #using class WaveFilteringSisoFtl instead fubction WaveFilteringSisoFtl
             #predicted_output, M, error_spec, error_persist = WaveFilteringSisoFtl(sys, t_t, 5)
-            wf_siso_ftl = WaveFilteringSisoFtl(sys, t_t, 5, VERBOSE)
+            wf_siso_ftl = WaveFilteringSisoFtl(sys, t_t, 5)
             predicted_output, M, error_spec = \
                 wf_siso_ftl.y_pred_full, wf_siso_ftl.M,\
                      wf_siso_ftl.pred_error #wf_siso_ftl.pred_error_persistent
 
-            wf_siso_persistent = WaveFilteringSisoFtlPersistent(sys, t_t, 5, VERBOSE)
+            wf_siso_persistent = WaveFilteringSisoFtlPersistent(sys, t_t, 5)
             #Here I replaced error_persist_data with error_persist
             predicted_persistent, M, error_persist = \
                 wf_siso_persistent.y_pred_full, wf_siso_persistent.M,\

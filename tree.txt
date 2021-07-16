@@ -1,0 +1,171 @@
+.
+├── dist
+│   └── LDS-1.0.tar.gz
+├── docs
+│   ├── build
+│   ├── make.bat
+│   ├── Makefile
+│   └── source
+│       ├── conf.py
+│       ├── index.rst
+│       ├── _static
+│       └── _templates
+├── LDS
+│   ├── example.py
+│   ├── __init__.py
+│   ├── LDS
+│   │   ├── ds
+│   │   │   ├── dynamical_system.py
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   │       ├── dynamical_system.cpython-38.pyc
+│   │   │       ├── __init__.cpython-38.pyc
+│   │   │       └── test_dynamical_system.cpython-38.pyc
+│   │   ├── filters
+│   │   │   ├── filtering_abc_class.py
+│   │   │   ├── filtering_siso.py
+│   │   │   ├── __init__.py
+│   │   │   ├── kalman_em.py
+│   │   │   ├── kalman_filtering_siso.py
+│   │   │   ├── __pycache__
+│   │   │   │   ├── filtering_abc_class.cpython-38.pyc
+│   │   │   │   ├── filtering_siso.cpython-38.pyc
+│   │   │   │   ├── __init__.cpython-38.pyc
+│   │   │   │   ├── kalman_filtering_siso.cpython-38.pyc
+│   │   │   │   ├── test_filtering_abc_class.cpython-38.pyc
+│   │   │   │   ├── test_filtering_siso.cpython-38.pyc
+│   │   │   │   ├── test_kalman_filtering_siso.cpython-38.pyc
+│   │   │   │   ├── test_wave_filtering_siso_abs.cpython-38.pyc
+│   │   │   │   ├── wave_filtering_siso_abs.cpython-38.pyc
+│   │   │   │   ├── wave_filtering_siso.cpython-38.pyc
+│   │   │   │   ├── wave_filtering_siso_ftl.cpython-38.pyc
+│   │   │   │   └── wave_filtering_siso_ftl_persistent.cpython-38.pyc
+│   │   │   ├── wave_filtering_siso_abs.py
+│   │   │   ├── wave_filtering_siso_ftl_persistent.py
+│   │   │   ├── wave_filtering_siso_ftl.py
+│   │   │   ├── wave_filtering_siso_persistent.py
+│   │   │   └── wave_filtering_siso.py
+│   │   ├── h_m
+│   │   │   ├── hankel.py
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   │       ├── hankel.cpython-38.pyc
+│   │   │       ├── __init__.cpython-38.pyc
+│   │   │       └── test_hankel.cpython-38.pyc
+│   │   ├── __init__.py
+│   │   ├── matlab_options
+│   │   │   ├── __init__.py
+│   │   │   ├── matlab_class_options.py
+│   │   │   └── __pycache__
+│   │   │       ├── __init__.cpython-38.pyc
+│   │   │       ├── matlab_class_options.cpython-38.pyc
+│   │   │       └── test_matlab_class_options.cpython-38.pyc
+│   │   ├── online_lds
+│   │   │   ├── cost_ftl.py
+│   │   │   ├── gradient_ftl.py
+│   │   │   ├── __init__.py
+│   │   │   ├── print_verbose.py
+│   │   │   └── __pycache__
+│   │   │       ├── cost_ftl.cpython-38.pyc
+│   │   │       ├── gradient_ftl.cpython-38.pyc
+│   │   │       ├── __init__.cpython-38.pyc
+│   │   │       └── print_verbose.cpython-38.pyc
+│   │   ├── __pycache__
+│   │   │   ├── dynamical_system.cpython-38.pyc
+│   │   │   ├── DynamicalSystem.cpython-38.pyc
+│   │   │   ├── filtering_abc_class.cpython-38.pyc
+│   │   │   ├── FilteringABCclass.cpython-38.pyc
+│   │   │   ├── filtering_siso.cpython-38.pyc
+│   │   │   ├── FilteringSiso.cpython-38.pyc
+│   │   │   ├── hankel.cpython-38.pyc
+│   │   │   ├── Hankel.cpython-38.pyc
+│   │   │   ├── __init__.cpython-38.pyc
+│   │   │   ├── kalman_filtering_siso.cpython-38.pyc
+│   │   │   ├── KalmanFilteringSISO.cpython-38.pyc
+│   │   │   ├── matlab_class_options.cpython-38.pyc
+│   │   │   ├── MatlabClassOptions.cpython-38.pyc
+│   │   │   ├── print_verbose.cpython-38.pyc
+│   │   │   ├── time_series.cpython-38.pyc
+│   │   │   ├── TimeSeries.cpython-38.pyc
+│   │   │   ├── trial.cpython-38.pyc
+│   │   │   ├── wave_filtering_siso_abs.cpython-38.pyc
+│   │   │   ├── WaveFilteringSisoAbs.cpython-38.pyc
+│   │   │   ├── wave_filtering_siso.cpython-38.pyc
+│   │   │   ├── WaveFilteringSISO.cpython-38.pyc
+│   │   │   ├── wave_filtering_siso_ftl.cpython-38.pyc
+│   │   │   └── WaveFilteringSisoFtl.cpython-38.pyc
+│   │   └── ts
+│   │       ├── __init__.py
+│   │       ├── __pycache__
+│   │       │   ├── __init__.cpython-38.pyc
+│   │       │   ├── test_time_series.cpython-38.pyc
+│   │       │   └── time_series.cpython-38.pyc
+│   │       └── time_series.py
+│   ├── main.py
+│   ├── OARIMA_code_data
+│   │   ├── code
+│   │   │   ├── arima_ogd.m
+│   │   │   ├── arima_ons.m
+│   │   │   ├── arima_yk.m
+│   │   │   ├── example.m
+│   │   │   ├── generate_data.m
+│   │   │   └── octave-workspace
+│   │   ├── data
+│   │   │   ├── setting1.mat
+│   │   │   ├── setting2.mat
+│   │   │   ├── setting3.mat
+│   │   │   ├── setting4.mat
+│   │   │   ├── setting5.mat
+│   │   │   └── setting6.mat
+│   │   └── read_me.txt
+│   ├── OnlineLDS_library.py
+│   ├── outputs
+│   │   ├── AR_new.pdf
+│   │   ├── AR.pdf
+│   │   ├── impacts.pdf
+│   │   ├── logratio-200.pdf
+│   │   ├── logratio-complete.pdf
+│   │   ├── noise_new.pdf
+│   │   ├── noise.pdf
+│   │   ├── seq0-20000.pdf
+│   │   ├── seq0-2000.pdf
+│   │   ├── seq0-200.pdf
+│   │   ├── seq0-short-k5.pdf
+│   │   ├── seq0-timing.pdf
+│   │   ├── seq1-short-k5.pdf
+│   │   └── seq2-short-k5.pdf
+│   ├── __pycache__
+│   │   ├── OnlineLDS_library.cpython-38.pyc
+│   │   └── OnlineLDS_library.cpython-39.pyc
+│   ├── readme
+│   ├── slides
+│   │   ├── AAAI2019.pdf
+│   │   └── poster.pdf
+│   └── tests
+│       ├── __pycache__
+│       │   ├── test_dynamical_system.cpython-38.pyc
+│       │   ├── test_filtering_abc_class.cpython-38.pyc
+│       │   ├── test_kalman_filtering_siso.cpython-38.pyc
+│       │   ├── test_wave_filtering_siso.cpython-38.pyc
+│       │   └── test_wave_filtering_siso_ftl.cpython-38.pyc
+│       ├── test_arima_ogd.py
+│       ├── test_dynamical_system.py
+│       ├── test_filtering_abc_class.py
+│       ├── test_filtering_siso.py
+│       ├── test_hankel.py
+│       ├── test_kalman_filtering_siso.py
+│       ├── test_matlab_class_options.py
+│       ├── test_time_series.py
+│       ├── test_wave_filtering_siso_abs.py
+│       ├── test_wave_filtering_siso_ftl.py
+│       └── test_wave_filtering_siso.py
+├── LDS.egg-info
+│   ├── dependency_links.txt
+│   ├── PKG-INFO
+│   ├── SOURCES.txt
+│   └── top_level.txt
+├── MANIFEST.in
+├── setup.py
+└── tree.txt
+
+30 directories, 138 files
