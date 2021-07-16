@@ -1,5 +1,9 @@
 """Implements persistent filter with follow-the-leader algorithm.
-Originates from function wave_filtering_SISO_ftl from onlinelds.py."""
+Originates from function wave_filtering_SISO_ftl from onlinelds.py.
+The related work is 
+"Spectral Filtering for General Linear Dynamical Systems" by E.Hazan, K.Singh, H.Lee 
+                                                                            and C.Zhang.
+"""
 
 import logging
 import numpy as np
@@ -13,7 +17,7 @@ logging.basicConfig(filename='filter.log',level=logging.INFO,
 
 class WaveFilteringSisoFtlPersistent(WaveFilteringSisoAbs):
     """
-    Persistent filter with follow-the-leader.
+    Persistent filter with follow-the-leader algorithm.
     Hierarchy tree ((ABC)):
                                                         WaveFilteringSisoPersistent
                                                             ^
@@ -28,16 +32,17 @@ class WaveFilteringSisoFtlPersistent(WaveFilteringSisoAbs):
         With initialization goes through all the methods and gets the predictions.
         
         Args:
-            sys: linear dynamical system. DynamicalSystem object.
-            t_t: time horizon.
-            k: 
+            sys : LDS. DynamicalSystem object.
+            t_t : Time horizon.
+            k   : Number of wave-filters for a spectral filter.
 
         Variables initialized with var_calc():
-        n - input vector.
-        m - observation vector.
-        k_dash - 
-        H - Hankel matrix.
-        M - 
+            n      : Input vector. Shape of processing noise.
+            m      : Observation vector. Shape of observational error.
+            k_dash : Siso filter parameter.
+            H      : Hankel matrix.
+            M      : Matrix specifying a linear map from featurized inputs to predictions. 
+                     Siso filter parameter.
 
         Uses method args4ftl_calc to create an array with m and k_dash.
         """
@@ -53,8 +58,8 @@ class WaveFilteringSisoFtlPersistent(WaveFilteringSisoAbs):
         Parameters calculation.Creates a 5-element array with m 
         on the zero position and k_dash on the first position. 
         All others are zeros.
-        self.m - observation vector.
-        self.k_dash - 
+        self.m      : Observation vector. Shape of observational error.
+        self.k_dash : Siso filter parameter. 
         """
         self.args4ftl = [0 for i in range(5)]
         self.args4ftl[0] = self.m
@@ -126,9 +131,10 @@ class WaveFilteringSisoFtlPersistent(WaveFilteringSisoAbs):
     def predict(self):
         """
         Returns:
-            y_pred_full: y prediction
-            M: identity matrix  ??
-            pred_error_persistent: last-value prediction error
+            y_pred_full           : Output prediction.
+            M                     : Matrix specifying a linear map from featurized inputs 
+                                    to predictions. Siso filter parameter.
+            pred_error_persistent : Persistent filter prediction error.
 
         """
         M = self.M
