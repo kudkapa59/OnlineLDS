@@ -147,6 +147,8 @@ class WaveFilteringSisoFtlPersistent(WaveFilteringSisoAbs):
     '''Gian-Reto Wiher version'''
     def predict(self):
         """
+        Prediction step.
+
         Returns:
             y_pred_full           : Output prediction.
             M                     : Matrix specifying a linear map from featurized inputs 

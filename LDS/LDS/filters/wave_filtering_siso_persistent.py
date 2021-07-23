@@ -21,14 +21,15 @@ class WaveFilteringSISOPersistent(WaveFilteringSisoAbs):
     def __init__(self, sys, t_t, k, eta, r_m):
         """
         Inits all the attributes of its superclass(see WaveFilteringSisoAbs) and
-        adds eta and r_m. Goes through all the methods and gets the predictions.
+        adds Learning rate and Radius parameter.
+        Goes through all the methods and gets the predictions.
 
         Args:
-            sys: linear dynamical system. DynamicalSystem object.
-            t_t: time horizon.
-            k: 
-            eta: 
-            r_m: 
+            sys : LDS. DynamicalSystem object.
+            t_t : Time horizon.
+            k   : Number of wave-filters for a spectral filter.
+            eta : Learning rate.
+            r_m : Radius parameter.
         """
         super().__init__(sys, t_t, k)
         self.eta = eta
@@ -42,9 +43,10 @@ class WaveFilteringSISOPersistent(WaveFilteringSisoAbs):
         Calculation of output predictions and prediction errors.
 
         Returns:
-            y_pred_full: signal prediction values.
-            M: identity matrix. ???
-            pred_error_persistent: persistent filter error.
+            y_pred_full           : Prediction values.
+            M                     : Matrix specifying a linear map 
+                                    from featurized inputs to predictions.
+            pred_error_persistent : Persistent filter error.
         """
 
         t_t = self.t_t

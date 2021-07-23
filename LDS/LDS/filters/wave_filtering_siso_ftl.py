@@ -48,16 +48,16 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
         With initialization goes through all the methods and gets the predictions.
         
         Args:
-            sys : linear dynamical system. DynamicalSystem object.
-            t_t : time horizon.
-            k   : Number of wave-filters for a spectral filter. 
+            sys : LDS. DynamicalSystem object.
+            t_t : Time horizon.
+            k   : Number of wave-filters for a spectral filter.
 
         Variables initialized with var_calc():
-        n - input vector.
-        m - observation vector.
-        k_dash - Siso filter parameter.
-        H - Hankel matrix.
-        M - Matrix specifying a linear map from featurized inputs to predictions. 
+            n      : Input vector. Shape of processing noise.
+            m      : Observation vector. Shape of observational error.
+            k_dash : Siso filter parameter.
+            H      : Hankel matrix.
+            M      : Matrix specifying a linear map from featurized inputs to predictions. 
                      Siso filter parameter.
 
         Uses method args4ftl_calc to create an array with m and k_dash.
@@ -73,8 +73,8 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
         Parameters calculation.Creates a 5-element array with m 
         on the zero position and k_dash on the first position. 
         All others are zeros.
-        self.m - observation vector.
-        self.k_dash - 
+        self.m      : Observation vector. Shape of observational error.
+        self.k_dash : Siso filter parameter. 
         """
         self.args4ftl = [0 for i in range(5)]
         self.args4ftl[0] = self.m
@@ -144,11 +144,13 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
     '''Gian-Reto Wiher version'''
     def predict(self):
         """
-        Returns:
-            y_pred_full: y prediction
-            M: identity matrix
-            pred_error: spectral error prediction error
+        Prediction step.
 
+        Returns:
+            y_pred_full           : Output prediction.
+            M                     : Matrix specifying a linear map from featurized inputs 
+                                    to predictions. Siso filter parameter.
+            pred_error_persistent : Persistent filter prediction error.
         """
         M = self.M
         args4ftl = self.args4ftl
