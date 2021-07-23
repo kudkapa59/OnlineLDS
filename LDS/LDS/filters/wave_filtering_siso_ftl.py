@@ -12,8 +12,23 @@ import LDS.online_lds.cost_ftl as cost_ftl
 import LDS.online_lds.gradient_ftl as gradient_ftl
 from LDS.filters.wave_filtering_siso_abs import WaveFilteringSisoAbs
 
-logging.basicConfig(filename='filter.log',level=logging.INFO,filemode='w',
-                    format='%(levelname)s:%(filename)s:%(message)s')
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+formatter = logging.Formatter('%(levelname)s:%(filename)s:%(message)s')
+
+file_handler = logging.FileHandler('spectral_test.log',mode='w')
+file_handler.setLevel(logging.ERROR)
+file_handler.setFormatter(formatter)
+
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
+#logger.addHandler(stream_handler)
+
+#logging.basicConfig(filename='filter.log',level=logging.INFO,filemode='w',
+#                    format='%(levelname)s:%(filename)s:%(message)s')
 
 class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
     """
@@ -33,16 +48,17 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
         With initialization goes through all the methods and gets the predictions.
         
         Args:
-            sys: linear dynamical system. DynamicalSystem object.
-            t_t: time horizon.
-            k: 
+            sys : linear dynamical system. DynamicalSystem object.
+            t_t : time horizon.
+            k   : Number of wave-filters for a spectral filter. 
 
         Variables initialized with var_calc():
         n - input vector.
         m - observation vector.
-        k_dash - 
+        k_dash - Siso filter parameter.
         H - Hankel matrix.
-        M - 
+        M - Matrix specifying a linear map from featurized inputs to predictions. 
+                     Siso filter parameter.
 
         Uses method args4ftl_calc to create an array with m and k_dash.
         """
@@ -142,7 +158,7 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
 
         scalings = [pow(self.H.V[j], 0.25) for j in range(self.k)]
         for t in range(1, self.t_t):
-            logging.info("step %d of %d" % (t + 1, self.t_t))
+            logger.info("step %d of %d" % (t + 1, self.t_t))
             X = np.zeros((self.m, self.k_dash))
             for j in range(self.k):
                 scaling = scalings[j]
@@ -170,6 +186,7 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
                 args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
                 args4ftl[4] = np.concatenate((args4ftl[4], X), 1)
             except:
+                logger.exception('Exception')
                 args4ftl[3] = self.sys.outputs[t]
                 args4ftl[4] = X
 

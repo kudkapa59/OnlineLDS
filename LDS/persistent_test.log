@@ -1,0 +1,720 @@
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
+ERROR:wave_filtering_siso_ftl_persistent.py:Exception
+Traceback (most recent call last):
+  File "/root/LDS/LDS/LDS/LDS/filters/wave_filtering_siso_ftl_persistent.py", line 192, in predict
+    args4ftl[3] = np.concatenate((args4ftl[3], self.sys.outputs[t]), 1)
+  File "<__array_function__ internals>", line 5, in concatenate
+ValueError: zero-dimensional arrays cannot be concatenated
