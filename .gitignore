@@ -13,3 +13,5 @@ LDS.egg-info
 LDS.fixes.with-latex.patch
 
 docs.settings.with-latex.patch
+
+.gitignore
