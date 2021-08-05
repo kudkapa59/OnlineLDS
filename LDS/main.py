@@ -3,7 +3,7 @@
 #so, to use this library the structute of a progect must be the same
 ###
 
-from OnlineLDS_library import *
+from .OnlineLDS_library import *
 
 #input settings
 #version = "FinalAAAI"

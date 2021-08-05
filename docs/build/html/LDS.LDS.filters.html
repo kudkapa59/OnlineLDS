@@ -1,0 +1,676 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LDS.LDS.filters package &#8212; Linear Dynamical Systems 1.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/asciiart.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="LDS.LDS.h_m package" href="LDS.LDS.h_m.html" />
+    <link rel="prev" title="LDS.LDS.ds package" href="LDS.LDS.ds.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="lds-lds-filters-package">
+<h1>LDS.LDS.filters package<a class="headerlink" href="#lds-lds-filters-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-LDS.LDS.filters.filtering_abc_class">
+<span id="lds-lds-filters-filtering-abc-class-module"></span><h2>LDS.LDS.filters.filtering_abc_class module<a class="headerlink" href="#module-LDS.LDS.filters.filtering_abc_class" title="Permalink to this headline">¶</a></h2>
+<p>This script implements ABC class.</p>
+<dl class="py class">
+<dt id="LDS.LDS.filters.filtering_abc_class.Filtering">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">LDS.LDS.filters.filtering_abc_class.</span></code><code class="sig-name descname"><span class="pre">Filtering</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_t</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.filtering_abc_class.Filtering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstract class for creation of filters.</p>
+<p>Hierarchy tree ((ABC)):</p>
+<pre class="ansi-block literal-block"><span class="ansi-white ansi-bg_black">                                                    WaveFilteringSisoPersistent
+                                                        ^
+                                                        |
+Filtering(ABC) --&gt; FilteringSiso(ABC) --&gt;  WaveFilteringSisoAbs(ABC) --&gt;WaveFilteringSisoFtlPersistent
+                                 |                 |                |
+                KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl</span></pre>
+<p>Initializing a basic filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> – LDS. DynamicalSystem object.</p></li>
+<li><p><strong>t_t</strong> – Time horizon.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-LDS.LDS.filters.filtering_siso">
+<span id="lds-lds-filters-filtering-siso-module"></span><h2>LDS.LDS.filters.filtering_siso module<a class="headerlink" href="#module-LDS.LDS.filters.filtering_siso" title="Permalink to this headline">¶</a></h2>
+<p>This script implements ABC class.</p>
+<dl class="py class">
+<dt id="LDS.LDS.filters.filtering_siso.FilteringSiso">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">LDS.LDS.filters.filtering_siso.</span></code><code class="sig-name descname"><span class="pre">FilteringSiso</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_t</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.filtering_siso.FilteringSiso" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#LDS.LDS.filters.filtering_abc_class.Filtering" title="LDS.LDS.filters.filtering_abc_class.Filtering"><code class="xref py py-class docutils literal notranslate"><span class="pre">LDS.LDS.filters.filtering_abc_class.Filtering</span></code></a></p>
+<p>Abstract class.
+Specifically written to separate Kalman filter and auto-regression from spectral and
+persistent filters.</p>
+<p>Hierarchy tree ((ABC)):</p>
+<pre class="ansi-block literal-block"><span class="ansi-white ansi-bg_black">                                                    WaveFilteringSisoPersistent
+                                                        ^
+                                                        |
+Filtering(ABC) --&gt; FilteringSiso(ABC) --&gt;  WaveFilteringSisoAbs(ABC) --&gt;WaveFilteringSisoFtlPersistent
+                                 |                 |                |
+                KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl</span></pre>
+<p>Inherits init method of Filtering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> – LDS. DynamicalSystem object.</p></li>
+<li><p><strong>t_t</strong> – Time horizon.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="LDS.LDS.filters.filtering_siso.FilteringSiso.predict">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">predict</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.filtering_siso.FilteringSiso.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates empty lists for prediction and error of filters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>tuple containing:</p>
+<ul class="simple">
+<li><p>y_pred_full : Output prediction.</p></li>
+<li><p>pred_error  : Prediction error.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(tuple)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-LDS.LDS.filters.kalman_em">
+<span id="lds-lds-filters-kalman-em-module"></span><h2>LDS.LDS.filters.kalman_em module<a class="headerlink" href="#module-LDS.LDS.filters.kalman_em" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-LDS.LDS.filters.kalman_filtering_siso">
+<span id="lds-lds-filters-kalman-filtering-siso-module"></span><h2>LDS.LDS.filters.kalman_filtering_siso module<a class="headerlink" href="#module-LDS.LDS.filters.kalman_filtering_siso" title="Permalink to this headline">¶</a></h2>
+<p>Implements Kalman filter prediction.
+Originates from function Kalman_filtering_SISO from onlinelds.py.</p>
+<dl class="py class">
+<dt id="LDS.LDS.filters.kalman_filtering_siso.KalmanFilteringSISO">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">LDS.LDS.filters.kalman_filtering_siso.</span></code><code class="sig-name descname"><span class="pre">KalmanFilteringSISO</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_dash</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proc_noise_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs_noise_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.kalman_filtering_siso.KalmanFilteringSISO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#LDS.LDS.filters.filtering_siso.FilteringSiso" title="LDS.LDS.filters.filtering_siso.FilteringSiso"><code class="xref py py-class docutils literal notranslate"><span class="pre">LDS.LDS.filters.filtering_siso.FilteringSiso</span></code></a></p>
+<p>Calculates Kalman filter parameters. Finds the prediction for Kalman and auto-regression.
+Uses abstract superclass FilteringSiso.</p>
+<p>Hierarchy tree ((ABC)):</p>
+<pre class="ansi-block literal-block"><span class="ansi-white ansi-bg_black">                                                    WaveFilteringSisoPersistent
+                                                        ^
+                                                        |
+Filtering(ABC) --&gt; FilteringSiso(ABC) --&gt;  WaveFilteringSisoAbs(ABC) --&gt;WaveFilteringSisoFtlPersistent
+                                 |                 |                |
+                KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl</span></pre>
+<p>Inherits init method of FilteringSiso. Assignment variable names to LDS matrices.
+Calls to method “parameters”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> – LDS. DynamicalSystem object.</p></li>
+<li><p><strong>G</strong> – State transition matrix. Shape nxn.</p></li>
+<li><p><strong>f_dash</strong> – Observation direction. Shape mxn.</p></li>
+<li><p><strong>proc_noise_std</strong> – Standard deviation of processing noise.</p></li>
+<li><p><strong>obs_noise_std</strong> – Standard deviation of observation noise.</p></li>
+<li><p><strong>t_t</strong> – Time horizon.</p></li>
+<li><p><strong>Y</strong> – Observations.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="LDS.LDS.filters.kalman_filtering_siso.KalmanFilteringSISO.parameters">
+<code class="sig-name descname"><span class="pre">parameters</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.kalman_filtering_siso.KalmanFilteringSISO.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds Kalman filter’s parameters:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – Input vector. Shape of processing noise.</p></li>
+<li><p><strong>m</strong> – Observation vector. Shape of observational error.</p></li>
+<li><p><strong>W</strong> – Processing noise covariance.</p></li>
+<li><p><strong>V</strong> – Observation noise covariance.</p></li>
+<li><p><strong>matrix_c</strong> – Covariance matrix of state.</p></li>
+<li><p><strong>R</strong> – Covariance matrix of observation noise.</p></li>
+<li><p><strong>Q</strong> – Covariance matrix of processing noise.</p></li>
+<li><p><strong>matrix_a</strong> – Kalman filter parameter. Not the same as matrix_a in DynamicalSystem class.</p></li>
+<li><p><strong>Z</strong> – Kalman filter parameter.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Raises:  #Not raises yet</dt><dd><p>Q can’t be zero.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="LDS.LDS.filters.kalman_filtering_siso.KalmanFilteringSISO.predict">
+<code class="sig-name descname"><span class="pre">predict</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_AR1_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_kalman_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.kalman_filtering_siso.KalmanFilteringSISO.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates output predictions and errors for auto-regression and Kalman filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Auto-regression term.</p></li>
+<li><p><strong>error_AR1_data</strong> – Auto-regression error. 2-norm.</p></li>
+<li><p><strong>error_kalman_data</strong> – Kalman error. 2-norm.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>tuple containing:</p>
+<ul class="simple">
+<li><p>y_pred_full       : Output prediction.</p></li>
+<li><p>error_AR1_data    : Auto-regression error. 2-norm.</p></li>
+<li><p>error_kalman_data : Kalman error. 2-norm.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(tuple)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="LDS.LDS.filters.kalman_filtering_siso.KalmanFilteringSISO.predict_kalman">
+<code class="sig-name descname"><span class="pre">predict_kalman</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_AR1_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_kalman_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.kalman_filtering_siso.KalmanFilteringSISO.predict_kalman" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates output predictions and errors for auto-regression and Kalman filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Auto-regression term.</p></li>
+<li><p><strong>error_AR1_data</strong> – Auto-regression error. 2-norm.</p></li>
+<li><p><strong>error_kalman_data</strong> – Kalman error. 2-norm.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>tuple containing:</p>
+<ul class="simple">
+<li><p>y_pred_full       : Output prediction.</p></li>
+<li><p>error_AR1_data    : Auto-regression error. 2-norm.</p></li>
+<li><p>error_kalman_data : Kalman error. 2-norm.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(tuple)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-LDS.LDS.filters.wave_filtering_siso">
+<span id="lds-lds-filters-wave-filtering-siso-module"></span><h2>LDS.LDS.filters.wave_filtering_siso module<a class="headerlink" href="#module-LDS.LDS.filters.wave_filtering_siso" title="Permalink to this headline">¶</a></h2>
+<p>Originates from function wave_filtering_SISO from onlineLDS.py.
+The related work is “Learning Linear Dynamical Systems via Spectral Filtering”
+by E.Hazan, K.Singh and C.Zhang.</p>
+<dl class="py class">
+<dt id="LDS.LDS.filters.wave_filtering_siso.WaveFilteringSISO">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">LDS.LDS.filters.wave_filtering_siso.</span></code><code class="sig-name descname"><span class="pre">WaveFilteringSISO</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso.WaveFilteringSISO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs" title="LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs"><code class="xref py py-class docutils literal notranslate"><span class="pre">LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs</span></code></a></p>
+<p>Implements spectral filter.</p>
+<p>Hierarchy tree ((ABC)):</p>
+<pre class="ansi-block literal-block"><span class="ansi-white ansi-bg_black">                                                    WaveFilteringSISOPersistent
+                                                        ^
+                                                        |
+Filtering(ABC) --&gt; FilteringSiso(ABC) --&gt;  WaveFilteringSisoAbs(ABC) --&gt;WaveFilteringSisoFtlPersistent
+                                 |                 |                |
+                KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl</span></pre>
+<p>Inits all the attributes of its superclass(see WaveFilteringSisoAbs) and
+adds Learning rate and Radius parameter.
+Goes through all the methods and gets the predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> – LDS. DynamicalSystem object.</p></li>
+<li><p><strong>t_t</strong> – Time horizon.</p></li>
+<li><p><strong>k</strong> – Number of wave-filters for a spectral filter.</p></li>
+<li><p><strong>eta</strong> – Learning rate.</p></li>
+<li><p><strong>r_m</strong> – Radius parameter.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="LDS.LDS.filters.wave_filtering_siso.WaveFilteringSISO.predict">
+<code class="sig-name descname"><span class="pre">predict</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso.WaveFilteringSISO.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculation of output predictions and prediction errors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>tuple containing:</p>
+<ul class="simple">
+<li><p>y_pred_full : Prediction values.</p></li>
+<li><dl class="simple">
+<dt>M<span class="classifier">Matrix specifying a linear map</span></dt><dd><p>from featurized inputs to predictions.</p>
+</dd>
+</dl>
+</li>
+<li><p>pred_error  : Spectral filter error.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(tuple)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-LDS.LDS.filters.wave_filtering_siso_abs">
+<span id="lds-lds-filters-wave-filtering-siso-abs-module"></span><h2>LDS.LDS.filters.wave_filtering_siso_abs module<a class="headerlink" href="#module-LDS.LDS.filters.wave_filtering_siso_abs" title="Permalink to this headline">¶</a></h2>
+<p>In FilteringSiso we separated KalmanFilteringSISO. By doing this we dedicated
+the written below class to be the abstract class for spectral and persistent filters.</p>
+<dl class="py class">
+<dt id="LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">LDS.LDS.filters.wave_filtering_siso_abs.</span></code><code class="sig-name descname"><span class="pre">WaveFilteringSisoAbs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#LDS.LDS.filters.filtering_siso.FilteringSiso" title="LDS.LDS.filters.filtering_siso.FilteringSiso"><code class="xref py py-class docutils literal notranslate"><span class="pre">LDS.LDS.filters.filtering_siso.FilteringSiso</span></code></a></p>
+<p>Abstract class for creation of persistent and spectral filters.
+The subclass WaveFilteringSISO is spectral filter only for symmetric transition matrix.
+The related work is “Learning Linear Dynamical Systems via Spectral Filtering”
+by E.Hazan, K.Singh and C.Zhang.</p>
+<p>WaveFilteringSisoFtl is the class for general case prediction.
+The related work is “Spectral Filtering for General Linear Dynamical Systems”
+by E.Hazan, K.Singh, H.Lee and C.Zhang.</p>
+<p>Hierarchy tree ((ABC)):</p>
+<pre class="ansi-block literal-block"><span class="ansi-white ansi-bg_black">                                                    WaveFilteringSisoPersistent
+                                                        ^
+                                                        |
+Filtering(ABC) --&gt; FilteringSiso(ABC) --&gt;  WaveFilteringSisoAbs(ABC) --&gt;WaveFilteringSisoFtlPersistent
+                                 |                 |                |
+                KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl</span></pre>
+<p>Inherits FilteringSiso method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> – LDS. DynamicalSystem object.</p></li>
+<li><p><strong>t_t</strong> – Time horizon.</p></li>
+<li><p><strong>k</strong> – Number of wave-filters for a spectral filter.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs.predict">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">predict</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method for calculating output predictions and errors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>tuple containing:</p>
+<ul class="simple">
+<li><p>y_pred_full           : Output prediction.</p></li>
+<li><dl class="simple">
+<dt>M<span class="classifier">Matrix specifying a linear map from featurized inputs to predictions.</span></dt><dd><p>Siso filter parameter.</p>
+</dd>
+</dl>
+</li>
+<li><p>pred_error            : Spectral filter prediction error.</p></li>
+<li><p>pred_error_persistent : Persistent filter error.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(tuple)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs.var_calc">
+<code class="sig-name descname"><span class="pre">var_calc</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs.var_calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes spectral filter’s parameters:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – Input vector. Shape of processing noise.</p></li>
+<li><p><strong>m</strong> – Observation vector. Shape of observational error.</p></li>
+<li><p><strong>k_dash</strong> – Siso filter parameter.</p></li>
+<li><p><strong>H</strong> – Hankel matrix.</p></li>
+<li><p><strong>M</strong> – Matrix specifying a linear map from featurized inputs to predictions.
+Siso filter parameter.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-LDS.LDS.filters.wave_filtering_siso_ftl">
+<span id="lds-lds-filters-wave-filtering-siso-ftl-module"></span><h2>LDS.LDS.filters.wave_filtering_siso_ftl module<a class="headerlink" href="#module-LDS.LDS.filters.wave_filtering_siso_ftl" title="Permalink to this headline">¶</a></h2>
+<p>Implements spectral filtering class with follow-the-leader algorithm.
+Originates from function wave_filtering_SISO_ftl from onlinelds.py.
+The related work is “Spectral Filtering for General Linear Dynamical Systems”
+by E.Hazan, K.Singh, H.Lee and C.Zhang.</p>
+<dl class="py class">
+<dt id="LDS.LDS.filters.wave_filtering_siso_ftl.WaveFilteringSisoFtl">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">LDS.LDS.filters.wave_filtering_siso_ftl.</span></code><code class="sig-name descname"><span class="pre">WaveFilteringSisoFtl</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso_ftl.WaveFilteringSisoFtl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs" title="LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs"><code class="xref py py-class docutils literal notranslate"><span class="pre">LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs</span></code></a></p>
+<p>Spectral filter with follow-the-leader algorithm.</p>
+<p>Hierarchy tree ((ABC)):</p>
+<pre class="ansi-block literal-block"><span class="ansi-white ansi-bg_black">                                                    WaveFilteringSisoPersistent
+                                                        ^
+                                                        |
+Filtering(ABC) --&gt; FilteringSiso(ABC) --&gt;  WaveFilteringSisoAbs(ABC) --&gt;WaveFilteringSisoFtlPersistent
+                                 |                 |                |
+                KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl</span></pre>
+<p>Inherits all the attributes of its superclass(see WaveFilteringSisoAbs).
+With initialization goes through all the methods and gets the predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> – LDS. DynamicalSystem object.</p></li>
+<li><p><strong>t_t</strong> – Time horizon.</p></li>
+<li><p><strong>k</strong> – Number of wave-filters for a spectral filter.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Variables initialized with var_calc():</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – Input vector. Shape of processing noise.</p></li>
+<li><p><strong>m</strong> – Observation vector. Shape of observational error.</p></li>
+<li><p><strong>k_dash</strong> – Siso filter parameter.</p></li>
+<li><p><strong>H</strong> – Hankel matrix.</p></li>
+<li><p><strong>M</strong> – Matrix specifying a linear map from featurized inputs to predictions.
+Siso filter parameter.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Uses method args4ftl_calc to create an array with m and k_dash.</p>
+<dl class="py method">
+<dt id="LDS.LDS.filters.wave_filtering_siso_ftl.WaveFilteringSisoFtl.args4ftl_calc">
+<code class="sig-name descname"><span class="pre">args4ftl_calc</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso_ftl.WaveFilteringSisoFtl.args4ftl_calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters calculation.</p>
+<p>Creates a 5-element array with m
+on the zero position and k_dash on the first position.
+All others are zeros.</p>
+<ul class="simple">
+<li><p>self.m      : Observation vector. Shape of observational error.</p></li>
+<li><p>self.k_dash : Siso filter parameter.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="LDS.LDS.filters.wave_filtering_siso_ftl.WaveFilteringSisoFtl.predict">
+<code class="sig-name descname"><span class="pre">predict</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso_ftl.WaveFilteringSisoFtl.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prediction step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>tuple containing:</p>
+<ul class="simple">
+<li><p>y_pred_full           : Output prediction.</p></li>
+<li><dl class="simple">
+<dt>M<span class="classifier">Matrix specifying a linear map from featurized inputs</span></dt><dd><p>to predictions. Siso filter parameter.</p>
+</dd>
+</dl>
+</li>
+<li><p>pred_error_persistent : Persistent filter prediction error.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(tuple)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-LDS.LDS.filters.wave_filtering_siso_ftl_persistent">
+<span id="lds-lds-filters-wave-filtering-siso-ftl-persistent-module"></span><h2>LDS.LDS.filters.wave_filtering_siso_ftl_persistent module<a class="headerlink" href="#module-LDS.LDS.filters.wave_filtering_siso_ftl_persistent" title="Permalink to this headline">¶</a></h2>
+<p>Implements persistent filter with follow-the-leader algorithm.
+Originates from function wave_filtering_SISO_ftl from onlinelds.py.
+The related work is “Spectral Filtering for General Linear Dynamical Systems”
+by E.Hazan, K.Singh, H.Lee and C.Zhang.</p>
+<dl class="py class">
+<dt id="LDS.LDS.filters.wave_filtering_siso_ftl_persistent.WaveFilteringSisoFtlPersistent">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">LDS.LDS.filters.wave_filtering_siso_ftl_persistent.</span></code><code class="sig-name descname"><span class="pre">WaveFilteringSisoFtlPersistent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso_ftl_persistent.WaveFilteringSisoFtlPersistent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs" title="LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs"><code class="xref py py-class docutils literal notranslate"><span class="pre">LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs</span></code></a></p>
+<p>Persistent filter with follow-the-leader algorithm.</p>
+<p>Hierarchy tree ((ABC)):</p>
+<pre class="ansi-block literal-block"><span class="ansi-white ansi-bg_black">                                                    WaveFilteringSisoPersistent
+                                                        ^
+                                                        |
+Filtering(ABC) --&gt; FilteringSiso(ABC) --&gt;  WaveFilteringSisoAbs(ABC) --&gt;WaveFilteringSisoFtlPersistent
+                                 |                 |                |
+                KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl</span></pre>
+<p>Inherits all the attributes of its superclass(see WaveFilteringSisoAbs).
+With initialization goes through all the methods and gets the predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> – LDS. DynamicalSystem object.</p></li>
+<li><p><strong>t_t</strong> – Time horizon.</p></li>
+<li><p><strong>k</strong> – Number of wave-filters for a spectral filter.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Variables initialized with var_calc():</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – Input vector. Shape of processing noise.</p></li>
+<li><p><strong>m</strong> – Observation vector. Shape of observational error.</p></li>
+<li><p><strong>k_dash</strong> – Siso filter parameter.</p></li>
+<li><p><strong>H</strong> – Hankel matrix.</p></li>
+<li><p><strong>M</strong> – Matrix specifying a linear map from featurized inputs to predictions.
+Siso filter parameter.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Uses method args4ftl_calc to create an array with m and k_dash.</p>
+<dl class="py method">
+<dt id="LDS.LDS.filters.wave_filtering_siso_ftl_persistent.WaveFilteringSisoFtlPersistent.args4ftl_calc">
+<code class="sig-name descname"><span class="pre">args4ftl_calc</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso_ftl_persistent.WaveFilteringSisoFtlPersistent.args4ftl_calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters calculation.</p>
+<p>Creates a 5-element array with m
+on the zero position and k_dash on the first position.
+All others are zeros.</p>
+<ul class="simple">
+<li><p>self.m      : Observation vector. Shape of observational error.</p></li>
+<li><p>self.k_dash : Siso filter parameter.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="LDS.LDS.filters.wave_filtering_siso_ftl_persistent.WaveFilteringSisoFtlPersistent.predict">
+<code class="sig-name descname"><span class="pre">predict</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso_ftl_persistent.WaveFilteringSisoFtlPersistent.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prediction step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>tuple containing:</p>
+<ul class="simple">
+<li><p>y_pred_full           : Output prediction.</p></li>
+<li><dl class="simple">
+<dt>M<span class="classifier">Matrix specifying a linear map from featurized inputs</span></dt><dd><p>to predictions. Siso filter parameter.</p>
+</dd>
+</dl>
+</li>
+<li><p>pred_error_persistent : Persistent filter prediction error.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(tuple)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-LDS.LDS.filters.wave_filtering_siso_persistent">
+<span id="lds-lds-filters-wave-filtering-siso-persistent-module"></span><h2>LDS.LDS.filters.wave_filtering_siso_persistent module<a class="headerlink" href="#module-LDS.LDS.filters.wave_filtering_siso_persistent" title="Permalink to this headline">¶</a></h2>
+<p>Originates from function wave_filtering_SISO from onlineLDS.py.
+The related work is “Learning Linear Dynamical Systems via Spectral Filtering”
+by E.Hazan, K.Singh and C.Zhang.</p>
+<dl class="py class">
+<dt id="LDS.LDS.filters.wave_filtering_siso_persistent.WaveFilteringSISOPersistent">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">LDS.LDS.filters.wave_filtering_siso_persistent.</span></code><code class="sig-name descname"><span class="pre">WaveFilteringSISOPersistent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso_persistent.WaveFilteringSISOPersistent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs" title="LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs"><code class="xref py py-class docutils literal notranslate"><span class="pre">LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs</span></code></a></p>
+<p>Implements Persistent filter.</p>
+<p>Hierarchy tree ((ABC)):</p>
+<pre class="ansi-block literal-block"><span class="ansi-white ansi-bg_black">                                                    WaveFilteringSisoPersistent
+                                                        ^
+                                                    |
+Filtering(ABC) --&gt; FilteringSiso(ABC) --&gt;  WaveFilteringSisoAbs(ABC) --&gt;WaveFilteringSisoFtlPersistent
+                                 |                 |                |
+                KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl</span></pre>
+<p>Inits all the attributes of its superclass(see WaveFilteringSisoAbs) and
+adds Learning rate and Radius parameter.
+Goes through all the methods and gets the predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> – LDS. DynamicalSystem object.</p></li>
+<li><p><strong>t_t</strong> – Time horizon.</p></li>
+<li><p><strong>k</strong> – Number of wave-filters for a spectral filter.</p></li>
+<li><p><strong>eta</strong> – Learning rate.</p></li>
+<li><p><strong>r_m</strong> – Radius parameter.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="LDS.LDS.filters.wave_filtering_siso_persistent.WaveFilteringSISOPersistent.predict">
+<code class="sig-name descname"><span class="pre">predict</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso_persistent.WaveFilteringSISOPersistent.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculation of output predictions and prediction errors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>tuple containing:</p>
+<ul class="simple">
+<li><p>y_pred_full: Prediction values.</p></li>
+<li><dl class="simple">
+<dt>M: Matrix specifying a linear map</dt><dd><p>from featurized inputs to predictions.</p>
+</dd>
+</dl>
+</li>
+<li><p>pred_error_persistent : Persistent filter error.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(tuple)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-LDS.LDS.filters">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-LDS.LDS.filters" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Linear Dynamical Systems</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">LDS</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="LDS.html">LDS package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">LDS</a><ul>
+  <li><a href="LDS.html">LDS package</a><ul>
+  <li><a href="LDS.LDS.html">LDS.LDS package</a><ul>
+      <li>Previous: <a href="LDS.LDS.ds.html" title="previous chapter">LDS.LDS.ds package</a></li>
+      <li>Next: <a href="LDS.LDS.h_m.html" title="next chapter">LDS.LDS.h_m package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Kapa Kudaibergenov.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/LDS.LDS.filters.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

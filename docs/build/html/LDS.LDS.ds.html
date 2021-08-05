@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LDS.LDS.ds package &#8212; Linear Dynamical Systems 1.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/asciiart.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="LDS.LDS.filters package" href="LDS.LDS.filters.html" />
+    <link rel="prev" title="LDS.LDS package" href="LDS.LDS.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="lds-lds-ds-package">
+<h1>LDS.LDS.ds package<a class="headerlink" href="#lds-lds-ds-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-LDS.LDS.ds.dynamical_system">
+<span id="lds-lds-ds-dynamical-system-module"></span><h2>LDS.LDS.ds.dynamical_system module<a class="headerlink" href="#module-LDS.LDS.ds.dynamical_system" title="Permalink to this headline">¶</a></h2>
+<p>Originally the class comes from inputlds.py file.</p>
+<dl class="py class">
+<dt id="LDS.LDS.ds.dynamical_system.DynamicalSystem">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">LDS.LDS.ds.dynamical_system.</span></code><code class="sig-name descname"><span class="pre">DynamicalSystem</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_d</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.ds.dynamical_system.DynamicalSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Creates LDS.</p>
+<p>Inits DynamicalSystem with four matrix args and
+adds possibility of additional keywords in arguments.</p>
+<div class="line-block">
+<div class="line">G - matrix_a</div>
+<div class="line">w - process noise</div>
+<div class="line">F_dash - matrix_c</div>
+<div class="line">v - sensor noise.</div>
+</div>
+<p>If a matrix_a is a number, transforms it into float
+and makes d-state vector equal to 1.
+If a matrix_a is square y x y, set d equal to y.
+If a matrix_b is a number, transform it into float
+and set n-input vector equal to 1.
+matrix_b can’t take place in case of single numbered
+matrix_a.
+If matrix_b is a matrix, number of its columns is assigned to n.
+If matrix_c is a number, transform it into float
+and set m-observation vector equal to 1.
+matrix_c can be a number only if matrix_a is a number too.
+If matrix_c is a matrix, number of its rows is assigned to m.
+matrix_d can’t be not zero number if matrix_b is a matrix.
+Number of columns of matrix_d must be equal to n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matrix_a</strong> – Evolution, system, transfer or state matrix (G matrix).
+Shape nxn.</p></li>
+<li><p><strong>matrix_b</strong> – Control matrix.</p></li>
+<li><p><strong>noise. Shape nx1. Shape of covariance matrix nxn.%</strong> (<em>%Processing</em>) – </p></li>
+<li><p><strong>matrix_c</strong> – First derivative of the observation
+direction(aka design matrix F(nxm)). Shape mxn.</p></li>
+<li><p><strong>matrix_d</strong> – Feedthrough matrix.</p></li>
+<li><p><strong>noise</strong><strong> or </strong><strong>observational error. Shape mx1. Shape of covariance matrix mxm.%</strong> (<em>%Sensor</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Optional arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>process_noise</strong> – Processing noise w.</p></li>
+<li><p><strong>observation_noise</strong> – Observation noise v.</p></li>
+<li><p><strong>timevarying_multiplier_b</strong></p></li>
+<li><p><strong>corrupt_probability</strong></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>KeyError</strong> – in case of no additional keywords.</p></li>
+<li><p><strong>Exits in case of wrong format of a matrix.</strong> – </p></li>
+<li><p><strong>Exits in case of not square matrix_a.</strong> – </p></li>
+<li><p><strong>Exits in case of having any matrix_b</strong><strong>, </strong><strong>but</strong> – </p></li>
+<li><p><strong>matrix_a is a number.</strong> – </p></li>
+<li><p><strong>Exits if number of rows of matrix_b isn't</strong> – </p></li>
+<li><p><strong>equal to d.</strong> – </p></li>
+<li><p><strong>Exits if matrix_c is a number</strong><strong>, </strong><strong>but matrix_a</strong> – </p></li>
+<li><p><strong>is not.</strong> – </p></li>
+<li><p><strong>Exits if number of columns of matrix_c is not</strong> – </p></li>
+<li><p><strong>equalt to d.</strong> – </p></li>
+<li><p><strong>Exits if matrix_b is a matrix</strong><strong>, </strong><strong>but matrix_d is</strong> – </p></li>
+<li><p><strong>not zero number.</strong> – </p></li>
+<li><p><strong>Exits if number of columns of matrix_d is not</strong> – </p></li>
+<li><p><strong>equal to n-input vector.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="LDS.LDS.ds.dynamical_system.DynamicalSystem.check_input">
+<code class="sig-name descname"><span class="pre">check_input</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.ds.dynamical_system.DynamicalSystem.check_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks variable type of matrices A,B,C,D.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>operator</strong> – Number or a matrix.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>1</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>TypeError</strong> – This error occurs if the argument is none of possible formats.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="LDS.LDS.ds.dynamical_system.DynamicalSystem.solve">
+<code class="sig-name descname"><span class="pre">solve</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h_zero</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_t</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.ds.dynamical_system.DynamicalSystem.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds outputs of LDS. The function is used in filters to find the error of prediction.</p>
+<p>t_t must be an integer greater than 1.
+Length of h_zero array must be equal to
+self.d(number of arrays in matrix A) if matrix_a
+is matrix
+If self.n-input vector is 1(matrix_b is a number),
+self.inputs will be transformed to a columns with t_t
+size.
+If matrix_b is matrix, inputs must have n x t_t size.
+If self.process_noise has Gaussian distribution, we
+create it with size d x t_t. If it isn’t of Gaussian,
+we create matrix of zeros.
+If self.observation_noise has Gaussian distribution, we
+create it with size m x t_t. If it isn’t of Gaussian,
+we create matrix of zeros.
+If it’s wasn’t given in init, we put earlies_event_time
+to zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h_zero</strong> – 1x2 array.</p></li>
+<li><p><strong>inputs</strong> – Array of zeros of t_t size.</p></li>
+<li><p><strong>t_t</strong> – Time horizon.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Optional arguments</dt>
+<dd class="field-even"><p><strong>earliest_event_time</strong></p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Exits if t_t is 1</strong><strong> or </strong><strong>a float.</strong> – </p></li>
+<li><p><strong>Exits if matrix_a is a number</strong><strong>, </strong><strong>but</strong> – </p></li>
+<li><p><strong>h_zero can't be transformed into float.</strong> – </p></li>
+<li><p><strong>Exits if length of h_zero isn't equal</strong> – </p></li>
+<li><p><strong>to d</strong><strong>(</strong><strong>if matrix_a is matrix</strong><strong>)</strong><strong></strong> – </p></li>
+<li><p><strong>Exits if self.n==1</strong><strong>, </strong><strong>but inputs don't have</strong> – </p></li>
+<li><p><strong>a size of t_t.</strong> – </p></li>
+<li><p><strong>Exits if matrix_b is a matrix</strong><strong>, </strong><strong>but inputs</strong> – </p></li>
+<li><p><strong>don't have n x t_t size.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-LDS.LDS.ds">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-LDS.LDS.ds" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Linear Dynamical Systems</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">LDS</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="LDS.html">LDS package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">LDS</a><ul>
+  <li><a href="LDS.html">LDS package</a><ul>
+  <li><a href="LDS.LDS.html">LDS.LDS package</a><ul>
+      <li>Previous: <a href="LDS.LDS.html" title="previous chapter">LDS.LDS package</a></li>
+      <li>Next: <a href="LDS.LDS.filters.html" title="next chapter">LDS.LDS.filters package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Kapa Kudaibergenov.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/LDS.LDS.ds.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

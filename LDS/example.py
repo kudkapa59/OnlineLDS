@@ -2,7 +2,7 @@
 import numpy as np
 
 #import our library based on MATLAB function
-from OnlineLDS_library import *
+from .OnlineLDS_library import *
 
 #settings_file_name = 'MATLAB_func_on_python/data/setting1.mat'
 settings_file_name = 'OARIMA_code_data/data/setting1.mat'

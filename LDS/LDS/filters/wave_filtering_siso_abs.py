@@ -4,28 +4,31 @@ the written below class to be the abstract class for spectral and persistent fil
 
 import numpy as np
 from abc import abstractmethod
-from LDS.filters.filtering_siso import FilteringSiso
-from LDS.h_m.hankel import Hankel
+from .filtering_siso import FilteringSiso
+from ..h_m.hankel import Hankel
 
 
 class WaveFilteringSisoAbs(FilteringSiso):
-    """
+    r"""
     Abstract class for creation of persistent and spectral filters.
     The subclass WaveFilteringSISO is spectral filter only for symmetric transition matrix.
-    The related work is
-    "Learning Linear Dynamical Systems via Spectral Filtering" by E.Hazan, K.Singh and C.Zhang.
+    The related work is "Learning Linear Dynamical Systems via Spectral Filtering"
+    by E.Hazan, K.Singh and C.Zhang.
+
     WaveFilteringSisoFtl is the class for general case prediction.
-    The related work is 
-    "Spectral Filtering for General Linear Dynamical Systems" by E.Hazan, K.Singh, H.Lee 
-                                                                            and C.Zhang. 
+    The related work is "Spectral Filtering for General Linear Dynamical Systems"
+    by E.Hazan, K.Singh, H.Lee and C.Zhang.
+    
     Hierarchy tree ((ABC)):
 
-                                                        WaveFilteringSisoPersistent
-                                                            ^
-                                                            |
-    Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
-                                     |                 |                |
-                    KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
+    .. asciiart::
+
+                                                            WaveFilteringSisoPersistent
+                                                                ^
+                                                                |
+        Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
+                                         |                 |                |
+                        KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
     """
 
     def __init__(self, sys, t_t, k):
@@ -43,6 +46,9 @@ class WaveFilteringSisoAbs(FilteringSiso):
     def var_calc(self):
         """
         Initializes spectral filter's parameters:
+
+        Parameters:
+
             n      : Input vector. Shape of processing noise.
             m      : Observation vector. Shape of observational error.
             k_dash : Siso filter parameter.
@@ -64,11 +70,13 @@ class WaveFilteringSisoAbs(FilteringSiso):
         Abstract method for calculating output predictions and errors.
 
         Returns:
-            y_pred_full           : Output prediction.
-            M                     : Matrix specifying a linear map from featurized inputs to predictions. 
-                                    Siso filter parameter. 
-            pred_error            : Spectral filter prediction error.
-            pred_error_persistent : Persistent filter error.
+            (tuple): tuple containing:
+            
+            - y_pred_full           : Output prediction.
+            - M                     : Matrix specifying a linear map from featurized inputs to predictions. 
+                                      Siso filter parameter. 
+            - pred_error            : Spectral filter prediction error.
+            - pred_error_persistent : Persistent filter error.
         """
         y_pred_full = []
         pred_error = []

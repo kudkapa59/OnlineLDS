@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LDS.LDS.ts package &#8212; Linear Dynamical Systems 1.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/asciiart.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="LDS.LDS.online_lds package" href="LDS.LDS.online_lds.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="lds-lds-ts-package">
+<h1>LDS.LDS.ts package<a class="headerlink" href="#lds-lds-ts-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-LDS.LDS.ts.time_series">
+<span id="lds-lds-ts-time-series-module"></span><h2>LDS.LDS.ts.time_series module<a class="headerlink" href="#module-LDS.LDS.ts.time_series" title="Permalink to this headline">¶</a></h2>
+<p>Implements time series from inputlds.py</p>
+<dl class="py class">
+<dt id="LDS.LDS.ts.time_series.TimeSeries">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">LDS.LDS.ts.time_series.</span></code><code class="sig-name descname"><span class="pre">TimeSeries</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matlabfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.ts.time_series.TimeSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class originated from inputlds.py, which
+was the first version of the algorithm.</p>
+<p>Inits TimeSeries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matlabfile</strong> – the matlab file ‘./OARIMA_code_data/data/setting6.mat’</p></li>
+<li><p><strong>varname</strong> – uses ‘seq_d0’. 1 x 35701 double vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>HDF5ExtError</strong> – can’t open given matlabfile.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="LDS.LDS.ts.time_series.TimeSeries.logratio">
+<code class="sig-name descname"><span class="pre">logratio</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.ts.time_series.TimeSeries.logratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces the time series by a log-ratio of subsequent element therein.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="LDS.LDS.ts.time_series.TimeSeries.solve">
+<code class="sig-name descname"><span class="pre">solve</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h_zero</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.ts.time_series.TimeSeries.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>This just truncates the series loaded in the constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>Exits if time horizon isn't an integer.</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-LDS.LDS.ts">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-LDS.LDS.ts" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Linear Dynamical Systems</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">LDS</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="LDS.html">LDS package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">LDS</a><ul>
+  <li><a href="LDS.html">LDS package</a><ul>
+  <li><a href="LDS.LDS.html">LDS.LDS package</a><ul>
+      <li>Previous: <a href="LDS.LDS.online_lds.html" title="previous chapter">LDS.LDS.online_lds package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Kapa Kudaibergenov.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/LDS.LDS.ts.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

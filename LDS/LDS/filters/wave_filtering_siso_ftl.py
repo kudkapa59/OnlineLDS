@@ -1,16 +1,15 @@
 """Implements spectral filtering class with follow-the-leader algorithm.
 Originates from function wave_filtering_SISO_ftl from onlinelds.py.
-The related work is 
-"Spectral Filtering for General Linear Dynamical Systems" by E.Hazan, K.Singh, H.Lee 
-                                                                            and C.Zhang. 
+The related work is "Spectral Filtering for General Linear Dynamical Systems"
+by E.Hazan, K.Singh, H.Lee and C.Zhang. 
 """
 
 import logging
 import numpy as np
 import scipy.optimize as opt
-import LDS.online_lds.cost_ftl as cost_ftl
-import LDS.online_lds.gradient_ftl as gradient_ftl
-from LDS.filters.wave_filtering_siso_abs import WaveFilteringSisoAbs
+from ..online_lds import cost_ftl as cost_ftl
+from ..online_lds import gradient_ftl as gradient_ftl
+from .wave_filtering_siso_abs import WaveFilteringSisoAbs
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -33,14 +32,17 @@ logger.addHandler(file_handler)
 class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
     """
     Spectral filter with follow-the-leader algorithm.
+    
     Hierarchy tree ((ABC)):
 
-                                                        WaveFilteringSisoPersistent
-                                                            ^
-                                                            |
-    Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
-                                     |                 |                |
-                    KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
+    .. asciiart::
+
+                                                            WaveFilteringSisoPersistent
+                                                                ^
+                                                                |
+        Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
+                                         |                 |                |
+                        KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
     """
     def __init__(self, sys, t_t, k):
         """
@@ -53,6 +55,8 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
             k   : Number of wave-filters for a spectral filter.
 
         Variables initialized with var_calc():
+
+        Variables:
             n      : Input vector. Shape of processing noise.
             m      : Observation vector. Shape of observational error.
             k_dash : Siso filter parameter.
@@ -70,11 +74,14 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
 
     def args4ftl_calc(self):
         """
-        Parameters calculation.Creates a 5-element array with m 
+        Parameters calculation.
+        
+        Creates a 5-element array with m 
         on the zero position and k_dash on the first position. 
         All others are zeros.
-        self.m      : Observation vector. Shape of observational error.
-        self.k_dash : Siso filter parameter. 
+
+        - self.m      : Observation vector. Shape of observational error.
+        - self.k_dash : Siso filter parameter. 
         """
         self.args4ftl = [0 for i in range(5)]
         self.args4ftl[0] = self.m
@@ -147,10 +154,12 @@ class WaveFilteringSisoFtl(WaveFilteringSisoAbs):
         Prediction step.
 
         Returns:
-            y_pred_full           : Output prediction.
-            M                     : Matrix specifying a linear map from featurized inputs 
-                                    to predictions. Siso filter parameter.
-            pred_error_persistent : Persistent filter prediction error.
+            (tuple): tuple containing:
+            
+            - y_pred_full           : Output prediction.
+            - M                     : Matrix specifying a linear map from featurized inputs 
+                                      to predictions. Siso filter parameter.
+            - pred_error_persistent : Persistent filter prediction error.
         """
         M = self.M
         args4ftl = self.args4ftl

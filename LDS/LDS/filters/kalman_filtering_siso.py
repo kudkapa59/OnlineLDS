@@ -2,7 +2,7 @@
 Originates from function Kalman_filtering_SISO from onlinelds.py."""
 
 import numpy as np
-from LDS.filters.filtering_siso import FilteringSiso
+from .filtering_siso import FilteringSiso
 
 class KalmanFilteringSISO(FilteringSiso):
     """
@@ -11,12 +11,14 @@ class KalmanFilteringSISO(FilteringSiso):
 
     Hierarchy tree ((ABC)):
 
-                                                        WaveFilteringSisoPersistent
-                                                            ^
-                                                            |
-    Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
-                                     |                 |                |
-                    KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
+    .. asciiart::
+
+                                                            WaveFilteringSisoPersistent
+                                                                ^
+                                                                |
+        Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
+                                         |                 |                |
+                        KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
     """
 
     def __init__(self, sys, G, f_dash,proc_noise_std, obs_noise_std, t_t, Y):
@@ -44,6 +46,9 @@ class KalmanFilteringSISO(FilteringSiso):
     def parameters(self):
         """
         Finds Kalman filter's parameters:
+
+        Parameters:
+        
             n        : Input vector. Shape of processing noise.
             m        : Observation vector. Shape of observational error.
             W        : Processing noise covariance.
@@ -89,9 +94,11 @@ class KalmanFilteringSISO(FilteringSiso):
             error_kalman_data : Kalman error. 2-norm.
         
         Returns:
-            y_pred_full       : Output prediction.
-            error_AR1_data    : Auto-regression error. 2-norm.
-            error_kalman_data : Kalman error. 2-norm. 
+            (tuple): tuple containing:
+
+            - y_pred_full       : Output prediction.
+            - error_AR1_data    : Auto-regression error. 2-norm.
+            - error_kalman_data : Kalman error. 2-norm. 
         """
         y_pred_full = []
         for t in range(self.t_t):
@@ -148,9 +155,11 @@ class KalmanFilteringSISO(FilteringSiso):
             error_kalman_data : Kalman error. 2-norm.
         
         Returns:
-            y_pred_full       : Output prediction.
-            error_AR1_data    : Auto-regression error. 2-norm.
-            error_kalman_data : Kalman error. 2-norm. 
+            (tuple): tuple containing:
+            
+            - y_pred_full       : Output prediction.
+            - error_AR1_data    : Auto-regression error. 2-norm.
+            - error_kalman_data : Kalman error. 2-norm. 
         """
         y_pred_kalman = []
         for t in range(self.t_t):

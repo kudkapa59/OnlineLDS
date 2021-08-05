@@ -18,8 +18,8 @@ class TimeSeries(object):
         Inits TimeSeries.
 
         Args:
-        matlabfile: the matlab file './OARIMA_code_data/data/setting6.mat'
-        varname: uses 'seq_d0'. 1 x 35701 double vector.
+            matlabfile: the matlab file './OARIMA_code_data/data/setting6.mat'
+            varname: uses 'seq_d0'. 1 x 35701 double vector.
 
         Raises:
             HDF5ExtError: can't open given matlabfile.

@@ -10,10 +10,10 @@ class DynamicalSystem(object):
         Inits DynamicalSystem with four matrix args and
         adds possibility of additional keywords in arguments.
 
-        G - matrix_a
-        w - process noise
-        F_dash - matrix_c
-        v - sensor noise.
+        | G - matrix_a
+        | w - process noise
+        | F_dash - matrix_c
+        | v - sensor noise.
 
         If a matrix_a is a number, transforms it into float 
         and makes d-state vector equal to 1.

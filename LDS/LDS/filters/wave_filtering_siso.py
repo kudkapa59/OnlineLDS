@@ -1,23 +1,26 @@
 """
 Originates from function wave_filtering_SISO from onlineLDS.py.
-The related work is
-"Learning Linear Dynamical Systems via Spectral Filtering" by E.Hazan, K.Singh and C.Zhang. 
+The related work is "Learning Linear Dynamical Systems via Spectral Filtering"
+by E.Hazan, K.Singh and C.Zhang. 
 """
 
 import numpy as np
-from LDS.filters.wave_filtering_siso_abs import WaveFilteringSisoAbs
+from .wave_filtering_siso_abs import WaveFilteringSisoAbs
 
 class WaveFilteringSISO(WaveFilteringSisoAbs):
     """
     Implements spectral filter.
 
-    Hierarchy tree ((ABC)):                                 
-                                                        WaveFilteringSISOPersistent
-                                                            ^
-                                                            |
-    Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
-                                     |                 |                |
-                    KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
+    Hierarchy tree ((ABC)):
+
+    .. asciiart::
+
+                                                            WaveFilteringSISOPersistent
+                                                                ^
+                                                                |
+        Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
+                                         |                 |                |
+                        KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
     """
 
     def __init__(self, sys, t_t, k, eta, r_m):
@@ -45,10 +48,12 @@ class WaveFilteringSISO(WaveFilteringSisoAbs):
         Calculation of output predictions and prediction errors.
 
         Returns:
-            y_pred_full : Prediction values.
-            M           : Matrix specifying a linear map 
-                          from featurized inputs to predictions.
-            pred_error  : Spectral filter error.
+            (tuple): tuple containing:
+            
+            - y_pred_full : Prediction values.
+            - M           : Matrix specifying a linear map 
+                            from featurized inputs to predictions.
+            - pred_error  : Spectral filter error.
         """
 
         t_t = self.t_t

@@ -24,13 +24,13 @@ import numpy as np
 #from sklearn.metrics import f1_score
 #import tables # Matlab loading
 from scipy.io import loadmat
-from LDS.ds.dynamical_system import DynamicalSystem
-from LDS.ts.time_series import TimeSeries
-from LDS.filters.wave_filtering_siso import WaveFilteringSISO
-from LDS.filters.wave_filtering_siso_ftl import WaveFilteringSisoFtl
-from LDS.filters.wave_filtering_siso_ftl_persistent import WaveFilteringSisoFtlPersistent
-from LDS.filters.kalman_filtering_siso import KalmanFilteringSISO
-from LDS.matlab_options.matlab_class_options import ClassOptions
+from .LDS.ds.dynamical_system import DynamicalSystem
+from .LDS.ts.time_series import TimeSeries
+from .LDS.filters.wave_filtering_siso import WaveFilteringSISO
+from .LDS.filters.wave_filtering_siso_ftl import WaveFilteringSisoFtl
+from .LDS.filters.wave_filtering_siso_ftl_persistent import WaveFilteringSisoFtlPersistent
+from .LDS.filters.kalman_filtering_siso import KalmanFilteringSISO
+from .LDS.matlab_options.matlab_class_options import ClassOptions
 
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
@@ -403,6 +403,7 @@ def heatmap(data, row_labels, col_labels, ax=None,
                      for the rows
         col_labels : A list or array of length M with the labels
                      for the columns
+
     Optional arguments:
         ax         : A matplotlib.axes.Axes instance to which the heatmap
                      is plotted. If not provided, use current axes or
@@ -865,6 +866,7 @@ def test_arima_ons(i, mk, lrate, data, A_trans_in):
     the test casees are based on MATLAB:
     the test numbers were taken from the output of MATLAB function
     the random array w is fixed
+
     :param i:
     :param mk:
     :param lrate:
@@ -1128,6 +1130,7 @@ def arima_ons(data, options):
 def lab(s, eta_zero):
     """
     Gives a label to auto-regression outputs and labels in seq0,seq1,seq2 pdfs.
+
     Returns:
         lab1: auto-regression label. Example: "AR(2), c = 2500".
     """
@@ -1251,6 +1254,7 @@ def plot_p3(ymin, ymax, have_spectral_persistent, error_spec_mean, error_spec_st
 def error_stat(error_spec_data, error_persist_data):
     """
     if have_spectral_persistent:
+
     Returns:
         error_spec_mean:    Mean error of spectral filtering
         error_spec_std:     Std of spectral filtering error
@@ -1308,22 +1312,22 @@ def p3_for_test_identification2(ylim, have_spectral_persistent, Tlim, error_spec
                                error_AR1_mean, error_AR1_std,
                                have_kalman, error_Kalman_mean, error_Kalman_std, p_p):
 
-    """
+    r"""
     Plots Figure 2,5 after getting all the errors data.
     LaTeX
     In Figure 2, we compare the prediction error for 4 methods: 
-    the standard baseline last-value prediction $\hat{y}_{t+1} := y_t$, also 
+    the standard baseline last-value prediction :math:`\hat{y}_{t+1} := y_t`, also 
     known as persistence prediction, the spectral filtering of 
-    \cite{hazan2017online}, Kalman filter, and AR(2).
+    \\cite{hazan2017online}, Kalman filter, and AR(2).
 
-    We first continue the Example \ref{HazanEx} form the main body of the 
-    paper, with a system given by (\ref{eq:experem1_system_hazan}) and 
-    $v=w=0.5$. Figure \ref{fig1}(right) shows a sample observations 
+    We first continue the Example \\ref{HazanEx} form the main body of the 
+    paper, with a system given by (\\ref{eq:experem1_system_hazan}) and 
+    :math:`v=w=0.5`. Figure \\ref{fig1}(right) shows a sample observations 
     trajectory of the system, together with forecast for the four methods. 
-    Figure \ref{fig1}(left) show the mean and standard deviations of the 
-    errors for the first 500 time steps. Figure \ref{fig1brief} in the main 
-    text is the restriction of this Figure \ref{fig1}(left) to the first 20 
-    steps. Similarly to Figure \ref{fig1brief}, we observe that the AR(2) 
+    Figure \\ref{fig1}(left) show the mean and standard deviations of the 
+    errors for the first 500 time steps. Figure \\ref{fig1brief} in the main 
+    text is the restriction of this Figure \\ref{fig1}(left) to the first 20 
+    steps. Similarly to Figure \\ref{fig1brief}, we observe that the AR(2) 
     predictions are better than the spectral and persistence methods, and 
     worse than the Kalman filter, since only two first terms are considered. 
     """
@@ -1383,8 +1387,8 @@ def prediction(t_t, f_dash, G, matrix_a, sys, s, Z, Y):
     """
     Auto-regression prediction values.
     Finds the formula for Figure 1(AR(s+1)):
-    The unrolling of the forecast $f_{t+1}$.
-    The remainder term goes to zero exponentially fast with $s$, by Lemma
+    The unrolling of the forecast :math:`f_{t+1}`.
+    The remainder term goes to zero exponentially fast with :math:`s`, by Lemma
     """
 
     Y_pred = []

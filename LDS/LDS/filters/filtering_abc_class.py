@@ -7,12 +7,14 @@ class Filtering(ABC):
     
     Hierarchy tree ((ABC)):
 
-                                                        WaveFilteringSisoPersistent
-                                                            ^
-                                                            |
-    Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
-                                     |                 |                |
-                    KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
+    .. asciiart::
+
+                                                            WaveFilteringSisoPersistent
+                                                                ^
+                                                                |
+        Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
+                                         |                 |                |
+                        KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
     """
 
     @abstractmethod

@@ -2,7 +2,7 @@
 
 import os, sys
 from abc import abstractmethod
-from LDS.filters.filtering_abc_class import Filtering
+from .filtering_abc_class import Filtering
 
 class FilteringSiso(Filtering):
     """
@@ -12,12 +12,14 @@ class FilteringSiso(Filtering):
 
     Hierarchy tree ((ABC)):
 
-                                                        WaveFilteringSisoPersistent
-                                                            ^
-                                                            |
-    Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
-                                     |                 |                |
-                    KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
+    .. asciiart::
+
+                                                            WaveFilteringSisoPersistent
+                                                                ^
+                                                                |
+        Filtering(ABC) --> FilteringSiso(ABC) -->  WaveFilteringSisoAbs(ABC) -->WaveFilteringSisoFtlPersistent
+                                         |                 |                |
+                        KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl
 
     """
 
@@ -38,8 +40,10 @@ class FilteringSiso(Filtering):
         Creates empty lists for prediction and error of filters.
 
         Returns:
-            y_pred_full : Output prediction.
-            pred_error  : Prediction error.
+            (tuple): tuple containing:
+
+            - y_pred_full : Output prediction.
+            - pred_error  : Prediction error.
         """
 
         y_pred_full, pred_error = [], []
