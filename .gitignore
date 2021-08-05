@@ -9,9 +9,3 @@ LDS.egg-info
 /LDS/.vscode/.ropeproject
 
 /LDS/.DS_Store
-
-LDS.fixes.with-latex.patch
-
-docs.settings.with-latex.patch
-
-.gitignore
