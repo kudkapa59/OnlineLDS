@@ -1320,6 +1320,13 @@ def p3_for_test_identification2(ylim, have_spectral_persistent, Tlim, error_spec
     known as persistence prediction, the spectral filtering of 
     \\cite{hazan2017online}, Kalman filter, and AR(2).
 
+    .. _label:
+    .. figure:: _static/image2.png
+      :alt: fig1
+
+      This is the caption
+
+    At :numref:`label` you can see...
     We first continue the Example \\ref{HazanEx} form the main body of the 
     paper, with a system given by (\\ref{eq:experem1_system_hazan}) and 
     :math:`v=w=0.5`. Figure \\ref{fig1}(right) shows a sample observations 

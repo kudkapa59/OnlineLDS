@@ -68,5 +68,8 @@ napoleon_custom_sections = [
 # More sphinx config
 autoclass_content = 'both'
 
+# Numfig
+numfig = True
+
 # Config of ASCII art
 ascii_art_output_format = dict(html='.html', latex='.png', text='.txt')
