@@ -408,13 +408,13 @@ Originally the function comes from onlinelds.py file.</p>
 Create a heatmap from a numpy array and two lists of labels.
 Used by testNoiseImpact to implement <a class="reference internal" href="#fig3"><span class="std std-numref">Fig. 1</span></a> and <a class="reference internal" href="#fig6"><span class="std std-numref">Fig. 2</span></a>.
 Originally the function comes from experiments.py file.</p>
-<div class="figure align-default" id="id3">
+<div class="figure align-default" id="id1">
 <span id="fig3"></span><img alt="fig3" src="_images/Figure3.png" />
 <p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">The ratio of the errors of Kalman filter and AR(2) on Example 7 from Marecek’s paper
 indicated by colours as a function of <img class="math" src="_images/math/ce901d5eb0e79e936ababf650dcb9a1685a1f093.png" alt="w, v"/> of process and observation noise, on
-the vertical and horizontal axes, resp. Origin is the top-left corner.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+the vertical and horizontal axes, resp. Origin is the top-left corner.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
-<div class="figure align-default" id="id4">
+<div class="figure align-default" id="id2">
 <span id="fig6"></span><img alt="fig6" src="_images/Figure6.png" />
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">The effect of varying the magnitude of noise in Example 7 on AR(2)
 (top), AR(4) (middle), and AR(8) (bottom). Left: average RMSE of predictions
@@ -424,7 +424,7 @@ Kalman filters and AR(s + 1) as a function of the variance of the process noise
 (vertical axis) and observation noise (horizontal axis). Throughout averages are
 taken over 10 runs. Right: The ratio (70) of the errors of Kalman filters and
 AR(s + 1) as a function of the variance of the process noise (vertical axis) and
-observation noise (horizontal axis). Throughout, notice the origin is in the topleft corner.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+observation noise (horizontal axis). Throughout, notice the origin is in the topleft corner.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -467,8 +467,8 @@ create a new one.</p></li>
 <dl class="py function">
 <dt id="LDS.OnlineLDS_library.p3_for_test_identification2">
 <code class="sig-prename descclassname"><span class="pre">LDS.OnlineLDS_library.</span></code><code class="sig-name descname"><span class="pre">p3_for_test_identification2</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ylim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">have_spectral_persistent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tlim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_spec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_spec_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_spec_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alphaValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_persist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_persist_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_persist_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_AR1_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_AR1_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">have_kalman</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_Kalman_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_Kalman_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.OnlineLDS_library.p3_for_test_identification2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plots <a class="reference internal" href="#fig2"><span class="std std-numref">Fig. 3</span></a>, <a class="reference internal" href="#fig5"><span class="std std-numref">Fig. 4</span></a> after getting all the errors data.
-In <a class="reference internal" href="#fig2"><span class="std std-numref">Fig. 3</span></a>, we compare the prediction error for 4 methods:
+<dd><p>Plots <a class="reference internal" href="#fig2"><span class="std std-numref">Fig. 6</span></a>, <a class="reference internal" href="#fig5"><span class="std std-numref">Fig. 7</span></a> after getting all the errors data.
+In <a class="reference internal" href="#fig2"><span class="std std-numref">Fig. 6</span></a>, we compare the prediction error for 4 methods:
 the standard baseline last-value prediction <img class="math" src="_images/math/8546ab635720ef88175accee3dbb128c24ef539f.png" alt="\hat{y}_{t+1} := y_t"/>, also
 known as persistence prediction, the spectral filtering of
 \cite{hazan2017online}, Kalman filter, and AR(2).</p>
@@ -572,11 +572,17 @@ The remainder term goes to zero exponentially fast with <img class="math" src="_
 <code class="sig-prename descclassname"><span class="pre">LDS.OnlineLDS_library.</span></code><code class="sig-name descname"><span class="pre">testImpactOfS</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sMax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.OnlineLDS_library.testImpactOfS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates file ‘./outputs/impacts.pdf’, which stores plots of average error of auto-regression
 as a function of regression depth s. In the main paper we present it again with Example 7
-and Figure 4.
+and <a class="reference internal" href="#fig4"><span class="std std-numref">Fig. 3</span></a> .
 Increasing s decreases the error, until the error approaches that of the Kalman filter.
 For a given value of the observation noise, the convergence w.r.t s is slower for
 smaller process noise.
 Originally the function comes from experiments.py file.</p>
+<div class="figure align-default" id="id3">
+<span id="fig4"></span><img alt="fig4" src="_images/Figure4.png" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">The error of AR(s + 1) as a function of s + 1, in terms of the mean
+and standard deviation over N = 100 runs on Example 7, for 4 choices of <img class="math" src="_images/math/ce901d5eb0e79e936ababf650dcb9a1685a1f093.png" alt="w, v"/>
+of process and observation noise, respectively.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -599,7 +605,7 @@ vs observation noise variance based on relative error between any two
 predictive algorithms. LaTeX shows the example of the ratio of the errors
 of Kalman filter and AR(2)(see <a class="reference internal" href="#fig3"><span class="std std-numref">Fig. 1</span></a>).
 Originally the function comes from experiments.py file.</p>
-<p>Plots RMSE of AR :numref:<a href="#id1"><span class="problematic" id="id2">`</span></a>fig6`(left) :
+<p>Plots RMSE of AR <a class="reference internal" href="#fig6"><span class="std std-numref">Fig. 2</span></a> (left):
 average RMSE of predictions of AR(s+ 1) as a function of the variance of the
 process noise (vertical axis) and observation noise (horizontal axis).</p>
 <p>Plots <a class="reference internal" href="#fig6"><span class="std std-numref">Fig. 2</span></a> (center):
@@ -686,9 +692,23 @@ the random array w is fixed</p>
 <dd><p>Implements here On-line Gradient Descent Algorithm 1 by the use of cost_ar and gradient_ar
 functions.
 Data found is used by plot_p1,plot_p2, plot_p3 functions which create “seq0”, “logration” pdfs.
-Implements Example 8 from Experiments section of the original paper.
-Plots Figures 7,8.
-Originally the function comes from experiments.py file.</p>
+Implements Example 8 from Experiments section of Marecek’s paper.
+Originally the function comes from experiments.py file. Plots <a class="reference internal" href="#fig7"><span class="std std-numref">Fig. 4</span></a>, <a class="reference internal" href="#fig8"><span class="std std-numref">Fig. 5</span></a>.</p>
+<div class="figure align-default" id="id4">
+<span id="fig7"></span><img alt="fig7" src="_images/Figure7.png" />
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">An illustration of the impact of constants in the learning rate on
+Example 8 from Marecek’s paper, the well-known time series.
+Top: The forecasts for three different values of c.
+Bottom: The error for three different values of c.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id5">
+<span id="fig8"></span><img alt="fig8" src="_images/Figure8.png" />
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Illustrations on Example 8, the well-known time series. Top: the
+predictions of AR(2) compared with the predictions of the spectral filter of
+Hazan, Singh, and Zhang (2017) and the trivial last-value prediction on the
+first T = 100 elements of series d0 (left), d1 (center), and d2 (right).
+Bottom: the corresponding errors.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -713,23 +733,23 @@ Default value - True.</p></li>
 
 <dl class="py function">
 <dt id="LDS.OnlineLDS_library.test_identification2">
-<code class="sig-prename descclassname"><span class="pre">LDS.OnlineLDS_library.</span></code><code class="sig-name descname"><span class="pre">test_identification2</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[15,</span> <span class="pre">3,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">have_kalman</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">have_spectral_persistent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([[0.54661607,</span> <span class="pre">0.00607494],</span> <span class="pre">[0.43924336,</span> <span class="pre">0.82128672]])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_dash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([[0.18222239,</span> <span class="pre">0.52486075]])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.OnlineLDS_library.test_identification2" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">LDS.OnlineLDS_library.</span></code><code class="sig-name descname"><span class="pre">test_identification2</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[15,</span> <span class="pre">3,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">have_kalman</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">have_spectral_persistent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([[2.29758254e-01,</span> <span class="pre">8.75504316e-01],</span> <span class="pre">[9.32669690e-06,</span> <span class="pre">6.96130792e-01]])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_dash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([[0.90174746,</span> <span class="pre">0.32181554]])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.OnlineLDS_library.test_identification2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements Example 7 from Experiments section of the paper.
 Creates ‘./outputs/AR.pdf’.Finds all the filters’ errors and
 uses function p3_for_test_identification2 for plotting them.
-Plots <a class="reference internal" href="#fig2"><span class="std std-numref">Fig. 3</span></a>,:numref:<cite>fig5</cite>. Plots Figure 2,5 of the main paper.
+Plots <a class="reference internal" href="#fig2"><span class="std std-numref">Fig. 6</span></a>, <a class="reference internal" href="#fig5"><span class="std std-numref">Fig. 7</span></a>. Plots Figure 2,5 of the main paper.
 Originally the function comes from experiments.py file.</p>
-<div class="figure align-default" id="id5">
-<span id="fig2"></span><img alt="fig2" src="_images/Figure2.png" />
-<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">The error of AR(2) compared against Kalman filter, last-value prediction,
-and spectral filtering in terms of the mean and standard deviation over
-N = 100 runs on Example 7.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
-</div>
 <div class="figure align-default" id="id6">
+<span id="fig2"></span><img alt="fig2" src="_images/Figure2.png" />
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">The error of AR(2) compared against Kalman filter, last-value prediction,
+and spectral filtering in terms of the mean and standard deviation over
+N = 100 runs on Example 7.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id7">
 <span id="fig5"></span><img alt="fig5" src="_images/Figure5.png" />
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Left: sample outputs and predictions with AR(2), compared against Kalman filter,
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Left: sample outputs and predictions with AR(2), compared against Kalman filter,
 last-value prediction, and spectral filtering of Hazan, Singh, and Zhang (2017).
-Right: Same as <a class="reference internal" href="#fig2"><span class="std std-numref">Fig. 3</span></a>, over longer time period.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+Right: Same as <a class="reference internal" href="#fig2"><span class="std std-numref">Fig. 6</span></a>, over longer time period.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
