@@ -268,6 +268,8 @@ Originates from function Kalman_filtering_SISO from onlinelds.py.</p>
 <dd><p>Bases: <a class="reference internal" href="#LDS.LDS.filters.filtering_siso.FilteringSiso" title="LDS.LDS.filters.filtering_siso.FilteringSiso"><code class="xref py py-class docutils literal notranslate"><span class="pre">LDS.LDS.filters.filtering_siso.FilteringSiso</span></code></a></p>
 <p>Calculates Kalman filter parameters. Finds the prediction for Kalman and auto-regression.
 Uses abstract superclass FilteringSiso.</p>
+<p><a class="reference internal" href="#kalman"><span class="std std-numref">Fig. 1</span></a> shows an example of predictions of the Kalman, spectral and persistent filters.
+<img class="math" src="_images/math/89878909dbb648acdc4a44ded1bd982d7bddef5d.png" alt="G"/> and <img class="math" src="_images/math/0171a8821e6452fec0decf1fae80b47357295997.png" alt="F'"/> are random normally distributed matrices.</p>
 <p>Hierarchy tree ((ABC)):</p>
 <pre class="ansi-block literal-block"><span class="ansi-white ansi-bg_black">                                                    WaveFilteringSisoPersistent
                                                         ^
@@ -275,6 +277,11 @@ Uses abstract superclass FilteringSiso.</p>
 Filtering(ABC) --&gt; FilteringSiso(ABC) --&gt;  WaveFilteringSisoAbs(ABC) --&gt;WaveFilteringSisoFtlPersistent
                                  |                 |                |
                 KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl</span></pre>
+<div class="figure align-default" id="id1">
+<span id="kalman"></span><img alt="kalman" src="_images/Kalman.png" />
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">The prediction of the Kalman filter, persistent filter and spectral filter compared to the
+real outputs over N = 100 iterations.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
 <p>Inherits init method of FilteringSiso. Assignment variable names to LDS matrices.
 Calls to method “parameters”.</p>
 <dl class="field-list simple">
@@ -381,7 +388,7 @@ by E.Hazan, K.Singh and C.Zhang.</p>
 <dt id="LDS.LDS.filters.wave_filtering_siso.WaveFilteringSISO">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">LDS.LDS.filters.wave_filtering_siso.</span></code><code class="sig-name descname"><span class="pre">WaveFilteringSISO</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso.WaveFilteringSISO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs" title="LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs"><code class="xref py py-class docutils literal notranslate"><span class="pre">LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs</span></code></a></p>
-<p>Implements spectral filter.</p>
+<p>Implements spectral filter. <a class="reference internal" href="#spectral"><span class="std std-numref">Fig. 2</span></a> shows an example of its real-time prediction.</p>
 <p>Hierarchy tree ((ABC)):</p>
 <pre class="ansi-block literal-block"><span class="ansi-white ansi-bg_black">                                                    WaveFilteringSISOPersistent
                                                         ^
@@ -389,6 +396,10 @@ by E.Hazan, K.Singh and C.Zhang.</p>
 Filtering(ABC) --&gt; FilteringSiso(ABC) --&gt;  WaveFilteringSisoAbs(ABC) --&gt;WaveFilteringSisoFtlPersistent
                                  |                 |                |
                 KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl</span></pre>
+<div class="figure align-default" id="id2">
+<span id="spectral"></span><img alt="spectral" src="_images/spectral.png" />
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">The prediction of the spectral filter compared to the real outputs over N = 100 iterations.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
 <p>Inits all the attributes of its superclass(see WaveFilteringSisoAbs) and
 adds Learning rate and Radius parameter.
 Goes through all the methods and gets the predictions.</p>
@@ -683,7 +694,8 @@ by E.Hazan, K.Singh and C.Zhang.</p>
 <dt id="LDS.LDS.filters.wave_filtering_siso_persistent.WaveFilteringSISOPersistent">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">LDS.LDS.filters.wave_filtering_siso_persistent.</span></code><code class="sig-name descname"><span class="pre">WaveFilteringSISOPersistent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LDS.LDS.filters.wave_filtering_siso_persistent.WaveFilteringSISOPersistent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs" title="LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs"><code class="xref py py-class docutils literal notranslate"><span class="pre">LDS.LDS.filters.wave_filtering_siso_abs.WaveFilteringSisoAbs</span></code></a></p>
-<p>Implements Persistent filter.</p>
+<p>Implements persistent filter. <a class="reference internal" href="#persistent"><span class="std std-numref">Fig. 3</span></a> shows comparison of filter’s errors.
+<a class="reference internal" href="#loss"><span class="std std-numref">Fig. 4</span></a> shows comparison of spectral and persistent filters.</p>
 <p>Hierarchy tree ((ABC)):</p>
 <pre class="ansi-block literal-block"><span class="ansi-white ansi-bg_black">                                                    WaveFilteringSisoPersistent
                                                         ^
@@ -691,6 +703,15 @@ by E.Hazan, K.Singh and C.Zhang.</p>
 Filtering(ABC) --&gt; FilteringSiso(ABC) --&gt;  WaveFilteringSisoAbs(ABC) --&gt;WaveFilteringSisoFtlPersistent
                                  |                 |                |
                 KalmanFilteringSISO    WaveFilteringSISO  WaveFilteringSisoFtl</span></pre>
+<div class="figure align-default" id="id3">
+<span id="persistent"></span><img alt="persistent" src="_images/persist.png" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">The errors of the persistent, spectral filters and AR(2) on the first T=100 elements of the
+time series.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id4">
+<span id="loss"></span><img alt="loss" src="_images/loss.png" />
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">The loss of the persistent filter compared to the spectral filter over N=100 iterations.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
 <p>Inits all the attributes of its superclass(see WaveFilteringSisoAbs) and
 adds Learning rate and Radius parameter.
 Goes through all the methods and gets the predictions.</p>
