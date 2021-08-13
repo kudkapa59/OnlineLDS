@@ -91,7 +91,7 @@
   \item \spxentry{LDS.LDS.h\_m.hankel}
     \subitem \spxentry{module}, \hyperpage{14}
   \item \spxentry{LDS.LDS.matlab\_options}
-    \subitem \spxentry{module}, \hyperpage{14}
+    \subitem \spxentry{module}, \hyperpage{15}
   \item \spxentry{LDS.LDS.matlab\_options.matlab\_class\_options}
     \subitem \spxentry{module}, \hyperpage{14}
   \item \spxentry{LDS.LDS.online\_lds}
@@ -131,7 +131,7 @@
     \subitem \spxentry{LDS.LDS.filters.wave\_filtering\_siso\_persistent}, \hyperpage{11}
     \subitem \spxentry{LDS.LDS.h\_m}, \hyperpage{14}
     \subitem \spxentry{LDS.LDS.h\_m.hankel}, \hyperpage{14}
-    \subitem \spxentry{LDS.LDS.matlab\_options}, \hyperpage{14}
+    \subitem \spxentry{LDS.LDS.matlab\_options}, \hyperpage{15}
     \subitem \spxentry{LDS.LDS.matlab\_options.matlab\_class\_options}, \hyperpage{14}
     \subitem \spxentry{LDS.LDS.online\_lds}, \hyperpage{15}
     \subitem \spxentry{LDS.LDS.online\_lds.cost\_ftl}, \hyperpage{15}

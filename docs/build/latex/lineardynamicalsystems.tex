@@ -131,10 +131,10 @@ Inits DynamicalSystem with four matrix args and
 adds possibility of additional keywords in arguments.
 
 \begin{DUlineblock}{0em}
-\item[] G \sphinxhyphen{} matrix\_a
-\item[] w \sphinxhyphen{} process noise
-\item[] F\_dash \sphinxhyphen{} matrix\_c
-\item[] v \sphinxhyphen{} sensor noise.
+\item[] \(G\) \sphinxhyphen{} matrix\_a
+\item[] \(w\) \sphinxhyphen{} process noise
+\item[] \(F_dash\) \sphinxhyphen{} matrix\_c
+\item[] \(v\) \sphinxhyphen{} sensor noise.
 \end{DUlineblock}
 
 \sphinxAtStartPar
@@ -156,7 +156,7 @@ Number of columns of matrix\_d must be equal to n.
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{matrix\_a}} \textendash{} Evolution, system, transfer or state matrix (G matrix).
+\sphinxstyleliteralstrong{\sphinxupquote{matrix\_a}} \textendash{} Evolution, system, transfer or state matrix.
 Shape nxn.
 
 \item {} 
@@ -246,7 +246,7 @@ direction(aka design matrix F(nxm)). Shape mxn.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{LDS.LDS.ds:LDS.LDS.ds.dynamical_system.DynamicalSystem.check_input}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{check\_input}}}{\emph{\DUrole{n}{operator}}}{}
 \sphinxAtStartPar
-Checks variable type of matrices A,B,C,D.
+Checks variable type of matrices \(A,B,C,D\).
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
 \sphinxAtStartPar
@@ -274,8 +274,8 @@ Finds outputs of LDS. The function is used in filters to find the error of predi
 \sphinxAtStartPar
 t\_t must be an integer greater than 1.
 Length of h\_zero array must be equal to
-self.d(number of arrays in matrix A) if matrix\_a
-is matrix
+self.d(number of arrays in matrix \(A\)) if matrix\_a
+is matrix.
 If self.n\sphinxhyphen{}input vector is 1(matrix\_b is a number),
 self.inputs will be transformed to a columns with t\_t
 size.
@@ -538,7 +538,7 @@ Calls to method “parameters”.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{LDS.LDS.filters:LDS.LDS.filters.kalman_filtering_siso.KalmanFilteringSISO.parameters}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{parameters}}}{}{}
 \sphinxAtStartPar
-Finds Kalman filter’s parameters:
+Finds Kalman filter’s parameters.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
@@ -579,13 +579,11 @@ Finds Kalman filter’s parameters:
 
 \end{itemize}
 
-\end{description}\end{quote}
-\begin{description}
-\item[{Raises:  \#Not raises yet}] \leavevmode
+\item[{Raises}] \leavevmode
 \sphinxAtStartPar
-Q can’t be zero.
+\sphinxstyleliteralstrong{\sphinxupquote{Q can\textquotesingle{}t be zero.}} \textendash{} 
 
-\end{description}
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -1030,7 +1028,10 @@ self.k\_dash : Siso filter parameter.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{LDS.LDS.filters:LDS.LDS.filters.wave_filtering_siso_ftl.WaveFilteringSisoFtl.predict}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{predict}}}{}{}
 \sphinxAtStartPar
-Prediction step.
+Prediction step. The original Marecek’s work didn’t work when the featurized input X
+contains complex values. The presented method is analysed by my colleague Gian\sphinxhyphen{}Reto Wiher
+from University of Applied Sciences in Rapperswil, Switzerland. Since the imaginary part
+of X can not be ignored, this disadvantage needs to be considered in future bug fixes.
 \begin{quote}\begin{description}
 \item[{Returns}] \leavevmode
 \sphinxAtStartPar
@@ -1173,6 +1174,9 @@ self.k\_dash : Siso filter parameter.
 \phantomsection\label{\detokenize{LDS.LDS.filters:LDS.LDS.filters.wave_filtering_siso_ftl_persistent.WaveFilteringSisoFtlPersistent.predict}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{predict}}}{}{}
 \sphinxAtStartPar
 Prediction step.
+The filter with FTL algorithm can be improved as now it only takes into
+account real parts of signals. Taking into consideration imaginary parts would make the
+code cease to work.
 \begin{quote}\begin{description}
 \item[{Returns}] \leavevmode
 \sphinxAtStartPar
@@ -1333,7 +1337,7 @@ pred\_error\_persistent : Persistent filter error.
 \subparagraph{LDS.LDS.h\_m.hankel module}
 \label{\detokenize{LDS.LDS.h_m:module-LDS.LDS.h_m.hankel}}\label{\detokenize{LDS.LDS.h_m:lds-lds-h-m-hankel-module}}\index{module@\spxentry{module}!LDS.LDS.h\_m.hankel@\spxentry{LDS.LDS.h\_m.hankel}}\index{LDS.LDS.h\_m.hankel@\spxentry{LDS.LDS.h\_m.hankel}!module@\spxentry{module}}
 \sphinxAtStartPar
-Implements Hankel matrix.
+Implements the Hankel matrix.
 \index{Hankel (class in LDS.LDS.h\_m.hankel)@\spxentry{Hankel}\spxextra{class in LDS.LDS.h\_m.hankel}}
 
 \begin{fulllineitems}
@@ -1344,16 +1348,15 @@ Bases: \sphinxcode{\sphinxupquote{object}}
 \sphinxAtStartPar
 Class originated from onlinelds.py, which
 was the first version of the algorithm.
-Creates Hankel matrix.
+Creates the Hankel matrix.
 
 \sphinxAtStartPar
-Inits Hankel class with t\_t argument.
-Stores Hankel matrix, its eigenvalues
+Inits the Hankel class with t\_t argument. the Stores Hankel matrix, its eigenvalues
 and normalized eigenvectors.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{t\_t}} \textendash{} integer, size of Hankel matrix
+\sphinxstyleliteralstrong{\sphinxupquote{t\_t}} \textendash{} Integer, size of Hankel matrix. Globally it is the time horizon.
 
 \end{description}\end{quote}
 
@@ -1373,7 +1376,7 @@ and normalized eigenvectors.
 \subparagraph{LDS.LDS.matlab\_options.matlab\_class\_options module}
 \label{\detokenize{LDS.LDS.matlab_options:module-LDS.LDS.matlab_options.matlab_class_options}}\label{\detokenize{LDS.LDS.matlab_options:lds-lds-matlab-options-matlab-class-options-module}}\index{module@\spxentry{module}!LDS.LDS.matlab\_options.matlab\_class\_options@\spxentry{LDS.LDS.matlab\_options.matlab\_class\_options}}\index{LDS.LDS.matlab\_options.matlab\_class\_options@\spxentry{LDS.LDS.matlab\_options.matlab\_class\_options}!module@\spxentry{module}}
 \sphinxAtStartPar
-Analogy of Matlab options
+Analogy of Matlab options.
 \index{ClassOptions (class in LDS.LDS.matlab\_options.matlab\_class\_options)@\spxentry{ClassOptions}\spxextra{class in LDS.LDS.matlab\_options.matlab\_class\_options}}
 
 \begin{fulllineitems}
@@ -1382,7 +1385,7 @@ Analogy of Matlab options
 Bases: \sphinxcode{\sphinxupquote{object}}
 
 \sphinxAtStartPar
-Mimics ‘options’ from Matlab
+Mimics the ‘options’ file from Matlab.
 
 \end{fulllineitems}
 
@@ -1403,7 +1406,7 @@ Mimics ‘options’ from Matlab
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{LDS.LDS.online_lds:LDS.LDS.online_lds.cost_ftl.cost_ftl}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{LDS.LDS.online\_lds.cost\_ftl.}}\sphinxbfcode{\sphinxupquote{cost\_ftl}}}{\emph{\DUrole{n}{M\_flat}}, \emph{\DUrole{o}{*}\DUrole{n}{args}}}{}
 \sphinxAtStartPar
-from onlinelds.py
+Originates from onlinelds.py.
 
 \end{fulllineitems}
 
@@ -1415,7 +1418,7 @@ from onlinelds.py
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{LDS.LDS.online_lds:LDS.LDS.online_lds.gradient_ftl.gradient_ftl}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{LDS.LDS.online\_lds.gradient\_ftl.}}\sphinxbfcode{\sphinxupquote{gradient\_ftl}}}{\emph{\DUrole{n}{M\_flat}}, \emph{\DUrole{o}{*}\DUrole{n}{args}}}{}
 \sphinxAtStartPar
-from onlinelds.py
+Originates from onlinelds.py.
 
 \end{fulllineitems}
 
@@ -1427,7 +1430,8 @@ from onlinelds.py
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{LDS.LDS.online_lds:LDS.LDS.online_lds.print_verbose.print_verbose}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{LDS.LDS.online\_lds.print\_verbose.}}\sphinxbfcode{\sphinxupquote{print\_verbose}}}{\emph{\DUrole{n}{a}}, \emph{\DUrole{n}{verbose}}}{}
 \sphinxAtStartPar
-from onlinelds.py
+Originates from onlinelds.py. The original goal was to do logging.
+Now it’s replaced with the Python package.
 
 \end{fulllineitems}
 
@@ -1492,6 +1496,21 @@ Replaces the time series by a log\sphinxhyphen{}ratio of subsequent element ther
 \sphinxAtStartPar
 This just truncates the series loaded in the constructor.
 \begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{h\_zero}} \textendash{} 
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{inputs}} \textendash{} Input values.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{t\_t}} \textendash{} Time horizon.
+
+\end{itemize}
+
 \item[{Raises}] \leavevmode
 \sphinxAtStartPar
 \sphinxstyleliteralstrong{\sphinxupquote{Exits if time horizon isn\textquotesingle{}t an integer.}} \textendash{} 
@@ -1520,9 +1539,6 @@ This just truncates the series loaded in the constructor.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{LDS:LDS.OnlineLDS_library.A_trans_calc}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{LDS.OnlineLDS\_library.}}\sphinxbfcode{\sphinxupquote{A\_trans\_calc}}}{\emph{\DUrole{n}{A\_trans}}, \emph{\DUrole{n}{grad}}}{}
 \sphinxAtStartPar
-begin\{gather\}
-Regret(w\_\{1:T\}) = sum\_\{t=0\}\textasciicircum{}\{T\}l(  heta\_t)\sphinxhyphen{}min\_\{L in S\} sum\_\{t=0\}\textasciicircum{}\{T\}l(y\_\{t\},f\_\{t\}(L)),
-end\{gather\}
 MATLAB:
 A\_trans = A\_trans \sphinxhyphen{} A\_trans * grad’ * grad * A\_trans/(1 + grad * A\_trans * grad’);
 we have to convert data{[}{]} from 1D vector to a numpy matrix (2D) to apply the transpose
@@ -1531,7 +1547,7 @@ OR data{[}{]}.reshape(\sphinxhyphen{}1,1) can be also used to mimick the transpo
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{A\_trans}} \textendash{} np.eye(mk) * epsilon
+\sphinxstyleliteralstrong{\sphinxupquote{A\_trans}} \textendash{} np.eye(mk) * epsilon.
 
 \item {} 
 \sphinxAtStartPar
@@ -1541,9 +1557,6 @@ OR data{[}{]}.reshape(\sphinxhyphen{}1,1) can be also used to mimick the transpo
 
 \end{description}\end{quote}
 
-\sphinxAtStartPar
-Returns:
-
 \end{fulllineitems}
 
 \index{arima\_ogd() (in module LDS.OnlineLDS\_library)@\spxentry{arima\_ogd()}\spxextra{in module LDS.OnlineLDS\_library}}
@@ -1551,7 +1564,7 @@ Returns:
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{LDS:LDS.OnlineLDS_library.arima_ogd}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{LDS.OnlineLDS\_library.}}\sphinxbfcode{\sphinxupquote{arima\_ogd}}}{\emph{\DUrole{n}{data}}, \emph{\DUrole{n}{options}}}{}
 \sphinxAtStartPar
-from arima\_ogd.m
+Originates from arima\_ogd.m.
 Used by example.py. ARIMA Online Newton Step algorithm.
 The function was originally written in MATLAB by Liu, C.; Hoi, S. C. H.; Zhao, P.; and Sun, J.
 It’s described in their work “Online arima algorithms for time series prediction.”
@@ -1568,9 +1581,6 @@ It’s described in their work “Online arima algorithms for time series predic
 \end{itemize}
 
 \end{description}\end{quote}
-
-\sphinxAtStartPar
-Returns:
 
 \end{fulllineitems}
 
@@ -1597,9 +1607,6 @@ It’s described in their work “Online arima algorithms for time series predic
 
 \end{description}\end{quote}
 
-\sphinxAtStartPar
-Returns:
-
 \end{fulllineitems}
 
 \index{close\_all\_figs() (in module LDS.OnlineLDS\_library)@\spxentry{close\_all\_figs()}\spxextra{in module LDS.OnlineLDS\_library}}
@@ -1625,15 +1632,15 @@ Originally the function comes from onlinelds.py file.
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{theta}} \textendash{} auto\sphinxhyphen{}regressive parameters.
+\sphinxstyleliteralstrong{\sphinxupquote{theta}} \textendash{} Auto\sphinxhyphen{}regressive parameters.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{args}}\sphinxstyleliteralstrong{\sphinxupquote{{[}}}\sphinxstyleliteralstrong{\sphinxupquote{0}}\sphinxstyleliteralstrong{\sphinxupquote{{]}}} \textendash{} observation at time t
+\sphinxstyleliteralstrong{\sphinxupquote{args}}\sphinxstyleliteralstrong{\sphinxupquote{{[}}}\sphinxstyleliteralstrong{\sphinxupquote{0}}\sphinxstyleliteralstrong{\sphinxupquote{{]}}} \textendash{} Observation at time \(t\).
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{args}}\sphinxstyleliteralstrong{\sphinxupquote{{[}}}\sphinxstyleliteralstrong{\sphinxupquote{1}}\sphinxstyleliteralstrong{\sphinxupquote{{]}}} \textendash{} past s observations (most to least recent: t\sphinxhyphen{}1 to t\sphinxhyphen{}1\sphinxhyphen{}s)
+\sphinxstyleliteralstrong{\sphinxupquote{args}}\sphinxstyleliteralstrong{\sphinxupquote{{[}}}\sphinxstyleliteralstrong{\sphinxupquote{1}}\sphinxstyleliteralstrong{\sphinxupquote{{]}}} \textendash{} past s observations (most to least recent: \(t-1\) to \(t-1-s\)).
 
 \end{itemize}
 
@@ -1678,24 +1685,18 @@ OR data{[}{]}.reshape(\sphinxhyphen{}1,1) can be also used to mimick the transpo
 
 \end{description}\end{quote}
 
-\sphinxAtStartPar
-Returns:
-
 \end{fulllineitems}
 
 \index{error\_stat() (in module LDS.OnlineLDS\_library)@\spxentry{error\_stat()}\spxextra{in module LDS.OnlineLDS\_library}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{LDS:LDS.OnlineLDS_library.error_stat}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{LDS.OnlineLDS\_library.}}\sphinxbfcode{\sphinxupquote{error\_stat}}}{\emph{\DUrole{n}{error\_spec\_data}}, \emph{\DUrole{n}{error\_persist\_data}}}{}
-\sphinxAtStartPar
-if have\_spectral\_persistent:
-\begin{quote}\begin{description}
+\phantomsection\label{\detokenize{LDS:LDS.OnlineLDS_library.error_stat}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{LDS.OnlineLDS\_library.}}\sphinxbfcode{\sphinxupquote{error\_stat}}}{\emph{\DUrole{n}{error\_spec\_data}}, \emph{\DUrole{n}{error\_persist\_data}}}{}~\begin{quote}\begin{description}
 \item[{Returns}] \leavevmode
 \sphinxAtStartPar
-Mean error of spectral filtering
-error\_spec\_std:     Std of spectral filtering error
-error\_persist\_mean: Mean error of last\sphinxhyphen{}value prediction
-error\_persist\_std:  Std of last\sphinxhyphen{}value prediction error
+Mean error of spectral filtering.
+error\_spec\_std:     Std of spectral filtering error.
+error\_persist\_mean: Mean error of last\sphinxhyphen{}value prediction.
+error\_persist\_std:  Std of last\sphinxhyphen{}value prediction error.
 
 \item[{Return type}] \leavevmode
 \sphinxAtStartPar
@@ -1728,7 +1729,7 @@ Used by function arima\_ons.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{diff}} \textendash{} Result of diff\_calc function
+\sphinxstyleliteralstrong{\sphinxupquote{diff}} \textendash{} Result of diff\_calc function.
 
 \end{itemize}
 
@@ -1762,7 +1763,7 @@ Originally the function comes from onlinelds.py file.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{args}}\sphinxstyleliteralstrong{\sphinxupquote{{[}}}\sphinxstyleliteralstrong{\sphinxupquote{1}}\sphinxstyleliteralstrong{\sphinxupquote{{]}}} \textendash{} Past s observations.
+\sphinxstyleliteralstrong{\sphinxupquote{args}}\sphinxstyleliteralstrong{\sphinxupquote{{[}}}\sphinxstyleliteralstrong{\sphinxupquote{1}}\sphinxstyleliteralstrong{\sphinxupquote{{]}}} \textendash{} Past \(s\) observations.
 
 \end{itemize}
 
@@ -2052,9 +2053,8 @@ Kalman filter auxiliary recursive parameters calculation.
 \phantomsection\label{\detokenize{LDS:LDS.OnlineLDS_library.prediction}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{LDS.OnlineLDS\_library.}}\sphinxbfcode{\sphinxupquote{prediction}}}{\emph{\DUrole{n}{t\_t}}, \emph{\DUrole{n}{f\_dash}}, \emph{\DUrole{n}{G}}, \emph{\DUrole{n}{matrix\_a}}, \emph{\DUrole{n}{sys}}, \emph{\DUrole{n}{s}}, \emph{\DUrole{n}{Z}}, \emph{\DUrole{n}{Y}}}{}
 \sphinxAtStartPar
 Auto\sphinxhyphen{}regression prediction values.
-Finds the formula for Figure 1(AR(s+1)):
+Finds the formula for Figure 1(AR(\(s+1\))).
 The unrolling of the forecast \(f_{t+1}\).
-The remainder term goes to zero exponentially fast with \(s\), by Lemma
 
 \end{fulllineitems}
 
@@ -2063,7 +2063,7 @@ The remainder term goes to zero exponentially fast with \(s\), by Lemma
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{LDS:LDS.OnlineLDS_library.prediction_kalman}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{LDS.OnlineLDS\_library.}}\sphinxbfcode{\sphinxupquote{prediction\_kalman}}}{\emph{\DUrole{n}{t\_t}}, \emph{\DUrole{n}{f\_dash}}, \emph{\DUrole{n}{G}}, \emph{\DUrole{n}{matrix\_a}}, \emph{\DUrole{n}{sys}}, \emph{\DUrole{n}{Z}}, \emph{\DUrole{n}{Y}}}{}
 \sphinxAtStartPar
-Kalman filter prediction values
+The Kalman filter prediction values.
 
 \end{fulllineitems}
 
@@ -2214,9 +2214,6 @@ the random array w is fixed.
 
 \end{description}\end{quote}
 
-\sphinxAtStartPar
-Raises:
-
 \end{fulllineitems}
 
 \index{test\_arima\_ons() (in module LDS.OnlineLDS\_library)@\spxentry{test\_arima\_ons()}\spxextra{in module LDS.OnlineLDS\_library}}
@@ -2343,7 +2340,7 @@ Default value \sphinxhyphen{} True.
 \index{test\_identification2() (in module LDS.OnlineLDS\_library)@\spxentry{test\_identification2()}\spxextra{in module LDS.OnlineLDS\_library}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{LDS:LDS.OnlineLDS_library.test_identification2}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{LDS.OnlineLDS\_library.}}\sphinxbfcode{\sphinxupquote{test\_identification2}}}{\emph{\DUrole{n}{t\_t}\DUrole{o}{=}\DUrole{default_value}{100}}, \emph{\DUrole{n}{no\_runs}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{s\_choices}\DUrole{o}{=}\DUrole{default_value}{{[}15, 3, 1{]}}}, \emph{\DUrole{n}{have\_kalman}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{have\_spectral\_persistent}\DUrole{o}{=}\DUrole{default_value}{True}}, \emph{\DUrole{n}{G}\DUrole{o}{=}\DUrole{default_value}{array({[}{[}0.47818304, 0.63191781{]}, {[}0.71975662, 0.51588563{]}{]})}}, \emph{\DUrole{n}{f\_dash}\DUrole{o}{=}\DUrole{default_value}{array({[}{[}0.77427218, 0.8161933{]}{]})}}, \emph{\DUrole{n}{sequence\_label}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}}{}
+\phantomsection\label{\detokenize{LDS:LDS.OnlineLDS_library.test_identification2}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{LDS.OnlineLDS\_library.}}\sphinxbfcode{\sphinxupquote{test\_identification2}}}{\emph{\DUrole{n}{t\_t}\DUrole{o}{=}\DUrole{default_value}{100}}, \emph{\DUrole{n}{no\_runs}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{s\_choices}\DUrole{o}{=}\DUrole{default_value}{{[}15, 3, 1{]}}}, \emph{\DUrole{n}{have\_kalman}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{have\_spectral\_persistent}\DUrole{o}{=}\DUrole{default_value}{True}}, \emph{\DUrole{n}{G}\DUrole{o}{=}\DUrole{default_value}{array({[}{[}0.63451048, 0.40349682{]}, {[}0.90258638, 0.35326055{]}{]})}}, \emph{\DUrole{n}{f\_dash}\DUrole{o}{=}\DUrole{default_value}{array({[}{[}0.6399034, 0.03843653{]}{]})}}, \emph{\DUrole{n}{sequence\_label}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}}{}
 \sphinxAtStartPar
 Implements Example 7 from Experiments section of the paper.
 Creates ‘./outputs/AR.pdf’.Finds all the filters’ errors and
@@ -2442,7 +2439,7 @@ MATLAB: w = w \sphinxhyphen{} data(i\sphinxhyphen{}mk:i\sphinxhyphen{}1)*2*diff/
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{diff}} \textendash{} Result of diff\_calc function
+\sphinxstyleliteralstrong{\sphinxupquote{diff}} \textendash{} Result of diff\_calc function.
 
 \item {} 
 \sphinxAtStartPar
@@ -2451,9 +2448,6 @@ MATLAB: w = w \sphinxhyphen{} data(i\sphinxhyphen{}mk:i\sphinxhyphen{}1)*2*diff/
 \end{itemize}
 
 \end{description}\end{quote}
-
-\sphinxAtStartPar
-Returns:
 
 \end{fulllineitems}
 

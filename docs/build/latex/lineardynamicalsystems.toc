@@ -27,9 +27,9 @@
 \contentsline {subparagraph}{LDS.LDS.matlab\_options package}{14}{subparagraph*.49}%
 \contentsline {subparagraph}{Submodules}{14}{subparagraph*.50}%
 \contentsline {subparagraph}{LDS.LDS.matlab\_options.matlab\_class\_options module}{14}{subparagraph*.51}%
-\contentsline {subparagraph}{Module contents}{14}{subparagraph*.53}%
-\contentsline {subparagraph}{LDS.LDS.online\_lds package}{14}{subparagraph*.54}%
-\contentsline {subparagraph}{Submodules}{14}{subparagraph*.55}%
+\contentsline {subparagraph}{Module contents}{15}{subparagraph*.53}%
+\contentsline {subparagraph}{LDS.LDS.online\_lds package}{15}{subparagraph*.54}%
+\contentsline {subparagraph}{Submodules}{15}{subparagraph*.55}%
 \contentsline {subparagraph}{LDS.LDS.online\_lds.cost\_ftl module}{15}{subparagraph*.56}%
 \contentsline {subparagraph}{LDS.LDS.online\_lds.gradient\_ftl module}{15}{subparagraph*.58}%
 \contentsline {subparagraph}{LDS.LDS.online\_lds.print\_verbose module}{15}{subparagraph*.60}%
