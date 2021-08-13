@@ -191,10 +191,10 @@
 <p>Inits DynamicalSystem with four matrix args and
 adds possibility of additional keywords in arguments.</p>
 <div class="line-block">
-<div class="line">G - matrix_a</div>
-<div class="line">w - process noise</div>
-<div class="line">F_dash - matrix_c</div>
-<div class="line">v - sensor noise.</div>
+<div class="line"><img class="math" src="_images/math/89878909dbb648acdc4a44ded1bd982d7bddef5d.png" alt="G"/> - matrix_a</div>
+<div class="line"><img class="math" src="_images/math/cc87ee665749db882f94e0d3707eb23e39638650.png" alt="w"/> - process noise</div>
+<div class="line"><img class="math" src="_images/math/25091123e2c871fe272f235921681fca84e37d06.png" alt="F_dash"/> - matrix_c</div>
+<div class="line"><img class="math" src="_images/math/02d98909b5d6acd6a7ff927d4d42790bdd407d58.png" alt="v"/> - sensor noise.</div>
 </div>
 <p>If a matrix_a is a number, transforms it into float
 and makes d-state vector equal to 1.
@@ -210,29 +210,29 @@ matrix_c can be a number only if matrix_a is a number too.
 If matrix_c is a matrix, number of its rows is assigned to m.
 matrix_d can’t be not zero number if matrix_b is a matrix.
 Number of columns of matrix_d must be equal to n.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>matrix_a</strong> – Evolution, system, transfer or state matrix (G matrix).
-Shape nxn.</p></li>
-<li><p><strong>matrix_b</strong> – Control matrix.</p></li>
-<li><p><strong>noise. Shape nx1. Shape of covariance matrix nxn.%</strong> (<em>%Processing</em>) – </p></li>
-<li><p><strong>matrix_c</strong> – First derivative of the observation
-direction(aka design matrix F(nxm)). Shape mxn.</p></li>
-<li><p><strong>matrix_d</strong> – Feedthrough matrix.</p></li>
-<li><p><strong>noise</strong><strong> or </strong><strong>observational error. Shape mx1. Shape of covariance matrix mxm.%</strong> (<em>%Sensor</em>) – </p></li>
-</ul>
+<dl class="simple">
+<dt>:param <img class="math" src="_images/math/33b78ba616af532253ea51f444d676d53bc5dcb4.png" alt="matrix_a"/>: Evolution, system, transfer or state matrix.</dt><dd><p>Shape nxn.</p>
 </dd>
-<dt class="field-even">Optional arguments</dt>
-<dd class="field-even"><ul class="simple">
+</dl>
+<p>:param <img class="math" src="_images/math/cbaf4bf69b73ca356645bd0c9e6d79e306679ede.png" alt="matrix_b"/>: Control matrix.
+:param %Processing noise. Shape nx1. Shape of covariance matrix nxn.%:
+:param <img class="math" src="_images/math/5e7f7ec7a3a847ec71c76a45ae41c79e33f30cfc.png" alt="matrix_c"/>: First derivative of the observation</p>
+<blockquote>
+<div><p>direction(aka design matrix F(nxm)). Shape mxn.</p>
+</div></blockquote>
+<p>:param <img class="math" src="_images/math/58b3de26f5e5d9f0b71a953dfa4d5ea93d8bb0ae.png" alt="matrix_d"/>: Feedthrough matrix.
+:param %Sensor noise or observational error. Shape mx1. Shape of covariance matrix mxm.%:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Optional arguments</dt>
+<dd class="field-odd"><ul class="simple">
 <li><p><strong>process_noise</strong> – Processing noise w.</p></li>
 <li><p><strong>observation_noise</strong> – Observation noise v.</p></li>
 <li><p><strong>timevarying_multiplier_b</strong></p></li>
 <li><p><strong>corrupt_probability</strong></p></li>
 </ul>
 </dd>
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>KeyError</strong> – in case of no additional keywords.</p></li>
 <li><p><strong>Exits in case of wrong format of a matrix.</strong> – </p></li>
 <li><p><strong>Exits in case of not square matrix_a.</strong> – </p></li>

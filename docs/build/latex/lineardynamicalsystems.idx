@@ -1,0 +1,111 @@
+\indexentry{module@\spxentry{module}!LDS.LDS.ds.dynamical\_system@\spxentry{LDS.LDS.ds.dynamical\_system}|hyperpage}{1}
+\indexentry{LDS.LDS.ds.dynamical\_system@\spxentry{LDS.LDS.ds.dynamical\_system}!module@\spxentry{module}|hyperpage}{1}
+\indexentry{DynamicalSystem (class in LDS.LDS.ds.dynamical\_system)@\spxentry{DynamicalSystem}\spxextra{class in LDS.LDS.ds.dynamical\_system}|hyperpage}{1}
+\indexentry{check\_input() (LDS.LDS.ds.dynamical\_system.DynamicalSystem method)@\spxentry{check\_input()}\spxextra{LDS.LDS.ds.dynamical\_system.DynamicalSystem method}|hyperpage}{2}
+\indexentry{solve() (LDS.LDS.ds.dynamical\_system.DynamicalSystem method)@\spxentry{solve()}\spxextra{LDS.LDS.ds.dynamical\_system.DynamicalSystem method}|hyperpage}{2}
+\indexentry{module@\spxentry{module}!LDS.LDS.ds@\spxentry{LDS.LDS.ds}|hyperpage}{3}
+\indexentry{LDS.LDS.ds@\spxentry{LDS.LDS.ds}!module@\spxentry{module}|hyperpage}{3}
+\indexentry{module@\spxentry{module}!LDS.LDS.filters.filtering\_abc\_class@\spxentry{LDS.LDS.filters.filtering\_abc\_class}|hyperpage}{3}
+\indexentry{LDS.LDS.filters.filtering\_abc\_class@\spxentry{LDS.LDS.filters.filtering\_abc\_class}!module@\spxentry{module}|hyperpage}{3}
+\indexentry{Filtering (class in LDS.LDS.filters.filtering\_abc\_class)@\spxentry{Filtering}\spxextra{class in LDS.LDS.filters.filtering\_abc\_class}|hyperpage}{3}
+\indexentry{module@\spxentry{module}!LDS.LDS.filters.filtering\_siso@\spxentry{LDS.LDS.filters.filtering\_siso}|hyperpage}{4}
+\indexentry{LDS.LDS.filters.filtering\_siso@\spxentry{LDS.LDS.filters.filtering\_siso}!module@\spxentry{module}|hyperpage}{4}
+\indexentry{FilteringSiso (class in LDS.LDS.filters.filtering\_siso)@\spxentry{FilteringSiso}\spxextra{class in LDS.LDS.filters.filtering\_siso}|hyperpage}{4}
+\indexentry{predict() (LDS.LDS.filters.filtering\_siso.FilteringSiso method)@\spxentry{predict()}\spxextra{LDS.LDS.filters.filtering\_siso.FilteringSiso method}|hyperpage}{4}
+\indexentry{module@\spxentry{module}!LDS.LDS.filters.kalman\_em@\spxentry{LDS.LDS.filters.kalman\_em}|hyperpage}{4}
+\indexentry{LDS.LDS.filters.kalman\_em@\spxentry{LDS.LDS.filters.kalman\_em}!module@\spxentry{module}|hyperpage}{4}
+\indexentry{module@\spxentry{module}!LDS.LDS.filters.kalman\_filtering\_siso@\spxentry{LDS.LDS.filters.kalman\_filtering\_siso}|hyperpage}{4}
+\indexentry{LDS.LDS.filters.kalman\_filtering\_siso@\spxentry{LDS.LDS.filters.kalman\_filtering\_siso}!module@\spxentry{module}|hyperpage}{4}
+\indexentry{KalmanFilteringSISO (class in LDS.LDS.filters.kalman\_filtering\_siso)@\spxentry{KalmanFilteringSISO}\spxextra{class in LDS.LDS.filters.kalman\_filtering\_siso}|hyperpage}{4}
+\indexentry{parameters() (LDS.LDS.filters.kalman\_filtering\_siso.KalmanFilteringSISO method)@\spxentry{parameters()}\spxextra{LDS.LDS.filters.kalman\_filtering\_siso.KalmanFilteringSISO method}|hyperpage}{5}
+\indexentry{predict() (LDS.LDS.filters.kalman\_filtering\_siso.KalmanFilteringSISO method)@\spxentry{predict()}\spxextra{LDS.LDS.filters.kalman\_filtering\_siso.KalmanFilteringSISO method}|hyperpage}{6}
+\indexentry{predict\_kalman() (LDS.LDS.filters.kalman\_filtering\_siso.KalmanFilteringSISO method)@\spxentry{predict\_kalman()}\spxextra{LDS.LDS.filters.kalman\_filtering\_siso.KalmanFilteringSISO method}|hyperpage}{6}
+\indexentry{module@\spxentry{module}!LDS.LDS.filters.wave\_filtering\_siso@\spxentry{LDS.LDS.filters.wave\_filtering\_siso}|hyperpage}{7}
+\indexentry{LDS.LDS.filters.wave\_filtering\_siso@\spxentry{LDS.LDS.filters.wave\_filtering\_siso}!module@\spxentry{module}|hyperpage}{7}
+\indexentry{WaveFilteringSISO (class in LDS.LDS.filters.wave\_filtering\_siso)@\spxentry{WaveFilteringSISO}\spxextra{class in LDS.LDS.filters.wave\_filtering\_siso}|hyperpage}{7}
+\indexentry{predict() (LDS.LDS.filters.wave\_filtering\_siso.WaveFilteringSISO method)@\spxentry{predict()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso.WaveFilteringSISO method}|hyperpage}{8}
+\indexentry{module@\spxentry{module}!LDS.LDS.filters.wave\_filtering\_siso\_abs@\spxentry{LDS.LDS.filters.wave\_filtering\_siso\_abs}|hyperpage}{8}
+\indexentry{LDS.LDS.filters.wave\_filtering\_siso\_abs@\spxentry{LDS.LDS.filters.wave\_filtering\_siso\_abs}!module@\spxentry{module}|hyperpage}{8}
+\indexentry{WaveFilteringSisoAbs (class in LDS.LDS.filters.wave\_filtering\_siso\_abs)@\spxentry{WaveFilteringSisoAbs}\spxextra{class in LDS.LDS.filters.wave\_filtering\_siso\_abs}|hyperpage}{8}
+\indexentry{predict() (LDS.LDS.filters.wave\_filtering\_siso\_abs.WaveFilteringSisoAbs method)@\spxentry{predict()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_abs.WaveFilteringSisoAbs method}|hyperpage}{8}
+\indexentry{var\_calc() (LDS.LDS.filters.wave\_filtering\_siso\_abs.WaveFilteringSisoAbs method)@\spxentry{var\_calc()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_abs.WaveFilteringSisoAbs method}|hyperpage}{9}
+\indexentry{module@\spxentry{module}!LDS.LDS.filters.wave\_filtering\_siso\_ftl@\spxentry{LDS.LDS.filters.wave\_filtering\_siso\_ftl}|hyperpage}{9}
+\indexentry{LDS.LDS.filters.wave\_filtering\_siso\_ftl@\spxentry{LDS.LDS.filters.wave\_filtering\_siso\_ftl}!module@\spxentry{module}|hyperpage}{9}
+\indexentry{WaveFilteringSisoFtl (class in LDS.LDS.filters.wave\_filtering\_siso\_ftl)@\spxentry{WaveFilteringSisoFtl}\spxextra{class in LDS.LDS.filters.wave\_filtering\_siso\_ftl}|hyperpage}{9}
+\indexentry{args4ftl\_calc() (LDS.LDS.filters.wave\_filtering\_siso\_ftl.WaveFilteringSisoFtl method)@\spxentry{args4ftl\_calc()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_ftl.WaveFilteringSisoFtl method}|hyperpage}{10}
+\indexentry{predict() (LDS.LDS.filters.wave\_filtering\_siso\_ftl.WaveFilteringSisoFtl method)@\spxentry{predict()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_ftl.WaveFilteringSisoFtl method}|hyperpage}{10}
+\indexentry{module@\spxentry{module}!LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent@\spxentry{LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent}|hyperpage}{10}
+\indexentry{LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent@\spxentry{LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent}!module@\spxentry{module}|hyperpage}{10}
+\indexentry{WaveFilteringSisoFtlPersistent (class in LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent)@\spxentry{WaveFilteringSisoFtlPersistent}\spxextra{class in LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent}|hyperpage}{10}
+\indexentry{args4ftl\_calc() (LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent.WaveFilteringSisoFtlPersistent method)@\spxentry{args4ftl\_calc()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent.WaveFilteringSisoFtlPersistent method}|hyperpage}{11}
+\indexentry{predict() (LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent.WaveFilteringSisoFtlPersistent method)@\spxentry{predict()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent.WaveFilteringSisoFtlPersistent method}|hyperpage}{11}
+\indexentry{module@\spxentry{module}!LDS.LDS.filters.wave\_filtering\_siso\_persistent@\spxentry{LDS.LDS.filters.wave\_filtering\_siso\_persistent}|hyperpage}{11}
+\indexentry{LDS.LDS.filters.wave\_filtering\_siso\_persistent@\spxentry{LDS.LDS.filters.wave\_filtering\_siso\_persistent}!module@\spxentry{module}|hyperpage}{11}
+\indexentry{WaveFilteringSISOPersistent (class in LDS.LDS.filters.wave\_filtering\_siso\_persistent)@\spxentry{WaveFilteringSISOPersistent}\spxextra{class in LDS.LDS.filters.wave\_filtering\_siso\_persistent}|hyperpage}{11}
+\indexentry{predict() (LDS.LDS.filters.wave\_filtering\_siso\_persistent.WaveFilteringSISOPersistent method)@\spxentry{predict()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_persistent.WaveFilteringSISOPersistent method}|hyperpage}{12}
+\indexentry{module@\spxentry{module}!LDS.LDS.filters@\spxentry{LDS.LDS.filters}|hyperpage}{14}
+\indexentry{LDS.LDS.filters@\spxentry{LDS.LDS.filters}!module@\spxentry{module}|hyperpage}{14}
+\indexentry{module@\spxentry{module}!LDS.LDS.h\_m.hankel@\spxentry{LDS.LDS.h\_m.hankel}|hyperpage}{14}
+\indexentry{LDS.LDS.h\_m.hankel@\spxentry{LDS.LDS.h\_m.hankel}!module@\spxentry{module}|hyperpage}{14}
+\indexentry{Hankel (class in LDS.LDS.h\_m.hankel)@\spxentry{Hankel}\spxextra{class in LDS.LDS.h\_m.hankel}|hyperpage}{14}
+\indexentry{module@\spxentry{module}!LDS.LDS.h\_m@\spxentry{LDS.LDS.h\_m}|hyperpage}{14}
+\indexentry{LDS.LDS.h\_m@\spxentry{LDS.LDS.h\_m}!module@\spxentry{module}|hyperpage}{14}
+\indexentry{module@\spxentry{module}!LDS.LDS.matlab\_options.matlab\_class\_options@\spxentry{LDS.LDS.matlab\_options.matlab\_class\_options}|hyperpage}{14}
+\indexentry{LDS.LDS.matlab\_options.matlab\_class\_options@\spxentry{LDS.LDS.matlab\_options.matlab\_class\_options}!module@\spxentry{module}|hyperpage}{14}
+\indexentry{ClassOptions (class in LDS.LDS.matlab\_options.matlab\_class\_options)@\spxentry{ClassOptions}\spxextra{class in LDS.LDS.matlab\_options.matlab\_class\_options}|hyperpage}{14}
+\indexentry{module@\spxentry{module}!LDS.LDS.matlab\_options@\spxentry{LDS.LDS.matlab\_options}|hyperpage}{14}
+\indexentry{LDS.LDS.matlab\_options@\spxentry{LDS.LDS.matlab\_options}!module@\spxentry{module}|hyperpage}{14}
+\indexentry{module@\spxentry{module}!LDS.LDS.online\_lds.cost\_ftl@\spxentry{LDS.LDS.online\_lds.cost\_ftl}|hyperpage}{15}
+\indexentry{LDS.LDS.online\_lds.cost\_ftl@\spxentry{LDS.LDS.online\_lds.cost\_ftl}!module@\spxentry{module}|hyperpage}{15}
+\indexentry{cost\_ftl() (in module LDS.LDS.online\_lds.cost\_ftl)@\spxentry{cost\_ftl()}\spxextra{in module LDS.LDS.online\_lds.cost\_ftl}|hyperpage}{15}
+\indexentry{module@\spxentry{module}!LDS.LDS.online\_lds.gradient\_ftl@\spxentry{LDS.LDS.online\_lds.gradient\_ftl}|hyperpage}{15}
+\indexentry{LDS.LDS.online\_lds.gradient\_ftl@\spxentry{LDS.LDS.online\_lds.gradient\_ftl}!module@\spxentry{module}|hyperpage}{15}
+\indexentry{gradient\_ftl() (in module LDS.LDS.online\_lds.gradient\_ftl)@\spxentry{gradient\_ftl()}\spxextra{in module LDS.LDS.online\_lds.gradient\_ftl}|hyperpage}{15}
+\indexentry{module@\spxentry{module}!LDS.LDS.online\_lds.print\_verbose@\spxentry{LDS.LDS.online\_lds.print\_verbose}|hyperpage}{15}
+\indexentry{LDS.LDS.online\_lds.print\_verbose@\spxentry{LDS.LDS.online\_lds.print\_verbose}!module@\spxentry{module}|hyperpage}{15}
+\indexentry{print\_verbose() (in module LDS.LDS.online\_lds.print\_verbose)@\spxentry{print\_verbose()}\spxextra{in module LDS.LDS.online\_lds.print\_verbose}|hyperpage}{15}
+\indexentry{module@\spxentry{module}!LDS.LDS.online\_lds@\spxentry{LDS.LDS.online\_lds}|hyperpage}{15}
+\indexentry{LDS.LDS.online\_lds@\spxentry{LDS.LDS.online\_lds}!module@\spxentry{module}|hyperpage}{15}
+\indexentry{module@\spxentry{module}!LDS.LDS.ts.time\_series@\spxentry{LDS.LDS.ts.time\_series}|hyperpage}{15}
+\indexentry{LDS.LDS.ts.time\_series@\spxentry{LDS.LDS.ts.time\_series}!module@\spxentry{module}|hyperpage}{15}
+\indexentry{TimeSeries (class in LDS.LDS.ts.time\_series)@\spxentry{TimeSeries}\spxextra{class in LDS.LDS.ts.time\_series}|hyperpage}{15}
+\indexentry{logratio() (LDS.LDS.ts.time\_series.TimeSeries method)@\spxentry{logratio()}\spxextra{LDS.LDS.ts.time\_series.TimeSeries method}|hyperpage}{15}
+\indexentry{solve() (LDS.LDS.ts.time\_series.TimeSeries method)@\spxentry{solve()}\spxextra{LDS.LDS.ts.time\_series.TimeSeries method}|hyperpage}{15}
+\indexentry{module@\spxentry{module}!LDS.LDS.ts@\spxentry{LDS.LDS.ts}|hyperpage}{16}
+\indexentry{LDS.LDS.ts@\spxentry{LDS.LDS.ts}!module@\spxentry{module}|hyperpage}{16}
+\indexentry{module@\spxentry{module}!LDS.LDS@\spxentry{LDS.LDS}|hyperpage}{16}
+\indexentry{LDS.LDS@\spxentry{LDS.LDS}!module@\spxentry{module}|hyperpage}{16}
+\indexentry{module@\spxentry{module}!LDS.OnlineLDS\_library@\spxentry{LDS.OnlineLDS\_library}|hyperpage}{16}
+\indexentry{LDS.OnlineLDS\_library@\spxentry{LDS.OnlineLDS\_library}!module@\spxentry{module}|hyperpage}{16}
+\indexentry{A\_trans\_calc() (in module LDS.OnlineLDS\_library)@\spxentry{A\_trans\_calc()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{16}
+\indexentry{arima\_ogd() (in module LDS.OnlineLDS\_library)@\spxentry{arima\_ogd()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{16}
+\indexentry{arima\_ons() (in module LDS.OnlineLDS\_library)@\spxentry{arima\_ons()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{16}
+\indexentry{close\_all\_figs() (in module LDS.OnlineLDS\_library)@\spxentry{close\_all\_figs()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{16}
+\indexentry{cost\_ar() (in module LDS.OnlineLDS\_library)@\spxentry{cost\_ar()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{16}
+\indexentry{diff\_calc() (in module LDS.OnlineLDS\_library)@\spxentry{diff\_calc()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{17}
+\indexentry{error\_stat() (in module LDS.OnlineLDS\_library)@\spxentry{error\_stat()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{17}
+\indexentry{grad\_calc() (in module LDS.OnlineLDS\_library)@\spxentry{grad\_calc()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{17}
+\indexentry{gradient\_ar() (in module LDS.OnlineLDS\_library)@\spxentry{gradient\_ar()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{17}
+\indexentry{heatmap() (in module LDS.OnlineLDS\_library)@\spxentry{heatmap()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{17}
+\indexentry{lab() (in module LDS.OnlineLDS\_library)@\spxentry{lab()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{20}
+\indexentry{p3\_for\_test\_identification2() (in module LDS.OnlineLDS\_library)@\spxentry{p3\_for\_test\_identification2()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{20}
+\indexentry{plot\_p1() (in module LDS.OnlineLDS\_library)@\spxentry{plot\_p1()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{20}
+\indexentry{plot\_p2() (in module LDS.OnlineLDS\_library)@\spxentry{plot\_p2()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{21}
+\indexentry{plot\_p3() (in module LDS.OnlineLDS\_library)@\spxentry{plot\_p3()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{21}
+\indexentry{pre\_comp\_filter\_params() (in module LDS.OnlineLDS\_library)@\spxentry{pre\_comp\_filter\_params()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{21}
+\indexentry{prediction() (in module LDS.OnlineLDS\_library)@\spxentry{prediction()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{21}
+\indexentry{prediction\_kalman() (in module LDS.OnlineLDS\_library)@\spxentry{prediction\_kalman()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{21}
+\indexentry{testImpactOfS() (in module LDS.OnlineLDS\_library)@\spxentry{testImpactOfS()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{21}
+\indexentry{testNoiseImpact() (in module LDS.OnlineLDS\_library)@\spxentry{testNoiseImpact()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{22}
+\indexentry{testSeqD0() (in module LDS.OnlineLDS\_library)@\spxentry{testSeqD0()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{22}
+\indexentry{test\_AR() (in module LDS.OnlineLDS\_library)@\spxentry{test\_AR()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{22}
+\indexentry{test\_arima\_ogd() (in module LDS.OnlineLDS\_library)@\spxentry{test\_arima\_ogd()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{23}
+\indexentry{test\_arima\_ons() (in module LDS.OnlineLDS\_library)@\spxentry{test\_arima\_ons()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{23}
+\indexentry{test\_identification() (in module LDS.OnlineLDS\_library)@\spxentry{test\_identification()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{23}
+\indexentry{test\_identification2() (in module LDS.OnlineLDS\_library)@\spxentry{test\_identification2()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{25}
+\indexentry{w\_calc() (in module LDS.OnlineLDS\_library)@\spxentry{w\_calc()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{26}
+\indexentry{w\_calc\_arima\_ons() (in module LDS.OnlineLDS\_library)@\spxentry{w\_calc\_arima\_ons()}\spxextra{in module LDS.OnlineLDS\_library}|hyperpage}{26}
+\indexentry{module@\spxentry{module}!LDS.main@\spxentry{LDS.main}|hyperpage}{27}
+\indexentry{LDS.main@\spxentry{LDS.main}!module@\spxentry{module}|hyperpage}{27}
+\indexentry{module@\spxentry{module}!LDS@\spxentry{LDS}|hyperpage}{27}
+\indexentry{LDS@\spxentry{LDS}!module@\spxentry{module}|hyperpage}{27}

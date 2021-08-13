@@ -1,0 +1,217 @@
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\let\spxpagem \sphinxstyleindexpagemain
+\let\spxentry \sphinxstyleindexentry
+\let\spxextra \sphinxstyleindexextra
+
+  \bigletter A
+  \item \spxentry{A\_trans\_calc()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{16}
+  \item \spxentry{args4ftl\_calc()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_ftl.WaveFilteringSisoFtl method}, 
+		\hyperpage{10}
+  \item \spxentry{args4ftl\_calc()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent.WaveFilteringSisoFtlPersistent method}, 
+		\hyperpage{11}
+  \item \spxentry{arima\_ogd()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{16}
+  \item \spxentry{arima\_ons()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{16}
+
+  \indexspace
+  \bigletter C
+  \item \spxentry{check\_input()}\spxextra{LDS.LDS.ds.dynamical\_system.DynamicalSystem method}, 
+		\hyperpage{2}
+  \item \spxentry{ClassOptions}\spxextra{class in LDS.LDS.matlab\_options.matlab\_class\_options}, 
+		\hyperpage{14}
+  \item \spxentry{close\_all\_figs()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{16}
+  \item \spxentry{cost\_ar()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{16}
+  \item \spxentry{cost\_ftl()}\spxextra{in module LDS.LDS.online\_lds.cost\_ftl}, \hyperpage{15}
+
+  \indexspace
+  \bigletter D
+  \item \spxentry{diff\_calc()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{17}
+  \item \spxentry{DynamicalSystem}\spxextra{class in LDS.LDS.ds.dynamical\_system}, \hyperpage{1}
+
+  \indexspace
+  \bigletter E
+  \item \spxentry{error\_stat()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{17}
+
+  \indexspace
+  \bigletter F
+  \item \spxentry{Filtering}\spxextra{class in LDS.LDS.filters.filtering\_abc\_class}, 
+		\hyperpage{3}
+  \item \spxentry{FilteringSiso}\spxextra{class in LDS.LDS.filters.filtering\_siso}, \hyperpage{4}
+
+  \indexspace
+  \bigletter G
+  \item \spxentry{grad\_calc()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{17}
+  \item \spxentry{gradient\_ar()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{17}
+  \item \spxentry{gradient\_ftl()}\spxextra{in module LDS.LDS.online\_lds.gradient\_ftl}, 
+		\hyperpage{15}
+
+  \indexspace
+  \bigletter H
+  \item \spxentry{Hankel}\spxextra{class in LDS.LDS.h\_m.hankel}, \hyperpage{14}
+  \item \spxentry{heatmap()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{17}
+
+  \indexspace
+  \bigletter K
+  \item \spxentry{KalmanFilteringSISO}\spxextra{class in LDS.LDS.filters.kalman\_filtering\_siso}, 
+		\hyperpage{4}
+
+  \indexspace
+  \bigletter L
+  \item \spxentry{lab()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{20}
+  \item \spxentry{LDS}
+    \subitem \spxentry{module}, \hyperpage{27}
+  \item \spxentry{LDS.LDS}
+    \subitem \spxentry{module}, \hyperpage{16}
+  \item \spxentry{LDS.LDS.ds}
+    \subitem \spxentry{module}, \hyperpage{3}
+  \item \spxentry{LDS.LDS.ds.dynamical\_system}
+    \subitem \spxentry{module}, \hyperpage{1}
+  \item \spxentry{LDS.LDS.filters}
+    \subitem \spxentry{module}, \hyperpage{14}
+  \item \spxentry{LDS.LDS.filters.filtering\_abc\_class}
+    \subitem \spxentry{module}, \hyperpage{3}
+  \item \spxentry{LDS.LDS.filters.filtering\_siso}
+    \subitem \spxentry{module}, \hyperpage{4}
+  \item \spxentry{LDS.LDS.filters.kalman\_em}
+    \subitem \spxentry{module}, \hyperpage{4}
+  \item \spxentry{LDS.LDS.filters.kalman\_filtering\_siso}
+    \subitem \spxentry{module}, \hyperpage{4}
+  \item \spxentry{LDS.LDS.filters.wave\_filtering\_siso}
+    \subitem \spxentry{module}, \hyperpage{7}
+  \item \spxentry{LDS.LDS.filters.wave\_filtering\_siso\_abs}
+    \subitem \spxentry{module}, \hyperpage{8}
+  \item \spxentry{LDS.LDS.filters.wave\_filtering\_siso\_ftl}
+    \subitem \spxentry{module}, \hyperpage{9}
+  \item \spxentry{LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent}
+    \subitem \spxentry{module}, \hyperpage{10}
+  \item \spxentry{LDS.LDS.filters.wave\_filtering\_siso\_persistent}
+    \subitem \spxentry{module}, \hyperpage{11}
+  \item \spxentry{LDS.LDS.h\_m}
+    \subitem \spxentry{module}, \hyperpage{14}
+  \item \spxentry{LDS.LDS.h\_m.hankel}
+    \subitem \spxentry{module}, \hyperpage{14}
+  \item \spxentry{LDS.LDS.matlab\_options}
+    \subitem \spxentry{module}, \hyperpage{14}
+  \item \spxentry{LDS.LDS.matlab\_options.matlab\_class\_options}
+    \subitem \spxentry{module}, \hyperpage{14}
+  \item \spxentry{LDS.LDS.online\_lds}
+    \subitem \spxentry{module}, \hyperpage{15}
+  \item \spxentry{LDS.LDS.online\_lds.cost\_ftl}
+    \subitem \spxentry{module}, \hyperpage{15}
+  \item \spxentry{LDS.LDS.online\_lds.gradient\_ftl}
+    \subitem \spxentry{module}, \hyperpage{15}
+  \item \spxentry{LDS.LDS.online\_lds.print\_verbose}
+    \subitem \spxentry{module}, \hyperpage{15}
+  \item \spxentry{LDS.LDS.ts}
+    \subitem \spxentry{module}, \hyperpage{16}
+  \item \spxentry{LDS.LDS.ts.time\_series}
+    \subitem \spxentry{module}, \hyperpage{15}
+  \item \spxentry{LDS.main}
+    \subitem \spxentry{module}, \hyperpage{27}
+  \item \spxentry{LDS.OnlineLDS\_library}
+    \subitem \spxentry{module}, \hyperpage{16}
+  \item \spxentry{logratio()}\spxextra{LDS.LDS.ts.time\_series.TimeSeries method}, \hyperpage{15}
+
+  \indexspace
+  \bigletter M
+  \item \spxentry{module}
+    \subitem \spxentry{LDS}, \hyperpage{27}
+    \subitem \spxentry{LDS.LDS}, \hyperpage{16}
+    \subitem \spxentry{LDS.LDS.ds}, \hyperpage{3}
+    \subitem \spxentry{LDS.LDS.ds.dynamical\_system}, \hyperpage{1}
+    \subitem \spxentry{LDS.LDS.filters}, \hyperpage{14}
+    \subitem \spxentry{LDS.LDS.filters.filtering\_abc\_class}, \hyperpage{3}
+    \subitem \spxentry{LDS.LDS.filters.filtering\_siso}, \hyperpage{4}
+    \subitem \spxentry{LDS.LDS.filters.kalman\_em}, \hyperpage{4}
+    \subitem \spxentry{LDS.LDS.filters.kalman\_filtering\_siso}, \hyperpage{4}
+    \subitem \spxentry{LDS.LDS.filters.wave\_filtering\_siso}, \hyperpage{7}
+    \subitem \spxentry{LDS.LDS.filters.wave\_filtering\_siso\_abs}, \hyperpage{8}
+    \subitem \spxentry{LDS.LDS.filters.wave\_filtering\_siso\_ftl}, \hyperpage{9}
+    \subitem \spxentry{LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent}, \hyperpage{10}
+    \subitem \spxentry{LDS.LDS.filters.wave\_filtering\_siso\_persistent}, \hyperpage{11}
+    \subitem \spxentry{LDS.LDS.h\_m}, \hyperpage{14}
+    \subitem \spxentry{LDS.LDS.h\_m.hankel}, \hyperpage{14}
+    \subitem \spxentry{LDS.LDS.matlab\_options}, \hyperpage{14}
+    \subitem \spxentry{LDS.LDS.matlab\_options.matlab\_class\_options}, \hyperpage{14}
+    \subitem \spxentry{LDS.LDS.online\_lds}, \hyperpage{15}
+    \subitem \spxentry{LDS.LDS.online\_lds.cost\_ftl}, \hyperpage{15}
+    \subitem \spxentry{LDS.LDS.online\_lds.gradient\_ftl}, \hyperpage{15}
+    \subitem \spxentry{LDS.LDS.online\_lds.print\_verbose}, \hyperpage{15}
+    \subitem \spxentry{LDS.LDS.ts}, \hyperpage{16}
+    \subitem \spxentry{LDS.LDS.ts.time\_series}, \hyperpage{15}
+    \subitem \spxentry{LDS.main}, \hyperpage{27}
+    \subitem \spxentry{LDS.OnlineLDS\_library}, \hyperpage{16}
+
+  \indexspace
+  \bigletter P
+  \item \spxentry{p3\_for\_test\_identification2()}\spxextra{in module LDS.OnlineLDS\_library}, 
+		\hyperpage{20}
+  \item \spxentry{parameters()}\spxextra{LDS.LDS.filters.kalman\_filtering\_siso.KalmanFilteringSISO method}, 
+		\hyperpage{5}
+  \item \spxentry{plot\_p1()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{20}
+  \item \spxentry{plot\_p2()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{21}
+  \item \spxentry{plot\_p3()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{21}
+  \item \spxentry{pre\_comp\_filter\_params()}\spxextra{in module LDS.OnlineLDS\_library}, 
+		\hyperpage{21}
+  \item \spxentry{predict()}\spxextra{LDS.LDS.filters.filtering\_siso.FilteringSiso method}, 
+		\hyperpage{4}
+  \item \spxentry{predict()}\spxextra{LDS.LDS.filters.kalman\_filtering\_siso.KalmanFilteringSISO method}, 
+		\hyperpage{6}
+  \item \spxentry{predict()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso.WaveFilteringSISO method}, 
+		\hyperpage{8}
+  \item \spxentry{predict()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_abs.WaveFilteringSisoAbs method}, 
+		\hyperpage{8}
+  \item \spxentry{predict()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_ftl.WaveFilteringSisoFtl method}, 
+		\hyperpage{10}
+  \item \spxentry{predict()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent.WaveFilteringSisoFtlPersistent method}, 
+		\hyperpage{11}
+  \item \spxentry{predict()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_persistent.WaveFilteringSISOPersistent method}, 
+		\hyperpage{12}
+  \item \spxentry{predict\_kalman()}\spxextra{LDS.LDS.filters.kalman\_filtering\_siso.KalmanFilteringSISO method}, 
+		\hyperpage{6}
+  \item \spxentry{prediction()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{21}
+  \item \spxentry{prediction\_kalman()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{21}
+  \item \spxentry{print\_verbose()}\spxextra{in module LDS.LDS.online\_lds.print\_verbose}, 
+		\hyperpage{15}
+
+  \indexspace
+  \bigletter S
+  \item \spxentry{solve()}\spxextra{LDS.LDS.ds.dynamical\_system.DynamicalSystem method}, 
+		\hyperpage{2}
+  \item \spxentry{solve()}\spxextra{LDS.LDS.ts.time\_series.TimeSeries method}, \hyperpage{15}
+
+  \indexspace
+  \bigletter T
+  \item \spxentry{test\_AR()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{22}
+  \item \spxentry{test\_arima\_ogd()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{23}
+  \item \spxentry{test\_arima\_ons()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{23}
+  \item \spxentry{test\_identification()}\spxextra{in module LDS.OnlineLDS\_library}, 
+		\hyperpage{23}
+  \item \spxentry{test\_identification2()}\spxextra{in module LDS.OnlineLDS\_library}, 
+		\hyperpage{25}
+  \item \spxentry{testImpactOfS()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{21}
+  \item \spxentry{testNoiseImpact()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{22}
+  \item \spxentry{testSeqD0()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{22}
+  \item \spxentry{TimeSeries}\spxextra{class in LDS.LDS.ts.time\_series}, \hyperpage{15}
+
+  \indexspace
+  \bigletter V
+  \item \spxentry{var\_calc()}\spxextra{LDS.LDS.filters.wave\_filtering\_siso\_abs.WaveFilteringSisoAbs method}, 
+		\hyperpage{9}
+
+  \indexspace
+  \bigletter W
+  \item \spxentry{w\_calc()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{26}
+  \item \spxentry{w\_calc\_arima\_ons()}\spxextra{in module LDS.OnlineLDS\_library}, \hyperpage{26}
+  \item \spxentry{WaveFilteringSISO}\spxextra{class in LDS.LDS.filters.wave\_filtering\_siso}, 
+		\hyperpage{7}
+  \item \spxentry{WaveFilteringSisoAbs}\spxextra{class in LDS.LDS.filters.wave\_filtering\_siso\_abs}, 
+		\hyperpage{8}
+  \item \spxentry{WaveFilteringSisoFtl}\spxextra{class in LDS.LDS.filters.wave\_filtering\_siso\_ftl}, 
+		\hyperpage{9}
+  \item \spxentry{WaveFilteringSisoFtlPersistent}\spxextra{class in LDS.LDS.filters.wave\_filtering\_siso\_ftl\_persistent}, 
+		\hyperpage{10}
+  \item \spxentry{WaveFilteringSISOPersistent}\spxextra{class in LDS.LDS.filters.wave\_filtering\_siso\_persistent}, 
+		\hyperpage{11}
+
+\end{sphinxtheindex}
